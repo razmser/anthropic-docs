@@ -1,0 +1,121 @@
+---
+title: Claude Sonnet 4.5
+url: https://platform.claude.com/docs/en/models/sonnet-4-5/overview
+description: "Claude Sonnet 4.5 reference: lifecycle status, model IDs on every platform, context window, output limits, pricing, and migration resources. Claude Sonnet 4.5 is a deprecated model; Claude Sonnet 5.5 is the current Sonnet model."
+---
+
+**Deprecated.** Released September 29, 2025.
+
+Claude Sonnet 4.5 is deprecated: it is still functional but no longer recommended, and retires on November 30, 2026. Recommended replacement: Claude Sonnet 5.5. [See Claude Sonnet 5.5](../sonnet-5-5/overview.md) · [Migrate to Claude Sonnet 5.5](../sonnet-5-5/migration-guide.md#migrating-from-sonnet-45)
+
+Model ID: `claude-sonnet-4-5-20250929`
+
+Context window: 200K tokens · Max output: 64K tokens · Input pricing: $3 / MTok · Output pricing: $15 / MTok
+
+[Announcement](https://www.anthropic.com/news/claude-sonnet-4-5)
+
+## How it compares to the current lineup
+
+| Model                                                                               | Context | Max output | Price / MTok       | Thinking             | Default effort | Knowledge cutoff |
+| :---------------------------------------------------------------------------------- | :------ | :--------- | :----------------- | :------------------- | :------------- | :--------------- |
+| [Claude Fable 5.1](../fable-5-1/overview.md)   | 1M      | 128K       | $10 / $50          | Adaptive (always on) | `high`         | Jun 2026         |
+| [Claude Opus 5.5](../opus-5-5/overview.md)     | 1M      | 128K       | $4 / $20           | Adaptive (always on) | `medium`       | Jun 2026         |
+| [Claude Sonnet 5.5](../sonnet-5-5/overview.md) | 1M      | 128K       | $2 / $10           | Adaptive             | `high`         | Jun 2026         |
+| **Claude Sonnet 4.5** (this model)                                                  | 200K    | 64K        | $3 / $15           | Extended             | —              | Jan 2025         |
+| [Claude Haiku 5.5](../haiku-5-5/overview.md)   | 1M      | 128K       | From $0.10 / $0.50 | Adaptive             | `medium`       | Jun 2026         |
+
+* **Context:** 1M tokens is roughly 555k words or 2.5M Unicode characters on the current tokenizer (introduced with Claude Opus 4.7); models before it fit about 750k words in 1M tokens. 200k tokens is roughly 150k words.
+* **Max output:** Synchronous Messages API limit. On the Message Batches API, Claude Opus 5.5, Claude Opus 5, Claude Sonnet 5.5, Claude Sonnet 5, Claude Haiku 5.5, Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6 support up to 300k output tokens with the output-300k-2026-03-24 beta header.
+* **Price / MTok:** Input / output, base price per million tokens. Batch API requests are 50% off; prompt caching reads cost 10% of the base input price (2.5% on Claude Fable 5.1 and Claude Mythos 5.1, 5% on Claude Opus 5.5 and Claude Sonnet 5.5). See Pricing for the full list.
+* **Thinking:** Adaptive thinking lets the model decide how much to think, steered by effort. Extended thinking is the manual budget\_tokens mode on earlier models.
+* **Default effort:** The effort parameter’s default on the Claude API. Models without a value don’t support the parameter.
+* **Knowledge cutoff:** Reliable knowledge cutoff: the date through which the model’s knowledge is most extensive and reliable.
+
+## Specifications
+
+### Model IDs
+
+| Platform                                                                                                                                                   | Model ID                                    |
+| :--------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------ |
+| Claude API                                                                                                                                                 | `claude-sonnet-4-5-20250929`                |
+| Claude API alias                                                                                                                                           | `claude-sonnet-4-5`                         |
+| [Amazon Bedrock (InvokeModel)](../../build-with-claude/claude-on-amazon-bedrock-legacy.md)                                      | `anthropic.claude-sonnet-4-5-20250929-v1:0` |
+| [Claude Models on Google Cloud (Google managed)](../../build-with-claude/claude-models-on-google-cloud/google-managed.md)       | `claude-sonnet-4-5@20250929`                |
+| [Microsoft Foundry](../../build-with-claude/claude-in-microsoft-foundry.md)                                                     | `claude-sonnet-4-5`                         |
+| [Claude Platform on AWS](../../build-with-claude/claude-platform-on-aws.md)                                                     | `claude-sonnet-4-5`                         |
+| [Claude Models on Google Cloud (Anthropic managed)](../../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md) | `claude-sonnet-4-5-20250929`                |
+
+### Pricing
+
+| Feature                                                                                | Value                            |
+| :------------------------------------------------------------------------------------- | :------------------------------- |
+| Input                                                                                  | $3 / MTok                        |
+| Output                                                                                 | $15 / MTok                       |
+| [5m cache write](../../build-with-claude/prompt-caching.md) | $3.75 / MTok                     |
+| [1h cache write](../../build-with-claude/prompt-caching.md) | $6 / MTok                        |
+| [Cache read](../../build-with-claude/prompt-caching.md)     | $0.30 / MTok                     |
+| [Batch API](../../build-with-claude/batch-processing.md)    | 50% discount on input and output |
+
+[Full price list](../../about-claude/pricing.md)
+
+### Capabilities
+
+| Feature                                                                                 | Value                  |
+| :-------------------------------------------------------------------------------------- | :--------------------- |
+| [Context window](../../build-with-claude/context-windows.md) | 200K tokens            |
+| Max output                                                                              | 64K tokens             |
+| [Thinking](../../build-with-claude/thinking.md)              | Extended               |
+| [Default effort](../../build-with-claude/effort.md)          | Not supported          |
+| Input → output                                                                          | Text and images → text |
+| Reliable knowledge cutoff                                                               | Jan 2025               |
+| Training data cutoff                                                                    | Jul 2025               |
+
+### Availability
+
+| Feature                                                                       | Value                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| :---------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [Status](../../about-claude/model-deprecations.md) | Deprecated                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| Released                                                                      | September 29, 2025                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| Deprecated                                                                    | September 30, 2026                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| Retires                                                                       | November 30, 2026                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| Platforms                                                                     | Claude API, [Amazon Bedrock (InvokeModel)](../../build-with-claude/claude-on-amazon-bedrock-legacy.md), [Claude Models on Google Cloud (Google managed)](../../build-with-claude/claude-models-on-google-cloud/google-managed.md), [Microsoft Foundry](../../build-with-claude/claude-in-microsoft-foundry.md), [Claude Platform on AWS](../../build-with-claude/claude-platform-on-aws.md), [Claude Models on Google Cloud (Anthropic managed)](../../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md) |
+
+## Resources
+
+<CardGroup cols={3}>
+  <Card title="Migrate to Claude Sonnet 5.5" icon="arrows-left-right" href="https://platform.claude.com/docs/en/models/sonnet-5-5/migration-guide#migrating-from-claude-sonnet-4-6">
+    What changes when moving from Claude Sonnet 4.5 and earlier Sonnet models to Claude Sonnet 5.5.
+  </Card>
+
+  <Card title="Claude Sonnet 5.5" icon="arrow-right" href="https://platform.claude.com/docs/en/models/sonnet-5-5/overview">
+    The current Sonnet model: overview, specs, and resources.
+  </Card>
+</CardGroup>
+
+## Reference
+
+<CardGroup cols={3}>
+  <Card title="System prompt" icon="text" href="https://platform.claude.com/docs/en/release-notes/system-prompts/overview#claude-sonnet-4-5">
+    The system prompt Claude Sonnet 4.5 uses on claude.ai and the Claude apps.
+  </Card>
+
+  <Card title="System card" icon="file" href="https://www.anthropic.com/claude-sonnet-4-5-system-card">
+    Safety evaluations and deployment decisions for Claude Sonnet 4.5.
+  </Card>
+
+  <Card title="Pricing" icon="coins" href="https://platform.claude.com/docs/en/about-claude/pricing">
+    Full price list, including batch discounts and prompt caching rates.
+  </Card>
+
+  <Card title="Model IDs and versioning" icon="fingerprint" href="https://platform.claude.com/docs/en/about-claude/models/model-ids-and-versions">
+    How model IDs, aliases, and pinned snapshots work.
+  </Card>
+
+  <Card title="Model deprecations" icon="clock" href="https://platform.claude.com/docs/en/about-claude/model-deprecations">
+    Lifecycle status and retirement commitments for every Claude model.
+  </Card>
+
+  <Card title="Amazon Bedrock (Opus 4.6 and earlier)" icon="cloud" href="https://platform.claude.com/docs/en/build-with-claude/claude-on-amazon-bedrock-legacy">
+    Claude Sonnet 4.5 uses the InvokeModel Bedrock integration and Bedrock-style model IDs.
+  </Card>
+</CardGroup>

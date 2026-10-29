@@ -1,0 +1,111 @@
+---
+title: Create an Admin API key
+url: https://platform.claude.com/docs/en/manage-claude/admin-api-keys
+description: Create an Admin API key for your Claude Console or Claude Enterprise organization.
+---
+
+An Admin API key authenticates every API in the **Admin** section of this guide: the [Admin API](admin-api.md), [Analytics APIs](analytics-api.md), [Compliance API](compliance-api.md), [Plugins API](plugins-api.md), [Claude Tag API](claude-tag-api.md), [Spend Limits API](spend-limits-api.md), [Usage and Cost API](usage-cost-api.md), and [Rate Limits API](rate-limits-api.md). You do not need a separate key for each API. The one exception is the Admin API’s service-account, federation-issuer, and federation-rule endpoints, which accept only an OAuth bearer token with the `org:admin` scope. See [Obtain an OAuth bearer token](admin-api.md#oauth-bearer-token).
+
+Where you create the key depends on which Claude product your organization uses.
+
+## Which key do you need?
+
+| Your organization                                           | Create the key in                                                                                                                    | Key prefix           | Who can create it                                                                                                                                                                          | Works with                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Claude Console** (Claude Platform, `platform.claude.com`) | [Admin keys](https://platform.claude.com/settings/admin-keys) page (`platform.claude.com/settings/admin-keys`) in the Claude Console | `sk-ant-admin01-...` | Organization members with the **admin** role                                                                                                                                               | [Admin API](admin-api.md), [Usage and Cost API](usage-cost-api.md), [Rate Limits API](rate-limits-api.md), [Claude Code Analytics API](claude-code-analytics-api.md), and the Compliance API [Activity Feed](compliance-activity-feed.md)                                                                                                                                                                                                                                                               |
+| **Claude Enterprise** (`claude.ai`)                         | [claude.ai > Organization settings > API](https://claude.ai/admin-settings/api-access)                                               | `sk-ant-api01-...`   | The parent organization’s **primary owner** (all linked organizations). An **organization owner** can create one carrying Compliance API scopes only, restricted to their own organization | [User management](user-management.md) (the Admin API’s member, invite, and group endpoints), [Plugins API](plugins-api.md), [Claude Tag API](claude-tag-api.md), [Compliance API](compliance-api.md), [Claude Enterprise Analytics API](analytics-api.md), and [Spend Limits API](spend-limits-api.md), according to the [scopes](admin-api-keys.md#choose-scopes-for-a-claude-enterprise-key) you select |
+
+A key created in one organization cannot be used to manage a different organization. If your company uses both Claude Console and Claude Enterprise, create one key in each.
+
+## Create a key for a Claude Console organization
+
+<Steps>
+  <Step title="Sign in as an organization admin">
+    Only organization members with the **admin** role can create Admin API keys. See [Organization roles and permissions](admin-api.md#organization-roles-and-permissions).
+  </Step>
+
+  <Step title="Open Admin keys settings">
+    In the Claude Console, go to the [Admin keys](https://platform.claude.com/settings/admin-keys) page (`platform.claude.com/settings/admin-keys`).
+  </Step>
+
+  <Step title="Create the key">
+    Click **Create admin key**, give it a name, select a [key expiration](authentication.md#key-expiration), and click **Add**. Claude Console keys do not have selectable scopes; every key carries full access to all endpoints that accept Admin API keys (the service-account and federation endpoints noted at the top of this page do not accept Admin API keys).
+  </Step>
+
+  <Step title="Copy and store the secret">
+    Copy the displayed secret (starting with `sk-ant-admin01-`) and store it in your secrets manager. The full secret is shown only once.
+  </Step>
+</Steps>
+
+## Create a key for a Claude Enterprise organization
+
+<Steps>
+  <Step title="Sign in as the primary owner or an organization owner">
+    The **primary owner** of the Claude Enterprise parent organization can create a key that can access every linked organization, or one restricted to a single organization. An **organization owner** can create a key with Compliance API scopes only, restricted to their own organization.
+  </Step>
+
+  <Step title="Open API settings">
+    Go to [claude.ai > Organization settings > API](https://claude.ai/admin-settings/api-access) and find the **Keys** section.
+  </Step>
+
+  <Step title="Click + Create key">
+    Name the key and select the scopes you need from the [scopes table](admin-api-keys.md#choose-scopes-for-a-claude-enterprise-key). The primary owner can combine scopes from different APIs (for example, `read:analytics` and `read:spend_limits`) on a single key.
+  </Step>
+
+  <Step title="Copy and store the secret">
+    Copy the displayed secret (starting with `sk-ant-api01-`) and store it in your secrets manager. The full secret is shown only once.
+  </Step>
+</Steps>
+
+## Choose scopes for a Claude Enterprise key
+
+When you create a Claude Enterprise key, select every scope that the APIs you plan to call require. Scopes are fixed at creation; to add a scope later, create a new key.
+
+| To call...                                                                                                                                                                                                                                                                                                                                                                                                             | Select these scopes           |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------- |
+| Admin API [user management](user-management.md): list and look up members and invites; read custom roles and their permissions                                                                                                                                                                                                                                          | `read:members`                |
+| Admin API [user management](user-management.md): change member roles, remove members, and create and withdraw invites (to assign the `managed` role on a role change or an invite, also select `write:rbac_groups`)                                                                                                                                                     | `write:members`               |
+| Admin API [user management](user-management.md): read groups and their members                                                                                                                                                                                                                                                                                          | `read:rbac_groups`            |
+| Admin API [user management](user-management.md): create, rename, and delete groups; add and remove group members; with `write:members`, assign the `managed` role (on an invite or a role change) or assign groups on an invite                                                                                                                                         | `write:rbac_groups`           |
+| [Plugins API](plugins-api.md): read plugins, versions, installation settings, shares, and marketplaces; download plugin files, including the files of members’ personal plugins; validate a marketplace before you connect it                                                                                                                                           | `read:plugins`                |
+| [Plugins API](plugins-api.md): upload plugins and versions; choose which version members are served; delete plugins, including members’ personal plugins; set and remove installation settings; set a marketplace’s default installation setting; validate a marketplace before you connect it (to read plugins, also select `read:plugins`)                            | `write:plugins`               |
+| [Claude Tag API](claude-tag-api.md): read Claude Tag’s settings on Slack channels and Slack workspaces; list Access bundles and where they are attached (no other scope grants access to the Claude Tag API)                                                                                                                                                            | `read:claude_tag`             |
+| [Claude Tag API](claude-tag-api.md): set up and remove channels; change settings; attach and detach Access bundles (to read as well, also select `read:claude_tag`)                                                                                                                                                                                                     | `write:claude_tag`            |
+| [Spend Limits API](spend-limits-api.md): read members’ effective spend limits and increase requests                                                                                                                                                                                                                                                                     | `read:spend_limits`           |
+| [Spend Limits API](spend-limits-api.md): set or clear per-user spend limits; approve or deny increase requests                                                                                                                                                                                                                                                          | `write:spend_limits`          |
+| [Claude Enterprise Analytics API](analytics-api.md): engagement, adoption, cost, and usage reports                                                                                                                                                                                                                                                                      | `read:analytics`              |
+| [Compliance API Activity Feed](compliance-activity-feed.md): organization-wide activity events                                                                                                                                                                                                                                                                          | `read:compliance_activities`  |
+| [Compliance API chat, file, and project endpoints](compliance-content-data.md) and [Compliance API session endpoints](compliance-sessions.md): read chats, files, projects, session transcripts, and [organization users](compliance-org-data.md#list-organization-users) | `read:compliance_user_data`   |
+| [Compliance API chat, file, and project endpoints](compliance-content-data.md): delete chats, files, and projects                                                                                                                                                                                                                                                       | `delete:compliance_user_data` |
+| [Compliance API organization endpoints](compliance-org-data.md): read organization metadata and effective settings; [Plugins API](plugins-api.md): every `GET` endpoint, including file downloads                                                                                                                        | `read:compliance_org_data`    |
+| Admin API [user management](user-management.md) read endpoints, every Compliance API read endpoint, and every [Plugins API](plugins-api.md) `GET` endpoint, including file downloads, with a single read-only scope (for security-audit integrations; does not include the Spend Limits or Analytics APIs)               | `read:org_audit`              |
+
+The Compliance and Analytics APIs must be enabled for your organization before keys with those scopes can be used. See [Set up the Compliance API](compliance-api-access.md#set-up-the-compliance-api) and [Get access to the Claude Enterprise Analytics API](analytics-api.md#get-access-to-the-claude-enterprise-analytics-api).
+
+You can create and use keys with `read:plugins` or `write:plugins` only if your organization can use the Plugins API. The [Plugins API](plugins-api.md) guide says which organizations can use it. In those organizations, keys with `read:org_audit` or `read:compliance_org_data` can also call the Plugins API’s read endpoints, including file downloads, but not marketplace validation. The `read:plugins` and `write:plugins` scopes act only on the organization the key was created in. See [Plugins API scopes](plugins-api.md#scopes) and [Reading another organization under the same parent](plugins-api.md#reading-another-organization-under-the-same-parent).
+
+## Use the key
+
+Pass the key in the `x-api-key` header on every request. See each API’s documentation for complete request examples.
+
+A call that exceeds the key’s scopes returns `403 Forbidden` with a message listing the scopes the key has and the scopes the endpoint needs.
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Admin API" href="https://platform.claude.com/docs/en/manage-claude/admin-api">
+    Manage organization members, workspaces, and API keys.
+  </Card>
+
+  <Card title="Spend Limits API" href="https://platform.claude.com/docs/en/manage-claude/spend-limits-api">
+    Set per-member spend limits and review increase requests for your Claude Enterprise organization.
+  </Card>
+
+  <Card title="Analytics APIs" href="https://platform.claude.com/docs/en/manage-claude/analytics-api">
+    Report on Claude Code productivity or Claude Enterprise engagement and adoption.
+  </Card>
+
+  <Card title="Compliance API" href="https://platform.claude.com/docs/en/manage-claude/compliance-api">
+    Audit activity and retrieve or delete user content across your organization.
+  </Card>
+</CardGroup>
