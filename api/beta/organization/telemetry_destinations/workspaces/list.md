@@ -11,7 +11,7 @@ List the workspaces on a destination's workspace list, newest entry first.
 
 A destination whose `workspaces.type` is `all` doesn't have a list, so its page is empty. The list includes archived workspaces.
 
-See the [OpenTelemetry export guide](../../../../../manage-claude/opentelemetry.md?sdk_languages=http#choose-workspaces-for-a-destination) to learn more about choosing the workspaces of a destination.
+See the [OpenTelemetry export guide](../../../../../manage-claude/opentelemetry.md#choose-workspaces-for-a-destination) to learn more about choosing the workspaces of a destination.
 
 ## Path parameters
 
@@ -37,7 +37,7 @@ See the [OpenTelemetry export guide](../../../../../manage-claude/opentelemetry.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../../../../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../../../../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 

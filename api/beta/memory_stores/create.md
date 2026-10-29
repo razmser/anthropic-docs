@@ -15,7 +15,7 @@ Create a Memory Store
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -141,7 +141,7 @@ Create a Memory Store
 
   In a session, the store's directory under `/mnt/memory/` is based on this name. The name is lowercased and every run of characters other than ASCII letters and digits becomes one hyphen. The session's memory store resource gives the exact path in `mount_path`.
 
-  See the [memory guide](../../../managed-agents/memory.md?sdk_languages=http#how-the-agent-accesses-memory) to learn more about how agents access memory stores.
+  See the [memory guide](../../../managed-agents/memory.md#how-the-agent-accesses-memory) to learn more about how agents access memory stores.
 
   minLength: 1, maxLength: 255
 
@@ -175,7 +175,7 @@ Create a Memory Store
 
     Archiving can't be undone. An archived store can't be attached to new sessions. You can't create or update its memories or update the store. You can still read and delete its memories, redact their versions, and delete the store.
 
-    See the [memory guide](../../../managed-agents/memory.md?sdk_languages=http#archive-a-store) to learn more about archiving.
+    See the [memory guide](../../../managed-agents/memory.md#archive-a-store) to learn more about archiving.
 
     format: date-time
 

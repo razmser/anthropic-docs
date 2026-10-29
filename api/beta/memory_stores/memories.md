@@ -39,7 +39,7 @@ Create a Memory
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -181,7 +181,7 @@ Create a Memory
 
   `content` is `null` when the response uses `view=basic`. `content_size_bytes` and `content_sha256` are always set, so you can detect changes without fetching the content. To retrieve, update, or delete a memory, pass its ID, which stays the same when its path changes.
 
-  See the [memory guide](../../../managed-agents/memory.md?sdk_languages=http#view-and-edit-memories) to learn more about working with memories.
+  See the [memory guide](../../../managed-agents/memory.md#view-and-edit-memories) to learn more about working with memories.
 
   - `type: "memory"`
 
@@ -217,7 +217,7 @@ Create a Memory
 
     Memory versions don't have a flag that marks the latest one. Compare their IDs with this field instead.
 
-    See the [memory guide](../../../managed-agents/memory.md?sdk_languages=http#audit-memory-changes) to learn more about memory versions.
+    See the [memory guide](../../../managed-agents/memory.md#audit-memory-changes) to learn more about memory versions.
 
   - `path: string`
 
@@ -328,7 +328,7 @@ List Memories
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -458,7 +458,7 @@ List Memories
 
     `content` is `null` when the response uses `view=basic`. `content_size_bytes` and `content_sha256` are always set, so you can detect changes without fetching the content. To retrieve, update, or delete a memory, pass its ID, which stays the same when its path changes.
 
-    See the [memory guide](../../../managed-agents/memory.md?sdk_languages=http#view-and-edit-memories) to learn more about working with memories.
+    See the [memory guide](../../../managed-agents/memory.md#view-and-edit-memories) to learn more about working with memories.
 
     - `type: "memory"`
 
@@ -494,7 +494,7 @@ List Memories
 
       Memory versions don't have a flag that marks the latest one. Compare their IDs with this field instead.
 
-      See the [memory guide](../../../managed-agents/memory.md?sdk_languages=http#audit-memory-changes) to learn more about memory versions.
+      See the [memory guide](../../../managed-agents/memory.md#audit-memory-changes) to learn more about memory versions.
 
     - `path: string`
 
@@ -516,7 +516,7 @@ List Memories
 
   - `BetaManagedAgentsMemoryPrefix object`
 
-    A directory marker that [List Memories](memories/list.md?sdk_languages=http) returns instead of the memories below the requested `depth`.
+    A directory marker that [List Memories](memories/list.md) returns instead of the memories below the requested `depth`.
 
     It stands for one or more memories whose paths start with `path`. It isn't a stored object and doesn't have an ID. Each marker counts toward the page `limit`.
 
@@ -599,7 +599,7 @@ Retrieve a Memory
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -725,7 +725,7 @@ Retrieve a Memory
 
   `content` is `null` when the response uses `view=basic`. `content_size_bytes` and `content_sha256` are always set, so you can detect changes without fetching the content. To retrieve, update, or delete a memory, pass its ID, which stays the same when its path changes.
 
-  See the [memory guide](../../../managed-agents/memory.md?sdk_languages=http#view-and-edit-memories) to learn more about working with memories.
+  See the [memory guide](../../../managed-agents/memory.md#view-and-edit-memories) to learn more about working with memories.
 
   - `type: "memory"`
 
@@ -761,7 +761,7 @@ Retrieve a Memory
 
     Memory versions don't have a flag that marks the latest one. Compare their IDs with this field instead.
 
-    See the [memory guide](../../../managed-agents/memory.md?sdk_languages=http#audit-memory-changes) to learn more about memory versions.
+    See the [memory guide](../../../managed-agents/memory.md#audit-memory-changes) to learn more about memory versions.
 
   - `path: string`
 
@@ -845,7 +845,7 @@ Update a Memory
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -997,7 +997,7 @@ Update a Memory
 
   `content` is `null` when the response uses `view=basic`. `content_size_bytes` and `content_sha256` are always set, so you can detect changes without fetching the content. To retrieve, update, or delete a memory, pass its ID, which stays the same when its path changes.
 
-  See the [memory guide](../../../managed-agents/memory.md?sdk_languages=http#view-and-edit-memories) to learn more about working with memories.
+  See the [memory guide](../../../managed-agents/memory.md#view-and-edit-memories) to learn more about working with memories.
 
   - `type: "memory"`
 
@@ -1033,7 +1033,7 @@ Update a Memory
 
     Memory versions don't have a flag that marks the latest one. Compare their IDs with this field instead.
 
-    See the [memory guide](../../../managed-agents/memory.md?sdk_languages=http#audit-memory-changes) to learn more about memory versions.
+    See the [memory guide](../../../managed-agents/memory.md#audit-memory-changes) to learn more about memory versions.
 
   - `path: string`
 
@@ -1111,7 +1111,7 @@ Delete a Memory
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -1233,11 +1233,11 @@ Delete a Memory
 
 - `BetaManagedAgentsDeletedMemory object`
 
-  The confirmation that [Delete a Memory](memories/delete.md?sdk_languages=http) returns.
+  The confirmation that [Delete a Memory](memories/delete.md) returns.
 
-  Deleting a memory doesn't delete its versions. [List Memory Versions](memory_versions/list.md?sdk_languages=http) returns them while they are retained: each version is kept for at least the version retention period after it was written, unless the store itself is deleted.
+  Deleting a memory doesn't delete its versions. [List Memory Versions](memory_versions/list.md) returns them while they are retained: each version is kept for at least the version retention period after it was written, unless the store itself is deleted.
 
-  See the [memory guide](../../../managed-agents/memory.md?sdk_languages=http#audit-memory-changes) to learn more about how long versions are kept.
+  See the [memory guide](../../../managed-agents/memory.md#audit-memory-changes) to learn more about how long versions are kept.
 
   - `type: "memory_deleted"`
 
@@ -1292,11 +1292,11 @@ curl https://api.anthropic.com/v1/memory_stores/$MEMORY_STORE_ID/memories/$MEMOR
 
 - `BetaManagedAgentsDeletedMemory object`
 
-  The confirmation that [Delete a Memory](memories/delete.md?sdk_languages=http) returns.
+  The confirmation that [Delete a Memory](memories/delete.md) returns.
 
-  Deleting a memory doesn't delete its versions. [List Memory Versions](memory_versions/list.md?sdk_languages=http) returns them while they are retained: each version is kept for at least the version retention period after it was written, unless the store itself is deleted.
+  Deleting a memory doesn't delete its versions. [List Memory Versions](memory_versions/list.md) returns them while they are retained: each version is kept for at least the version retention period after it was written, unless the store itself is deleted.
 
-  See the [memory guide](../../../managed-agents/memory.md?sdk_languages=http#audit-memory-changes) to learn more about how long versions are kept.
+  See the [memory guide](../../../managed-agents/memory.md#audit-memory-changes) to learn more about how long versions are kept.
 
   - `type: "memory_deleted"`
 
@@ -1404,7 +1404,7 @@ curl https://api.anthropic.com/v1/memory_stores/$MEMORY_STORE_ID/memories/$MEMOR
 
     The error doesn't include the memory's current state. Retrieve the memory to see its current content and `content_sha256` before you retry.
 
-    See the [memory guide](../../../managed-agents/memory.md?sdk_languages=http#safe-content-edits-optimistic-concurrency) to learn more about safe content edits with content hash preconditions.
+    See the [memory guide](../../../managed-agents/memory.md#safe-content-edits-optimistic-concurrency) to learn more about safe content edits with content hash preconditions.
 
     - `type: "memory_precondition_failed_error"`
 
@@ -1448,7 +1448,7 @@ curl https://api.anthropic.com/v1/memory_stores/$MEMORY_STORE_ID/memories/$MEMOR
 
   `content` is `null` when the response uses `view=basic`. `content_size_bytes` and `content_sha256` are always set, so you can detect changes without fetching the content. To retrieve, update, or delete a memory, pass its ID, which stays the same when its path changes.
 
-  See the [memory guide](../../../managed-agents/memory.md?sdk_languages=http#view-and-edit-memories) to learn more about working with memories.
+  See the [memory guide](../../../managed-agents/memory.md#view-and-edit-memories) to learn more about working with memories.
 
   - `type: "memory"`
 
@@ -1484,7 +1484,7 @@ curl https://api.anthropic.com/v1/memory_stores/$MEMORY_STORE_ID/memories/$MEMOR
 
     Memory versions don't have a flag that marks the latest one. Compare their IDs with this field instead.
 
-    See the [memory guide](../../../managed-agents/memory.md?sdk_languages=http#audit-memory-changes) to learn more about memory versions.
+    See the [memory guide](../../../managed-agents/memory.md#audit-memory-changes) to learn more about memory versions.
 
   - `path: string`
 
@@ -1508,7 +1508,7 @@ curl https://api.anthropic.com/v1/memory_stores/$MEMORY_STORE_ID/memories/$MEMOR
 
 - `BetaManagedAgentsMemoryListItem = BetaManagedAgentsMemory or BetaManagedAgentsMemoryPrefix`
 
-  One item in a [List Memories](memories/list.md?sdk_languages=http) response: a `memory`, or a `memory_prefix` marker when `depth` is `1`.
+  One item in a [List Memories](memories/list.md) response: a `memory`, or a `memory_prefix` marker when `depth` is `1`.
 
   - `BetaManagedAgentsMemory object`
 
@@ -1516,7 +1516,7 @@ curl https://api.anthropic.com/v1/memory_stores/$MEMORY_STORE_ID/memories/$MEMOR
 
     `content` is `null` when the response uses `view=basic`. `content_size_bytes` and `content_sha256` are always set, so you can detect changes without fetching the content. To retrieve, update, or delete a memory, pass its ID, which stays the same when its path changes.
 
-    See the [memory guide](../../../managed-agents/memory.md?sdk_languages=http#view-and-edit-memories) to learn more about working with memories.
+    See the [memory guide](../../../managed-agents/memory.md#view-and-edit-memories) to learn more about working with memories.
 
     - `type: "memory"`
 
@@ -1552,7 +1552,7 @@ curl https://api.anthropic.com/v1/memory_stores/$MEMORY_STORE_ID/memories/$MEMOR
 
       Memory versions don't have a flag that marks the latest one. Compare their IDs with this field instead.
 
-      See the [memory guide](../../../managed-agents/memory.md?sdk_languages=http#audit-memory-changes) to learn more about memory versions.
+      See the [memory guide](../../../managed-agents/memory.md#audit-memory-changes) to learn more about memory versions.
 
     - `path: string`
 
@@ -1574,7 +1574,7 @@ curl https://api.anthropic.com/v1/memory_stores/$MEMORY_STORE_ID/memories/$MEMOR
 
   - `BetaManagedAgentsMemoryPrefix object`
 
-    A directory marker that [List Memories](memories/list.md?sdk_languages=http) returns instead of the memories below the requested `depth`.
+    A directory marker that [List Memories](memories/list.md) returns instead of the memories below the requested `depth`.
 
     It stands for one or more memories whose paths start with `path`. It isn't a stored object and doesn't have an ID. Each marker counts toward the page `limit`.
 
@@ -1616,7 +1616,7 @@ curl https://api.anthropic.com/v1/memory_stores/$MEMORY_STORE_ID/memories/$MEMOR
 
   The error doesn't include the memory's current state. Retrieve the memory to see its current content and `content_sha256` before you retry.
 
-  See the [memory guide](../../../managed-agents/memory.md?sdk_languages=http#safe-content-edits-optimistic-concurrency) to learn more about safe content edits with content hash preconditions.
+  See the [memory guide](../../../managed-agents/memory.md#safe-content-edits-optimistic-concurrency) to learn more about safe content edits with content hash preconditions.
 
   - `type: "memory_precondition_failed_error"`
 
@@ -1628,7 +1628,7 @@ curl https://api.anthropic.com/v1/memory_stores/$MEMORY_STORE_ID/memories/$MEMOR
 
 - `BetaManagedAgentsMemoryPrefix object`
 
-  A directory marker that [List Memories](memories/list.md?sdk_languages=http) returns instead of the memories below the requested `depth`.
+  A directory marker that [List Memories](memories/list.md) returns instead of the memories below the requested `depth`.
 
   It stands for one or more memories whose paths start with `path`. It isn't a stored object and doesn't have an ID. Each marker counts toward the page `limit`.
 

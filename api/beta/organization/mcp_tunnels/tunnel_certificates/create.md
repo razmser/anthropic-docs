@@ -9,7 +9,7 @@ url: https://platform.claude.com/docs/en/api/beta/organization/mcp_tunnels/tunne
 
 **Deprecated**
 
-**Deprecated.** This Admin API endpoint is superseded by `/v1/tunnels` on the Claude API and will be removed after a migration window. New integrations should use [`/v1/tunnels`](../../../tunnels.md?sdk_languages=http) with the `anthropic-beta: mcp-tunnels-2026-06-22` header and a WIF token carrying the `workspace:manage_tunnels` scope. Existing integrations continue to work with the `mcp-tunnels-2026-05-19` header and `org:manage_tunnels` scope during the migration window.
+**Deprecated.** This Admin API endpoint is superseded by `/v1/tunnels` on the Claude API and will be removed after a migration window. New integrations should use [`/v1/tunnels`](../../../tunnels.md) with the `anthropic-beta: mcp-tunnels-2026-06-22` header and a WIF token carrying the `workspace:manage_tunnels` scope. Existing integrations continue to work with the `mcp-tunnels-2026-05-19` header and `org:manage_tunnels` scope during the migration window.
 
 Register a public CA certificate for the tunnel.
 
@@ -30,7 +30,7 @@ holds at most two non-archived certificates.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../../../../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../../../../versioning.md).
 
 - `"anthropic-beta": array of AnthropicBeta`
 

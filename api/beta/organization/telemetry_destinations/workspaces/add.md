@@ -13,7 +13,7 @@ Under `include` the workspace's spans start going to the destination. Under `exc
 
 Adding a workspace that is already on the list changes nothing and returns the existing entry. An archived workspace that isn't on the list yet can't be added. A destination whose `workspaces.type` is `all` doesn't have a list, so the API returns 400. To change which workspaces such a destination covers, update its `workspaces`.
 
-See the [OpenTelemetry export guide](../../../../../manage-claude/opentelemetry.md?sdk_languages=http#choose-workspaces-for-a-destination) to learn more about choosing the workspaces of a destination.
+See the [OpenTelemetry export guide](../../../../../manage-claude/opentelemetry.md#choose-workspaces-for-a-destination) to learn more about choosing the workspaces of a destination.
 
 ## Path parameters
 
@@ -31,7 +31,7 @@ See the [OpenTelemetry export guide](../../../../../manage-claude/opentelemetry.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../../../../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../../../../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 

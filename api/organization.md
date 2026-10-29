@@ -17,7 +17,7 @@ Retrieve information about the organization associated with the authenticated AP
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](versioning.md).
 
 ### Returns
 
@@ -157,7 +157,7 @@ List API Keys
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](versioning.md).
 
 #### Returns
 
@@ -348,7 +348,7 @@ Retrieve information about a single API key in your organization, looked up by i
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](versioning.md).
 
 #### Returns
 
@@ -520,7 +520,7 @@ Update API Key
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](versioning.md).
 
 #### Body parameters
 
@@ -708,7 +708,7 @@ Create an external key config owned by the caller's organization.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](versioning.md).
 
 #### Body parameters
 
@@ -942,7 +942,7 @@ Results are ordered by creation time (newest first). Use the
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](versioning.md).
 
 #### Returns
 
@@ -1099,7 +1099,7 @@ Retrieve a single external key config in the caller's organization by ID.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](versioning.md).
 
 #### Returns
 
@@ -1257,7 +1257,7 @@ encrypted data requires the original key identity to decrypt.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](versioning.md).
 
 #### Body parameters
 
@@ -1481,7 +1481,7 @@ The request is rejected if any workspace still references this config.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](versioning.md).
 
 #### Returns
 
@@ -1536,7 +1536,7 @@ message if it failed or timed out.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](versioning.md).
 
 #### Returns
 
@@ -1581,7 +1581,7 @@ curl https://api.anthropic.com/v1/organizations/external_keys/$EXTERNAL_KEY_ID/v
 
 **POST** `/v1/organizations/federation_issuers`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md?sdk_languages=http).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md).
 
 Register an OIDC issuer that Anthropic will trust for workload identity
 federation in your organization.
@@ -1601,7 +1601,7 @@ matched as the JWT's `iss` claim and is not fetched.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](versioning.md).
 
 #### Body parameters
 
@@ -1863,7 +1863,7 @@ curl https://api.anthropic.com/v1/organizations/federation_issuers \
 
 **GET** `/v1/organizations/federation_issuers`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md?sdk_languages=http).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md).
 
 List federation issuers in your organization.
 
@@ -1893,7 +1893,7 @@ Archived issuers are excluded unless `include_archived=true`.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](versioning.md).
 
 #### Returns
 
@@ -2080,7 +2080,7 @@ curl https://api.anthropic.com/v1/organizations/federation_issuers \
 
 **GET** `/v1/organizations/federation_issuers/{federation_issuer_id}`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md?sdk_languages=http).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md).
 
 Retrieve a federation issuer by its ID (`fdis_...`).
 
@@ -2096,7 +2096,7 @@ Retrieve a federation issuer by its ID (`fdis_...`).
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](versioning.md).
 
 #### Returns
 
@@ -2279,7 +2279,7 @@ curl https://api.anthropic.com/v1/organizations/federation_issuers/$FEDERATION_I
 
 **POST** `/v1/organizations/federation_issuers/{federation_issuer_id}`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md?sdk_languages=http).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md).
 
 Partially update a federation issuer.
 
@@ -2302,7 +2302,7 @@ session.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](versioning.md).
 
 #### Body parameters
 
@@ -2565,7 +2565,7 @@ curl https://api.anthropic.com/v1/organizations/federation_issuers/$FEDERATION_I
 
 **POST** `/v1/organizations/federation_issuers/{federation_issuer_id}/archive`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md?sdk_languages=http).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md).
 
 Archive a federation issuer.
 
@@ -2586,7 +2586,7 @@ issuer cannot be changed), or recreate them against another issuer.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](versioning.md).
 
 #### Returns
 
@@ -2772,7 +2772,7 @@ curl https://api.anthropic.com/v1/organizations/federation_issuers/$FEDERATION_I
 
 **POST** `/v1/organizations/federation_rules`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md?sdk_languages=http).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md).
 
 Create a federation rule owned by your organization.
 
@@ -2796,7 +2796,7 @@ manage rules whose `oauth_scope` is `workspace:developer` or
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](versioning.md).
 
 #### Body parameters
 
@@ -3078,7 +3078,7 @@ curl https://api.anthropic.com/v1/organizations/federation_rules \
 
 **GET** `/v1/organizations/federation_rules`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md?sdk_languages=http).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md).
 
 List federation rules in your organization.
 
@@ -3113,7 +3113,7 @@ unless `include_archived=true`.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](versioning.md).
 
 #### Returns
 
@@ -3300,7 +3300,7 @@ curl https://api.anthropic.com/v1/organizations/federation_rules \
 
 **GET** `/v1/organizations/federation_rules/{federation_rule_id}`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md?sdk_languages=http).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md).
 
 Retrieve a federation rule by its ID (`fdrl_...`).
 
@@ -3316,7 +3316,7 @@ Retrieve a federation rule by its ID (`fdrl_...`).
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](versioning.md).
 
 #### Returns
 
@@ -3505,7 +3505,7 @@ curl https://api.anthropic.com/v1/organizations/federation_rules/$FEDERATION_RUL
 
 **POST** `/v1/organizations/federation_rules/{federation_rule_id}`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md?sdk_languages=http).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md).
 
 Partially update a federation rule.
 
@@ -3537,7 +3537,7 @@ Console session.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](versioning.md).
 
 #### Body parameters
 
@@ -3806,7 +3806,7 @@ curl https://api.anthropic.com/v1/organizations/federation_rules/$FEDERATION_RUL
 
 **POST** `/v1/organizations/federation_rules/{federation_rule_id}/archive`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md?sdk_languages=http).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md).
 
 Archive a federation rule.
 
@@ -3830,7 +3830,7 @@ other scopes require a Console session.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](versioning.md).
 
 #### Returns
 
@@ -4022,7 +4022,7 @@ curl https://api.anthropic.com/v1/organizations/federation_rules/$FEDERATION_RUL
 
 **POST** `/v1/organizations/federation_rules/{federation_rule_id}/workspaces`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md?sdk_languages=http).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md).
 
 Enable a federation rule for a workspace.
 
@@ -4047,7 +4047,7 @@ other scopes require a Console session.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](versioning.md).
 
 #### Body parameters
 
@@ -4114,7 +4114,7 @@ curl https://api.anthropic.com/v1/organizations/federation_rules/$FEDERATION_RUL
 
 **GET** `/v1/organizations/federation_rules/{federation_rule_id}/workspaces`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md?sdk_languages=http).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md).
 
 List workspaces where this federation rule is enabled.
 
@@ -4148,7 +4148,7 @@ rules with `applies_to_all_workspaces` or a legacy single
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](versioning.md).
 
 #### Returns
 
@@ -4214,7 +4214,7 @@ curl https://api.anthropic.com/v1/organizations/federation_rules/$FEDERATION_RUL
 
 **DELETE** `/v1/organizations/federation_rules/{federation_rule_id}/workspaces/{workspace_id}`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md?sdk_languages=http).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md).
 
 Disable a federation rule for a workspace.
 
@@ -4239,7 +4239,7 @@ Console session.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](versioning.md).
 
 #### Returns
 
@@ -4290,7 +4290,7 @@ On plans that draw members from a finite pool of purchased seats, the invite aut
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](versioning.md).
 
 #### Body parameters
 
@@ -4481,7 +4481,7 @@ List the organization's invites.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](versioning.md).
 
 #### Returns
 
@@ -4622,7 +4622,7 @@ Retrieve an invite by ID.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](versioning.md).
 
 #### Returns
 
@@ -4744,7 +4744,7 @@ Delete a pending invite.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](versioning.md).
 
 #### Returns
 
@@ -4784,7 +4784,7 @@ curl https://api.anthropic.com/v1/organizations/invites/$INVITE_ID \
 
 **POST** `/v1/organizations/service_accounts`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md?sdk_languages=http).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md).
 
 Create a service account.
 
@@ -4802,7 +4802,7 @@ accounts.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](versioning.md).
 
 #### Body parameters
 
@@ -4923,7 +4923,7 @@ curl https://api.anthropic.com/v1/organizations/service_accounts \
 
 **GET** `/v1/organizations/service_accounts`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md?sdk_languages=http).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md).
 
 List service accounts in the caller's organization.
 
@@ -4955,7 +4955,7 @@ archived service accounts.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](versioning.md).
 
 #### Returns
 
@@ -5054,7 +5054,7 @@ curl https://api.anthropic.com/v1/organizations/service_accounts \
 
 **GET** `/v1/organizations/service_accounts/{service_account_id}`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md?sdk_languages=http).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md).
 
 Retrieve a service account by its ID (`svac_...`).
 
@@ -5070,7 +5070,7 @@ Retrieve a service account by its ID (`svac_...`).
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](versioning.md).
 
 #### Returns
 
@@ -5165,7 +5165,7 @@ curl https://api.anthropic.com/v1/organizations/service_accounts/$SERVICE_ACCOUN
 
 **POST** `/v1/organizations/service_accounts/{service_account_id}`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md?sdk_languages=http).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md).
 
 Update a service account.
 
@@ -5186,7 +5186,7 @@ interactive credential (a user OAuth token or a Console session).
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](versioning.md).
 
 #### Body parameters
 
@@ -5299,7 +5299,7 @@ curl https://api.anthropic.com/v1/organizations/service_accounts/$SERVICE_ACCOUN
 
 **POST** `/v1/organizations/service_accounts/{service_account_id}/archive`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md?sdk_languages=http).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md).
 
 Archive a service account.
 
@@ -5320,7 +5320,7 @@ those rules first or change their target to another service account.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](versioning.md).
 
 #### Returns
 
@@ -5418,7 +5418,7 @@ curl https://api.anthropic.com/v1/organizations/service_accounts/$SERVICE_ACCOUN
 
 **POST** `/v1/organizations/service_accounts/{service_account_id}/workspaces`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md?sdk_languages=http).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md).
 
 Add a service account to a workspace with the given `workspace_role`.
 
@@ -5441,7 +5441,7 @@ rejected.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](versioning.md).
 
 #### Body parameters
 
@@ -5529,7 +5529,7 @@ curl https://api.anthropic.com/v1/organizations/service_accounts/$SERVICE_ACCOUN
 
 **GET** `/v1/organizations/service_accounts/{service_account_id}/workspaces`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md?sdk_languages=http).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md).
 
 List the workspaces a service account is a member of.
 
@@ -5571,7 +5571,7 @@ page to recover.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](versioning.md).
 
 #### Returns
 
@@ -5645,7 +5645,7 @@ curl https://api.anthropic.com/v1/organizations/service_accounts/$SERVICE_ACCOUN
 
 **DELETE** `/v1/organizations/service_accounts/{service_account_id}/workspaces/{workspace_id}`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md?sdk_languages=http).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md).
 
 Remove a service account from a workspace.
 
@@ -5673,7 +5673,7 @@ to the implicit `workspace_user` membership. Archived workspaces return
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](versioning.md).
 
 #### Returns
 
@@ -5752,7 +5752,7 @@ List the organization's members.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](versioning.md).
 
 #### Returns
 
@@ -5864,7 +5864,7 @@ Retrieve a member of the organization by user ID.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](versioning.md).
 
 #### Returns
 
@@ -5957,7 +5957,7 @@ Update a member's organization role.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](versioning.md).
 
 #### Body parameters
 
@@ -6072,7 +6072,7 @@ Remove a member from the organization.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](versioning.md).
 
 #### Returns
 
@@ -6150,7 +6150,7 @@ List Workspaces
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](versioning.md).
 
 #### Returns
 
@@ -6311,7 +6311,7 @@ Create Workspace
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](versioning.md).
 
 #### Body parameters
 
@@ -6529,7 +6529,7 @@ Get Workspace
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](versioning.md).
 
 #### Returns
 
@@ -6675,7 +6675,7 @@ Update Workspace
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](versioning.md).
 
 #### Body parameters
 
@@ -6886,7 +6886,7 @@ Archive Workspace
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](versioning.md).
 
 #### Returns
 
@@ -7083,7 +7083,7 @@ the remaining entries.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](versioning.md).
 
 #### Returns
 
@@ -7302,7 +7302,7 @@ Changes take effect within about an hour.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](versioning.md).
 
 #### Body parameters
 
@@ -7561,7 +7561,7 @@ List Workspace Members
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](versioning.md).
 
 #### Returns
 
@@ -7653,7 +7653,7 @@ Create Workspace Member
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](versioning.md).
 
 #### Body parameters
 
@@ -7753,7 +7753,7 @@ Get Workspace Member
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](versioning.md).
 
 #### Returns
 
@@ -7830,7 +7830,7 @@ Update Workspace Member
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](versioning.md).
 
 #### Body parameters
 
@@ -7927,7 +7927,7 @@ Delete Workspace Member
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](versioning.md).
 
 #### Returns
 
@@ -7972,7 +7972,7 @@ curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/members
 
 **GET** `/v1/organizations/workspaces/{workspace_id}/service_accounts`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md?sdk_languages=http).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md).
 
 List the service accounts that are members of a workspace.
 
@@ -8007,7 +8007,7 @@ omitted from the results.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](versioning.md).
 
 #### Returns
 
@@ -8081,7 +8081,7 @@ curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/service
 
 **POST** `/v1/organizations/workspaces/{workspace_id}/service_accounts`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md?sdk_languages=http).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md).
 
 Add a service account to a workspace with the given `workspace_role`.
 
@@ -8106,7 +8106,7 @@ accounts cannot be added and are rejected.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](versioning.md).
 
 #### Body parameters
 
@@ -8194,7 +8194,7 @@ curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/service
 
 **GET** `/v1/organizations/workspaces/{workspace_id}/service_accounts/{service_account_id}`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md?sdk_languages=http).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md).
 
 Retrieve a service account's membership in a workspace.
 
@@ -8221,7 +8221,7 @@ account returns 404.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](versioning.md).
 
 #### Returns
 
@@ -8286,7 +8286,7 @@ curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/service
 
 **POST** `/v1/organizations/workspaces/{workspace_id}/service_accounts/{service_account_id}`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md?sdk_languages=http).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md).
 
 Change a service account's role in a workspace.
 
@@ -8313,7 +8313,7 @@ rejected.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](versioning.md).
 
 #### Body parameters
 
@@ -8396,7 +8396,7 @@ curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/service
 
 **DELETE** `/v1/organizations/workspaces/{workspace_id}/service_accounts/{service_account_id}`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md?sdk_languages=http).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../manage-claude/wif-admin-api.md).
 
 Remove a service account from a workspace.
 
@@ -8422,7 +8422,7 @@ membership. Archived workspaces return 400.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](versioning.md).
 
 #### Returns
 
@@ -8513,7 +8513,7 @@ the remaining entries.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](versioning.md).
 
 #### Returns
 
@@ -8686,7 +8686,7 @@ organization reads the state inherited from the parent's configuration.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](versioning.md).
 
 #### Returns
 
@@ -8756,7 +8756,7 @@ compliance settings.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](versioning.md).
 
 #### Body parameters
 

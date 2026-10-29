@@ -2691,7 +2691,7 @@ Enterprise plan. Requires an API key with the `read:analytics` scope.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../../versioning.md).
 
 #### Returns
 
@@ -2961,7 +2961,7 @@ the `read:analytics` scope.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../../versioning.md).
 
 #### Returns
 
@@ -3670,7 +3670,7 @@ plan. Requires an API key with the `read:analytics` scope.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../../versioning.md).
 
 #### Returns
 
@@ -3858,7 +3858,7 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../../versioning.md).
 
 #### Returns
 
@@ -4135,7 +4135,7 @@ range-rollup mode like `/skills`.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../../versioning.md).
 
 #### Returns
 
@@ -4324,7 +4324,7 @@ on a Claude Enterprise plan. Requires an API key with the
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../../versioning.md).
 
 #### Returns
 
@@ -4582,7 +4582,7 @@ can be broken out per product, per member, or per RBAC group via
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../../versioning.md).
 
 #### Returns
 
@@ -4836,7 +4836,7 @@ key with the `read:analytics` scope.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../../versioning.md).
 
 #### Returns
 
@@ -5235,7 +5235,7 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../../versioning.md).
 
 #### Returns
 
@@ -5635,7 +5635,7 @@ Requires an API key with the `read:analytics` scope.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../../versioning.md).
 
 #### Returns
 
@@ -6031,7 +6031,7 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../../versioning.md).
 
 #### Returns
 

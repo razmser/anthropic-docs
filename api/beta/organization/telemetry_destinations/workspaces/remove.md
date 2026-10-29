@@ -13,7 +13,7 @@ Under `include` the workspace's spans stop going to the destination. Under `excl
 
 The API returns 404 when the workspace isn't on the list. A destination whose `workspaces.type` is `all` doesn't have a list, so the API returns 400.
 
-See the [OpenTelemetry export guide](../../../../../manage-claude/opentelemetry.md?sdk_languages=http#choose-workspaces-for-a-destination) to learn more about choosing the workspaces of a destination.
+See the [OpenTelemetry export guide](../../../../../manage-claude/opentelemetry.md#choose-workspaces-for-a-destination) to learn more about choosing the workspaces of a destination.
 
 ## Path parameters
 
@@ -31,7 +31,7 @@ See the [OpenTelemetry export guide](../../../../../manage-claude/opentelemetry.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../../../../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../../../../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 

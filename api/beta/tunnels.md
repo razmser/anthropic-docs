@@ -19,7 +19,7 @@ Creates a tunnel. Creation allocates a fresh hostname and provisions the tunnel;
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -221,7 +221,7 @@ Fetches a tunnel by ID.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -423,7 +423,7 @@ Lists tunnels. Results are ordered by creation time, newest first; archived tunn
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -624,7 +624,7 @@ Archives a tunnel. Archival is irreversible: every non-archived certificate on t
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -817,7 +817,7 @@ Reveals a tunnel's connector token. The value is fetched live on each call; Anth
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -991,7 +991,7 @@ Rotates a tunnel's connector token. Rotation invalidates the current token for n
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -1226,7 +1226,7 @@ Registers a public CA certificate on a tunnel. Anthropic verifies the gateway's 
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -1441,7 +1441,7 @@ Fetches a tunnel certificate by ID.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -1656,7 +1656,7 @@ Lists the certificates registered on a tunnel. Archived certificates are exclude
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -1868,7 +1868,7 @@ Archives a tunnel certificate, removing it from the set Anthropic trusts for the
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 

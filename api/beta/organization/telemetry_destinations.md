@@ -13,7 +13,7 @@ Register an OpenTelemetry destination for the organization.
 
 The destination starts in state `enabled`. An organization can have at most 10 destinations, including disabled ones.
 
-See the [OpenTelemetry export guide](../../../manage-claude/opentelemetry.md?sdk_languages=http#add-a-destination) to learn more about adding a destination.
+See the [OpenTelemetry export guide](../../../manage-claude/opentelemetry.md#add-a-destination) to learn more about adding a destination.
 
 ### Headers
 
@@ -21,7 +21,7 @@ See the [OpenTelemetry export guide](../../../manage-claude/opentelemetry.md?sdk
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -275,7 +275,7 @@ See the [OpenTelemetry export guide](../../../manage-claude/opentelemetry.md?sdk
 
       `last_error` and `last_error_at` always change together. A later successful delivery doesn't clear them. If `last_success_at` is later than `last_error_at`, a delivery has succeeded since this failure.
 
-      See the [OpenTelemetry export guide](../../../manage-claude/opentelemetry.md?sdk_languages=http#delivery-errors) to learn the likely cause of each error.
+      See the [OpenTelemetry export guide](../../../manage-claude/opentelemetry.md#delivery-errors) to learn the likely cause of each error.
 
     - `last_error_at: string or null`
 
@@ -470,7 +470,7 @@ curl https://api.anthropic.com/v1/organizations/telemetry_destinations \
 
 List the organization's destinations, newest first, optionally only those that cover given workspaces.
 
-See the [OpenTelemetry export guide](../../../manage-claude/opentelemetry.md?sdk_languages=http#set-up-api-tracing) to learn more about destinations.
+See the [OpenTelemetry export guide](../../../manage-claude/opentelemetry.md#set-up-api-tracing) to learn more about destinations.
 
 ### Query parameters
 
@@ -496,7 +496,7 @@ See the [OpenTelemetry export guide](../../../manage-claude/opentelemetry.md?sdk
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -638,7 +638,7 @@ See the [OpenTelemetry export guide](../../../manage-claude/opentelemetry.md?sdk
 
       `last_error` and `last_error_at` always change together. A later successful delivery doesn't clear them. If `last_success_at` is later than `last_error_at`, a delivery has succeeded since this failure.
 
-      See the [OpenTelemetry export guide](../../../manage-claude/opentelemetry.md?sdk_languages=http#delivery-errors) to learn the likely cause of each error.
+      See the [OpenTelemetry export guide](../../../manage-claude/opentelemetry.md#delivery-errors) to learn the likely cause of each error.
 
     - `last_error_at: string or null`
 
@@ -835,7 +835,7 @@ curl https://api.anthropic.com/v1/organizations/telemetry_destinations \
 
 Read a destination's configuration, state, and most recent delivery results.
 
-See the [OpenTelemetry export guide](../../../manage-claude/opentelemetry.md?sdk_languages=http#delivery-and-health) to learn how the API delivers spans and when it disables a destination.
+See the [OpenTelemetry export guide](../../../manage-claude/opentelemetry.md#delivery-and-health) to learn how the API delivers spans and when it disables a destination.
 
 ### Path parameters
 
@@ -849,7 +849,7 @@ See the [OpenTelemetry export guide](../../../manage-claude/opentelemetry.md?sdk
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -991,7 +991,7 @@ See the [OpenTelemetry export guide](../../../manage-claude/opentelemetry.md?sdk
 
       `last_error` and `last_error_at` always change together. A later successful delivery doesn't clear them. If `last_success_at` is later than `last_error_at`, a delivery has succeeded since this failure.
 
-      See the [OpenTelemetry export guide](../../../manage-claude/opentelemetry.md?sdk_languages=http#delivery-errors) to learn the likely cause of each error.
+      See the [OpenTelemetry export guide](../../../manage-claude/opentelemetry.md#delivery-errors) to learn the likely cause of each error.
 
     - `last_error_at: string or null`
 
@@ -1183,7 +1183,7 @@ Send at least one field. Omitted fields keep their stored values, except the reg
 
 If another request changes the destination while the update runs, the API returns a 409 `conflict_error`. Read the destination again, then retry the update.
 
-See the [OpenTelemetry export guide](../../../manage-claude/opentelemetry.md?sdk_languages=http#delivery-and-health) to learn more about changing a destination.
+See the [OpenTelemetry export guide](../../../manage-claude/opentelemetry.md#delivery-and-health) to learn more about changing a destination.
 
 ### Path parameters
 
@@ -1197,7 +1197,7 @@ See the [OpenTelemetry export guide](../../../manage-claude/opentelemetry.md?sdk
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -1473,7 +1473,7 @@ See the [OpenTelemetry export guide](../../../manage-claude/opentelemetry.md?sdk
 
       `last_error` and `last_error_at` always change together. A later successful delivery doesn't clear them. If `last_success_at` is later than `last_error_at`, a delivery has succeeded since this failure.
 
-      See the [OpenTelemetry export guide](../../../manage-claude/opentelemetry.md?sdk_languages=http#delivery-errors) to learn the likely cause of each error.
+      See the [OpenTelemetry export guide](../../../manage-claude/opentelemetry.md#delivery-errors) to learn the likely cause of each error.
 
     - `last_error_at: string or null`
 
@@ -1665,7 +1665,7 @@ Delete a destination and its workspace list.
 
 The API stops sending spans to the destination. The spans of the workspaces it covered still go to the other destinations that cover them. A deleted destination can't be read, listed, or restored.
 
-See the [OpenTelemetry export guide](../../../manage-claude/opentelemetry.md?sdk_languages=http#delivery-and-health) to learn more about managing a destination.
+See the [OpenTelemetry export guide](../../../manage-claude/opentelemetry.md#delivery-and-health) to learn more about managing a destination.
 
 ### Path parameters
 
@@ -1679,7 +1679,7 @@ See the [OpenTelemetry export guide](../../../manage-claude/opentelemetry.md?sdk
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -1840,7 +1840,7 @@ Send one test span, named `anthropic.test`, to the destination with its register
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -2045,7 +2045,7 @@ curl https://api.anthropic.com/v1/organizations/telemetry_destinations/$DESTINAT
 
       `last_error` and `last_error_at` always change together. A later successful delivery doesn't clear them. If `last_success_at` is later than `last_error_at`, a delivery has succeeded since this failure.
 
-      See the [OpenTelemetry export guide](../../../manage-claude/opentelemetry.md?sdk_languages=http#delivery-errors) to learn the likely cause of each error.
+      See the [OpenTelemetry export guide](../../../manage-claude/opentelemetry.md#delivery-errors) to learn the likely cause of each error.
 
     - `last_error_at: string or null`
 
@@ -2191,7 +2191,7 @@ curl https://api.anthropic.com/v1/organizations/telemetry_destinations/$DESTINAT
 
   What the spans that the API exports to a telemetry destination contain.
 
-  See the [OpenTelemetry export guide](../../../manage-claude/opentelemetry.md?sdk_languages=http#choose-a-content-mode) to learn what the spans contain in each content mode.
+  See the [OpenTelemetry export guide](../../../manage-claude/opentelemetry.md#choose-a-content-mode) to learn what the spans contain in each content mode.
 
   - `"metadata_only"`
 
@@ -2211,7 +2211,7 @@ curl https://api.anthropic.com/v1/organizations/telemetry_destinations/$DESTINAT
 
   Changes to the destination's configuration or state don't reset these fields. Changes to these fields don't change `updated_at`. The values can lag behind the latest deliveries.
 
-  See the [OpenTelemetry export guide](../../../manage-claude/opentelemetry.md?sdk_languages=http#delivery-and-health) to learn how the API delivers spans and when it disables a destination.
+  See the [OpenTelemetry export guide](../../../manage-claude/opentelemetry.md#delivery-and-health) to learn how the API delivers spans and when it disables a destination.
 
   - `last_error: string or null`
 
@@ -2221,7 +2221,7 @@ curl https://api.anthropic.com/v1/organizations/telemetry_destinations/$DESTINAT
 
     `last_error` and `last_error_at` always change together. A later successful delivery doesn't clear them. If `last_success_at` is later than `last_error_at`, a delivery has succeeded since this failure.
 
-    See the [OpenTelemetry export guide](../../../manage-claude/opentelemetry.md?sdk_languages=http#delivery-errors) to learn the likely cause of each error.
+    See the [OpenTelemetry export guide](../../../manage-claude/opentelemetry.md#delivery-errors) to learn the likely cause of each error.
 
   - `last_error_at: string or null`
 
@@ -2305,7 +2305,7 @@ curl https://api.anthropic.com/v1/organizations/telemetry_destinations/$DESTINAT
 
   A caller can set either state. The API also disables an enabled destination on its own in some cases. The `reason` of the disabled state says whether a caller or the API disabled the destination and, when the API did, why.
 
-  See the [OpenTelemetry export guide](../../../manage-claude/opentelemetry.md?sdk_languages=http#delivery-and-health) to learn when the API disables a destination.
+  See the [OpenTelemetry export guide](../../../manage-claude/opentelemetry.md#delivery-and-health) to learn when the API disables a destination.
 
   - `BetaTelemetryDestinationStateEnabled object`
 
@@ -2745,7 +2745,7 @@ List the workspaces on a destination's workspace list, newest entry first.
 
 A destination whose `workspaces.type` is `all` doesn't have a list, so its page is empty. The list includes archived workspaces.
 
-See the [OpenTelemetry export guide](../../../manage-claude/opentelemetry.md?sdk_languages=http#choose-workspaces-for-a-destination) to learn more about choosing the workspaces of a destination.
+See the [OpenTelemetry export guide](../../../manage-claude/opentelemetry.md#choose-workspaces-for-a-destination) to learn more about choosing the workspaces of a destination.
 
 #### Path parameters
 
@@ -2771,7 +2771,7 @@ See the [OpenTelemetry export guide](../../../manage-claude/opentelemetry.md?sdk
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -2944,7 +2944,7 @@ Under `include` the workspace's spans start going to the destination. Under `exc
 
 Adding a workspace that is already on the list changes nothing and returns the existing entry. An archived workspace that isn't on the list yet can't be added. A destination whose `workspaces.type` is `all` doesn't have a list, so the API returns 400. To change which workspaces such a destination covers, update its `workspaces`.
 
-See the [OpenTelemetry export guide](../../../manage-claude/opentelemetry.md?sdk_languages=http#choose-workspaces-for-a-destination) to learn more about choosing the workspaces of a destination.
+See the [OpenTelemetry export guide](../../../manage-claude/opentelemetry.md#choose-workspaces-for-a-destination) to learn more about choosing the workspaces of a destination.
 
 #### Path parameters
 
@@ -2962,7 +2962,7 @@ See the [OpenTelemetry export guide](../../../manage-claude/opentelemetry.md?sdk
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -3129,7 +3129,7 @@ Under `include` the workspace's spans stop going to the destination. Under `excl
 
 The API returns 404 when the workspace isn't on the list. A destination whose `workspaces.type` is `all` doesn't have a list, so the API returns 400.
 
-See the [OpenTelemetry export guide](../../../manage-claude/opentelemetry.md?sdk_languages=http#choose-workspaces-for-a-destination) to learn more about choosing the workspaces of a destination.
+See the [OpenTelemetry export guide](../../../manage-claude/opentelemetry.md#choose-workspaces-for-a-destination) to learn more about choosing the workspaces of a destination.
 
 #### Path parameters
 
@@ -3147,7 +3147,7 @@ See the [OpenTelemetry export guide](../../../manage-claude/opentelemetry.md?sdk
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 

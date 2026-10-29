@@ -23,7 +23,7 @@ List Vaults
 
 - `page: optional string`
 
-  The `next_page` value from a previous [List Vaults](list.md?sdk_languages=http) response, to get the next page. Leave it out to get the first page.
+  The `next_page` value from a previous [List Vaults](list.md) response, to get the next page. Leave it out to get the first page.
 
 ## Headers
 
@@ -31,7 +31,7 @@ List Vaults
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 

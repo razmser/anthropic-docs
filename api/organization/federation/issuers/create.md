@@ -7,7 +7,7 @@ url: https://platform.claude.com/docs/en/api/organization/federation/issuers/cre
 
 **POST** `/v1/organizations/federation_issuers`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../../../../manage-claude/wif-admin-api.md?sdk_languages=http).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../../../../manage-claude/wif-admin-api.md).
 
 Register an OIDC issuer that Anthropic will trust for workload identity
 federation in your organization.
@@ -27,7 +27,7 @@ matched as the JWT's `iss` claim and is not fetched.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../../../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../../../versioning.md).
 
 ## Body parameters
 

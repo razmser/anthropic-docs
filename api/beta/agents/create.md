@@ -15,7 +15,7 @@ Create Agent
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -327,7 +327,7 @@ Create Agent
 
 - `mcp_servers: optional array of BetaManagedAgentsURLMCPServerParams`
 
-  MCP servers this agent connects to. Maximum 20. Names must be unique within the array. Every server must be referenced by an `mcp_toolset` in `tools`; unreferenced servers are rejected. See the [MCP connector guide](../../../managed-agents/mcp-connector.md?sdk_languages=http).
+  MCP servers this agent connects to. Maximum 20. Names must be unique within the array. Every server must be referenced by an `mcp_toolset` in `tools`; unreferenced servers are rejected. See the [MCP connector guide](../../../managed-agents/mcp-connector.md).
 
   - `type: "url"`
 

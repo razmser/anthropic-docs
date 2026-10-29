@@ -11,7 +11,7 @@ Delete a destination and its workspace list.
 
 The API stops sending spans to the destination. The spans of the workspaces it covered still go to the other destinations that cover them. A deleted destination can't be read, listed, or restored.
 
-See the [OpenTelemetry export guide](../../../../manage-claude/opentelemetry.md?sdk_languages=http#delivery-and-health) to learn more about managing a destination.
+See the [OpenTelemetry export guide](../../../../manage-claude/opentelemetry.md#delivery-and-health) to learn more about managing a destination.
 
 ## Path parameters
 
@@ -25,7 +25,7 @@ See the [OpenTelemetry export guide](../../../../manage-claude/opentelemetry.md?
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../../../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../../../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 

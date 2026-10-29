@@ -17,7 +17,7 @@ Create Deployment
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -1211,7 +1211,7 @@ List Deployments
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -1952,7 +1952,7 @@ Get Deployment
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -2684,7 +2684,7 @@ Update Deployment
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -3826,7 +3826,7 @@ Archive Deployment
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -4559,7 +4559,7 @@ Run Deployment Now
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -4954,7 +4954,7 @@ Pause Deployment
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -5687,7 +5687,7 @@ Unpause Deployment
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 

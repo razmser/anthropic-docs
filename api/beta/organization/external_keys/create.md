@@ -15,7 +15,7 @@ Create an external key config owned by the caller's organization.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../../../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../../../versioning.md).
 
 ## Body parameters
 

@@ -7,7 +7,7 @@ url: https://platform.claude.com/docs/en/api/beta/organization/workspaces/servic
 
 **POST** `/v1/organizations/workspaces/{workspace_id}/service_accounts`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../../../../../manage-claude/wif-admin-api.md?sdk_languages=http).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../../../../../manage-claude/wif-admin-api.md).
 
 Add a service account to a workspace with the given `workspace_role`.
 
@@ -32,7 +32,7 @@ accounts cannot be added and are rejected.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../../../../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../../../../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 

@@ -95,7 +95,7 @@ List Memory Versions
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../../../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../../../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -235,7 +235,7 @@ List Memory Versions
 
     The ID of the memory that this version belongs to (`mem_...`).
 
-    The ID stays valid after the memory is deleted. Pass it as `memory_id` to [List Memory Versions](list.md?sdk_languages=http) to get the memory's retained versions, including its `deleted` version while the lineage is retained.
+    The ID stays valid after the memory is deleted. Pass it as `memory_id` to [List Memory Versions](list.md) to get the memory's retained versions, including its `deleted` version while the lineage is retained.
 
   - `memory_store_id: string`
 
@@ -277,7 +277,7 @@ List Memory Versions
 
     Redacting the version doesn't change this field. A `session_actor` here is an agent that wrote through the store's mounted filesystem at `/mnt/memory/`. The version doesn't record the API key that created that session. So the author in `created_by` is who made the change, not who is ultimately responsible for it.
 
-    You can [retrieve the session](../../sessions/retrieve.md?sdk_languages=http) to learn more about where the change came from.
+    You can [retrieve the session](../../sessions/retrieve.md) to learn more about where the change came from.
 
     - `BetaManagedAgentsSessionActor object`
 
@@ -287,7 +287,7 @@ List Memory Versions
 
       - `session_id: string`
 
-        ID of the session (a `sesn_...` value). Look up the session via [Retrieve a session](../../sessions/retrieve.md?sdk_languages=http) for further provenance.
+        ID of the session (a `sesn_...` value). Look up the session via [Retrieve a session](../../sessions/retrieve.md) for further provenance.
 
         minLength: 1
 
@@ -337,7 +337,7 @@ List Memory Versions
 
     When set, `content`, `path`, `content_size_bytes`, and `content_sha256` are `null`.
 
-    See the [memory guide](../../../../managed-agents/memory.md?sdk_languages=http#redact-a-version) to learn more about redaction.
+    See the [memory guide](../../../../managed-agents/memory.md#redact-a-version) to learn more about redaction.
 
     format: date-time
 

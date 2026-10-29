@@ -41,7 +41,7 @@ Retrieve a Memory
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../../../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../../../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -167,7 +167,7 @@ Retrieve a Memory
 
   `content` is `null` when the response uses `view=basic`. `content_size_bytes` and `content_sha256` are always set, so you can detect changes without fetching the content. To retrieve, update, or delete a memory, pass its ID, which stays the same when its path changes.
 
-  See the [memory guide](../../../../managed-agents/memory.md?sdk_languages=http#view-and-edit-memories) to learn more about working with memories.
+  See the [memory guide](../../../../managed-agents/memory.md#view-and-edit-memories) to learn more about working with memories.
 
   - `type: "memory"`
 
@@ -203,7 +203,7 @@ Retrieve a Memory
 
     Memory versions don't have a flag that marks the latest one. Compare their IDs with this field instead.
 
-    See the [memory guide](../../../../managed-agents/memory.md?sdk_languages=http#audit-memory-changes) to learn more about memory versions.
+    See the [memory guide](../../../../managed-agents/memory.md#audit-memory-changes) to learn more about memory versions.
 
   - `path: string`
 

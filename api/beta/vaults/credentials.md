@@ -23,7 +23,7 @@ Create a Credential
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -543,7 +543,7 @@ List Credentials
 
 - `page: optional string`
 
-  The `next_page` value from a previous [List Credentials](credentials/list.md?sdk_languages=http) response, to get the next page. Leave it out to get the first page.
+  The `next_page` value from a previous [List Credentials](credentials/list.md) response, to get the next page. Leave it out to get the first page.
 
 ### Headers
 
@@ -551,7 +551,7 @@ List Credentials
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -886,7 +886,7 @@ Retrieve a Credential
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -1212,7 +1212,7 @@ Update a Credential
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -1687,7 +1687,7 @@ Delete a Credential
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -1858,7 +1858,7 @@ Archive a Credential
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -2185,7 +2185,7 @@ Validate an MCP OAuth Credential
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -2938,7 +2938,7 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
   After the change, at least one location must be enabled.
 
-  See [Authenticate with vaults](../../../managed-agents/vaults.md?sdk_languages=http#add-a-credential) to learn more about injection locations.
+  See [Authenticate with vaults](../../../managed-agents/vaults.md#add-a-credential) to learn more about injection locations.
 
   - `body: optional boolean`
 

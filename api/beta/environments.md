@@ -17,7 +17,7 @@ Create a new environment with the specified configuration.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -496,7 +496,7 @@ List environments with pagination support.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -831,7 +831,7 @@ Retrieve a specific environment by ID.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -1157,7 +1157,7 @@ Update an existing environment's configuration.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -1605,7 +1605,7 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -1774,7 +1774,7 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -2570,7 +2570,7 @@ Retrieve detailed information about a specific work item.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -2836,7 +2836,7 @@ Long poll for work items in the queue.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -3088,7 +3088,7 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -3347,7 +3347,7 @@ Record a heartbeat for a work item to maintain the lease.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -3539,7 +3539,7 @@ Stop a work item, initiating graceful or forced shutdown.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -3813,7 +3813,7 @@ List work items in an environment.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -4070,7 +4070,7 @@ Update work item metadata with merge semantics.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -4332,7 +4332,7 @@ Get statistics about the work queue for an environment.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 

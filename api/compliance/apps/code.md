@@ -80,7 +80,7 @@ returned.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../../versioning.md).
 
 - `"x-api-key": optional string`
 
@@ -273,7 +273,7 @@ A ZIP archive of a version's files holds one top-level folder, named for the Art
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../../versioning.md).
 
 - `"x-api-key": optional string`
 
@@ -341,7 +341,7 @@ A ZIP archive of a version's files holds one top-level folder, named for the Art
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../../versioning.md).
 
 - `"x-api-key": optional string`
 
@@ -378,7 +378,7 @@ Artifact.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../../versioning.md).
 
 - `"x-api-key": optional string`
 

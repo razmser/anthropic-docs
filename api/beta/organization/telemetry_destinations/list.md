@@ -9,7 +9,7 @@ url: https://platform.claude.com/docs/en/api/beta/organization/telemetry_destina
 
 List the organization's destinations, newest first, optionally only those that cover given workspaces.
 
-See the [OpenTelemetry export guide](../../../../manage-claude/opentelemetry.md?sdk_languages=http#set-up-api-tracing) to learn more about destinations.
+See the [OpenTelemetry export guide](../../../../manage-claude/opentelemetry.md#set-up-api-tracing) to learn more about destinations.
 
 ## Query parameters
 
@@ -35,7 +35,7 @@ See the [OpenTelemetry export guide](../../../../manage-claude/opentelemetry.md?
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../../../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../../../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -177,7 +177,7 @@ See the [OpenTelemetry export guide](../../../../manage-claude/opentelemetry.md?
 
       `last_error` and `last_error_at` always change together. A later successful delivery doesn't clear them. If `last_success_at` is later than `last_error_at`, a delivery has succeeded since this failure.
 
-      See the [OpenTelemetry export guide](../../../../manage-claude/opentelemetry.md?sdk_languages=http#delivery-errors) to learn the likely cause of each error.
+      See the [OpenTelemetry export guide](../../../../manage-claude/opentelemetry.md#delivery-errors) to learn the likely cause of each error.
 
     - `last_error_at: string or null`
 

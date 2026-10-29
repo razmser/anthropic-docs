@@ -13,7 +13,7 @@ Send at least one field. Omitted fields keep their stored values, except the reg
 
 If another request changes the destination while the update runs, the API returns a 409 `conflict_error`. Read the destination again, then retry the update.
 
-See the [OpenTelemetry export guide](../../../../manage-claude/opentelemetry.md?sdk_languages=http#delivery-and-health) to learn more about changing a destination.
+See the [OpenTelemetry export guide](../../../../manage-claude/opentelemetry.md#delivery-and-health) to learn more about changing a destination.
 
 ## Path parameters
 
@@ -27,7 +27,7 @@ See the [OpenTelemetry export guide](../../../../manage-claude/opentelemetry.md?
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../../../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../../../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -303,7 +303,7 @@ See the [OpenTelemetry export guide](../../../../manage-claude/opentelemetry.md?
 
       `last_error` and `last_error_at` always change together. A later successful delivery doesn't clear them. If `last_success_at` is later than `last_error_at`, a delivery has succeeded since this failure.
 
-      See the [OpenTelemetry export guide](../../../../manage-claude/opentelemetry.md?sdk_languages=http#delivery-errors) to learn the likely cause of each error.
+      See the [OpenTelemetry export guide](../../../../manage-claude/opentelemetry.md#delivery-errors) to learn the likely cause of each error.
 
     - `last_error_at: string or null`
 

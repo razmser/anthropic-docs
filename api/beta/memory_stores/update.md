@@ -23,7 +23,7 @@ Update a Memory Store
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -181,7 +181,7 @@ Update a Memory Store
 
     Archiving can't be undone. An archived store can't be attached to new sessions. You can't create or update its memories or update the store. You can still read and delete its memories, redact their versions, and delete the store.
 
-    See the [memory guide](../../../managed-agents/memory.md?sdk_languages=http#archive-a-store) to learn more about archiving.
+    See the [memory guide](../../../managed-agents/memory.md#archive-a-store) to learn more about archiving.
 
     format: date-time
 

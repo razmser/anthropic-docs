@@ -17,7 +17,7 @@ Retrieve information about the organization associated with the authenticated AP
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 ### Returns
 
@@ -157,7 +157,7 @@ List API Keys
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 #### Returns
 
@@ -348,7 +348,7 @@ Retrieve information about a single API key in your organization, looked up by i
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 #### Returns
 
@@ -520,7 +520,7 @@ Update API Key
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 #### Body parameters
 
@@ -708,7 +708,7 @@ Create an external key config owned by the caller's organization.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 #### Body parameters
 
@@ -942,7 +942,7 @@ Results are ordered by creation time (newest first). Use the
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 #### Returns
 
@@ -1099,7 +1099,7 @@ Retrieve a single external key config in the caller's organization by ID.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 #### Returns
 
@@ -1257,7 +1257,7 @@ encrypted data requires the original key identity to decrypt.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 #### Body parameters
 
@@ -1481,7 +1481,7 @@ The request is rejected if any workspace still references this config.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 #### Returns
 
@@ -1536,7 +1536,7 @@ message if it failed or timed out.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 #### Returns
 
@@ -1581,7 +1581,7 @@ curl https://api.anthropic.com/v1/organizations/external_keys/$EXTERNAL_KEY_ID/v
 
 **POST** `/v1/organizations/federation_issuers`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../../manage-claude/wif-admin-api.md?sdk_languages=http).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../../manage-claude/wif-admin-api.md).
 
 Register an OIDC issuer that Anthropic will trust for workload identity
 federation in your organization.
@@ -1601,7 +1601,7 @@ matched as the JWT's `iss` claim and is not fetched.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -1973,7 +1973,7 @@ curl https://api.anthropic.com/v1/organizations/federation_issuers \
 
 **GET** `/v1/organizations/federation_issuers`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../../manage-claude/wif-admin-api.md?sdk_languages=http).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../../manage-claude/wif-admin-api.md).
 
 List federation issuers in your organization.
 
@@ -2003,7 +2003,7 @@ Archived issuers are excluded unless `include_archived=true`.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -2300,7 +2300,7 @@ curl https://api.anthropic.com/v1/organizations/federation_issuers \
 
 **GET** `/v1/organizations/federation_issuers/{federation_issuer_id}`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../../manage-claude/wif-admin-api.md?sdk_languages=http).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../../manage-claude/wif-admin-api.md).
 
 Retrieve a federation issuer by its ID (`fdis_...`).
 
@@ -2316,7 +2316,7 @@ Retrieve a federation issuer by its ID (`fdis_...`).
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -2609,7 +2609,7 @@ curl https://api.anthropic.com/v1/organizations/federation_issuers/$FEDERATION_I
 
 **POST** `/v1/organizations/federation_issuers/{federation_issuer_id}`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../../manage-claude/wif-admin-api.md?sdk_languages=http).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../../manage-claude/wif-admin-api.md).
 
 Partially update a federation issuer.
 
@@ -2632,7 +2632,7 @@ session.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -3005,7 +3005,7 @@ curl https://api.anthropic.com/v1/organizations/federation_issuers/$FEDERATION_I
 
 **POST** `/v1/organizations/federation_issuers/{federation_issuer_id}/archive`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../../manage-claude/wif-admin-api.md?sdk_languages=http).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../../manage-claude/wif-admin-api.md).
 
 Archive a federation issuer.
 
@@ -3026,7 +3026,7 @@ issuer cannot be changed), or recreate them against another issuer.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -3322,7 +3322,7 @@ curl https://api.anthropic.com/v1/organizations/federation_issuers/$FEDERATION_I
 
 **POST** `/v1/organizations/federation_rules`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../../manage-claude/wif-admin-api.md?sdk_languages=http).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../../manage-claude/wif-admin-api.md).
 
 Create a federation rule owned by your organization.
 
@@ -3346,7 +3346,7 @@ manage rules whose `oauth_scope` is `workspace:developer` or
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -3738,7 +3738,7 @@ curl https://api.anthropic.com/v1/organizations/federation_rules \
 
 **GET** `/v1/organizations/federation_rules`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../../manage-claude/wif-admin-api.md?sdk_languages=http).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../../manage-claude/wif-admin-api.md).
 
 List federation rules in your organization.
 
@@ -3773,7 +3773,7 @@ unless `include_archived=true`.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -4070,7 +4070,7 @@ curl https://api.anthropic.com/v1/organizations/federation_rules \
 
 **GET** `/v1/organizations/federation_rules/{federation_rule_id}`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../../manage-claude/wif-admin-api.md?sdk_languages=http).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../../manage-claude/wif-admin-api.md).
 
 Retrieve a federation rule by its ID (`fdrl_...`).
 
@@ -4086,7 +4086,7 @@ Retrieve a federation rule by its ID (`fdrl_...`).
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -4385,7 +4385,7 @@ curl https://api.anthropic.com/v1/organizations/federation_rules/$FEDERATION_RUL
 
 **POST** `/v1/organizations/federation_rules/{federation_rule_id}`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../../manage-claude/wif-admin-api.md?sdk_languages=http).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../../manage-claude/wif-admin-api.md).
 
 Partially update a federation rule.
 
@@ -4417,7 +4417,7 @@ Console session.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -4796,7 +4796,7 @@ curl https://api.anthropic.com/v1/organizations/federation_rules/$FEDERATION_RUL
 
 **POST** `/v1/organizations/federation_rules/{federation_rule_id}/archive`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../../manage-claude/wif-admin-api.md?sdk_languages=http).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../../manage-claude/wif-admin-api.md).
 
 Archive a federation rule.
 
@@ -4820,7 +4820,7 @@ other scopes require a Console session.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -5122,7 +5122,7 @@ curl https://api.anthropic.com/v1/organizations/federation_rules/$FEDERATION_RUL
 
 **POST** `/v1/organizations/federation_rules/{federation_rule_id}/workspaces`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../../manage-claude/wif-admin-api.md?sdk_languages=http).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../../manage-claude/wif-admin-api.md).
 
 Enable a federation rule for a workspace.
 
@@ -5147,7 +5147,7 @@ other scopes require a Console session.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -5324,7 +5324,7 @@ curl https://api.anthropic.com/v1/organizations/federation_rules/$FEDERATION_RUL
 
 **GET** `/v1/organizations/federation_rules/{federation_rule_id}/workspaces`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../../manage-claude/wif-admin-api.md?sdk_languages=http).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../../manage-claude/wif-admin-api.md).
 
 List workspaces where this federation rule is enabled.
 
@@ -5358,7 +5358,7 @@ rules with `applies_to_all_workspaces` or a legacy single
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -5534,7 +5534,7 @@ curl https://api.anthropic.com/v1/organizations/federation_rules/$FEDERATION_RUL
 
 **DELETE** `/v1/organizations/federation_rules/{federation_rule_id}/workspaces/{workspace_id}`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../../manage-claude/wif-admin-api.md?sdk_languages=http).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../../manage-claude/wif-admin-api.md).
 
 Disable a federation rule for a workspace.
 
@@ -5559,7 +5559,7 @@ Console session.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -5720,7 +5720,7 @@ On plans that draw members from a finite pool of purchased seats, the invite aut
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 #### Body parameters
 
@@ -5911,7 +5911,7 @@ List the organization's invites.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 #### Returns
 
@@ -6052,7 +6052,7 @@ Retrieve an invite by ID.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 #### Returns
 
@@ -6174,7 +6174,7 @@ Delete a pending invite.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 #### Returns
 
@@ -6214,7 +6214,7 @@ curl https://api.anthropic.com/v1/organizations/invites/$INVITE_ID \
 
 **POST** `/v1/organizations/service_accounts`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../../manage-claude/wif-admin-api.md?sdk_languages=http).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../../manage-claude/wif-admin-api.md).
 
 Create a service account.
 
@@ -6232,7 +6232,7 @@ accounts.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -6463,7 +6463,7 @@ curl https://api.anthropic.com/v1/organizations/service_accounts \
 
 **GET** `/v1/organizations/service_accounts`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../../manage-claude/wif-admin-api.md?sdk_languages=http).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../../manage-claude/wif-admin-api.md).
 
 List service accounts in the caller's organization.
 
@@ -6495,7 +6495,7 @@ archived service accounts.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -6704,7 +6704,7 @@ curl https://api.anthropic.com/v1/organizations/service_accounts \
 
 **GET** `/v1/organizations/service_accounts/{service_account_id}`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../../manage-claude/wif-admin-api.md?sdk_languages=http).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../../manage-claude/wif-admin-api.md).
 
 Retrieve a service account by its ID (`svac_...`).
 
@@ -6720,7 +6720,7 @@ Retrieve a service account by its ID (`svac_...`).
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -6925,7 +6925,7 @@ curl https://api.anthropic.com/v1/organizations/service_accounts/$SERVICE_ACCOUN
 
 **POST** `/v1/organizations/service_accounts/{service_account_id}`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../../manage-claude/wif-admin-api.md?sdk_languages=http).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../../manage-claude/wif-admin-api.md).
 
 Update a service account.
 
@@ -6946,7 +6946,7 @@ interactive credential (a user OAuth token or a Console session).
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -7169,7 +7169,7 @@ curl https://api.anthropic.com/v1/organizations/service_accounts/$SERVICE_ACCOUN
 
 **POST** `/v1/organizations/service_accounts/{service_account_id}/archive`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../../manage-claude/wif-admin-api.md?sdk_languages=http).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../../manage-claude/wif-admin-api.md).
 
 Archive a service account.
 
@@ -7190,7 +7190,7 @@ those rules first or change their target to another service account.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -7398,7 +7398,7 @@ curl https://api.anthropic.com/v1/organizations/service_accounts/$SERVICE_ACCOUN
 
 **POST** `/v1/organizations/service_accounts/{service_account_id}/workspaces`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../../manage-claude/wif-admin-api.md?sdk_languages=http).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../../manage-claude/wif-admin-api.md).
 
 Add a service account to a workspace with the given `workspace_role`.
 
@@ -7421,7 +7421,7 @@ rejected.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -7619,7 +7619,7 @@ curl https://api.anthropic.com/v1/organizations/service_accounts/$SERVICE_ACCOUN
 
 **GET** `/v1/organizations/service_accounts/{service_account_id}/workspaces`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../../manage-claude/wif-admin-api.md?sdk_languages=http).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../../manage-claude/wif-admin-api.md).
 
 List the workspaces a service account is a member of.
 
@@ -7661,7 +7661,7 @@ page to recover.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -7845,7 +7845,7 @@ curl https://api.anthropic.com/v1/organizations/service_accounts/$SERVICE_ACCOUN
 
 **DELETE** `/v1/organizations/service_accounts/{service_account_id}/workspaces/{workspace_id}`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../../manage-claude/wif-admin-api.md?sdk_languages=http).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../../manage-claude/wif-admin-api.md).
 
 Remove a service account from a workspace.
 
@@ -7873,7 +7873,7 @@ to the implicit `workspace_user` membership. Archived workspaces return
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -8062,7 +8062,7 @@ List the organization's members.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 #### Returns
 
@@ -8174,7 +8174,7 @@ Retrieve a member of the organization by user ID.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 #### Returns
 
@@ -8267,7 +8267,7 @@ Update a member's organization role.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 #### Body parameters
 
@@ -8382,7 +8382,7 @@ Remove a member from the organization.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 #### Returns
 
@@ -8460,7 +8460,7 @@ List Workspaces
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 #### Returns
 
@@ -8621,7 +8621,7 @@ Create Workspace
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -8949,7 +8949,7 @@ Get Workspace
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 #### Returns
 
@@ -9095,7 +9095,7 @@ Update Workspace
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 #### Body parameters
 
@@ -9306,7 +9306,7 @@ Archive Workspace
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 #### Returns
 
@@ -9503,7 +9503,7 @@ the remaining entries.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 #### Returns
 
@@ -9722,7 +9722,7 @@ Changes take effect within about an hour.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 #### Body parameters
 
@@ -9981,7 +9981,7 @@ List Workspace Members
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 #### Returns
 
@@ -10073,7 +10073,7 @@ Create Workspace Member
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 #### Body parameters
 
@@ -10173,7 +10173,7 @@ Get Workspace Member
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 #### Returns
 
@@ -10250,7 +10250,7 @@ Update Workspace Member
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 #### Body parameters
 
@@ -10347,7 +10347,7 @@ Delete Workspace Member
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 #### Returns
 
@@ -10392,7 +10392,7 @@ curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/members
 
 **GET** `/v1/organizations/workspaces/{workspace_id}/service_accounts`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../../manage-claude/wif-admin-api.md?sdk_languages=http).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../../manage-claude/wif-admin-api.md).
 
 List the service accounts that are members of a workspace.
 
@@ -10427,7 +10427,7 @@ omitted from the results.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -10611,7 +10611,7 @@ curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/service
 
 **POST** `/v1/organizations/workspaces/{workspace_id}/service_accounts`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../../manage-claude/wif-admin-api.md?sdk_languages=http).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../../manage-claude/wif-admin-api.md).
 
 Add a service account to a workspace with the given `workspace_role`.
 
@@ -10636,7 +10636,7 @@ accounts cannot be added and are rejected.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -10834,7 +10834,7 @@ curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/service
 
 **GET** `/v1/organizations/workspaces/{workspace_id}/service_accounts/{service_account_id}`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../../manage-claude/wif-admin-api.md?sdk_languages=http).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../../manage-claude/wif-admin-api.md).
 
 Retrieve a service account's membership in a workspace.
 
@@ -10861,7 +10861,7 @@ account returns 404.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -11036,7 +11036,7 @@ curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/service
 
 **POST** `/v1/organizations/workspaces/{workspace_id}/service_accounts/{service_account_id}`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../../manage-claude/wif-admin-api.md?sdk_languages=http).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../../manage-claude/wif-admin-api.md).
 
 Change a service account's role in a workspace.
 
@@ -11063,7 +11063,7 @@ rejected.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -11256,7 +11256,7 @@ curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/service
 
 **DELETE** `/v1/organizations/workspaces/{workspace_id}/service_accounts/{service_account_id}`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../../manage-claude/wif-admin-api.md?sdk_languages=http).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](../../manage-claude/wif-admin-api.md).
 
 Remove a service account from a workspace.
 
@@ -11282,7 +11282,7 @@ membership. Archived workspaces return 400.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -11483,7 +11483,7 @@ the remaining entries.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 #### Returns
 
@@ -11656,7 +11656,7 @@ organization reads the state inherited from the parent's configuration.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 #### Returns
 
@@ -11726,7 +11726,7 @@ compliance settings.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 #### Body parameters
 
@@ -11929,7 +11929,7 @@ Get Messages Usage Report
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -12249,7 +12249,7 @@ Enables organizations to analyze developer productivity and build custom dashboa
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 #### Returns
 
@@ -12546,7 +12546,7 @@ Get Cost Report
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -12817,7 +12817,7 @@ curl https://api.anthropic.com/v1/organizations/cost_report \
 
 **Deprecated**
 
-**Deprecated.** This Admin API endpoint is superseded by `/v1/tunnels` on the Claude API and will be removed after a migration window. New integrations should use [`/v1/tunnels`](tunnels.md?sdk_languages=http) with the `anthropic-beta: mcp-tunnels-2026-06-22` header and a WIF token carrying the `workspace:manage_tunnels` scope. Existing integrations continue to work with the `mcp-tunnels-2026-05-19` header and `org:manage_tunnels` scope during the migration window.
+**Deprecated.** This Admin API endpoint is superseded by `/v1/tunnels` on the Claude API and will be removed after a migration window. New integrations should use [`/v1/tunnels`](tunnels.md) with the `anthropic-beta: mcp-tunnels-2026-06-22` header and a WIF token carrying the `workspace:manage_tunnels` scope. Existing integrations continue to work with the `mcp-tunnels-2026-05-19` header and `org:manage_tunnels` scope during the migration window.
 
 List the organization's tunnels.
 
@@ -12856,7 +12856,7 @@ archived tunnels are excluded unless `include_archived` is set.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": array of AnthropicBeta`
 
@@ -13048,7 +13048,7 @@ curl https://api.anthropic.com/v1/organizations/tunnels \
 
 **Deprecated**
 
-**Deprecated.** This Admin API endpoint is superseded by `/v1/tunnels` on the Claude API and will be removed after a migration window. New integrations should use [`/v1/tunnels`](tunnels.md?sdk_languages=http) with the `anthropic-beta: mcp-tunnels-2026-06-22` header and a WIF token carrying the `workspace:manage_tunnels` scope. Existing integrations continue to work with the `mcp-tunnels-2026-05-19` header and `org:manage_tunnels` scope during the migration window.
+**Deprecated.** This Admin API endpoint is superseded by `/v1/tunnels` on the Claude API and will be removed after a migration window. New integrations should use [`/v1/tunnels`](tunnels.md) with the `anthropic-beta: mcp-tunnels-2026-06-22` header and a WIF token carrying the `workspace:manage_tunnels` scope. Existing integrations continue to work with the `mcp-tunnels-2026-05-19` header and `org:manage_tunnels` scope during the migration window.
 
 Retrieve a single tunnel in the caller's organization by ID.
 
@@ -13064,7 +13064,7 @@ Retrieve a single tunnel in the caller's organization by ID.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": array of AnthropicBeta`
 
@@ -13247,7 +13247,7 @@ curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID \
 
 **Deprecated**
 
-**Deprecated.** This Admin API endpoint is superseded by `/v1/tunnels` on the Claude API and will be removed after a migration window. New integrations should use [`/v1/tunnels`](tunnels.md?sdk_languages=http) with the `anthropic-beta: mcp-tunnels-2026-06-22` header and a WIF token carrying the `workspace:manage_tunnels` scope. Existing integrations continue to work with the `mcp-tunnels-2026-05-19` header and `org:manage_tunnels` scope during the migration window.
+**Deprecated.** This Admin API endpoint is superseded by `/v1/tunnels` on the Claude API and will be removed after a migration window. New integrations should use [`/v1/tunnels`](tunnels.md) with the `anthropic-beta: mcp-tunnels-2026-06-22` header and a WIF token carrying the `workspace:manage_tunnels` scope. Existing integrations continue to work with the `mcp-tunnels-2026-05-19` header and `org:manage_tunnels` scope during the migration window.
 
 Archive a tunnel. Archival is irreversible.
 
@@ -13268,7 +13268,7 @@ tunnel returns the existing record unchanged.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": array of AnthropicBeta`
 
@@ -13452,7 +13452,7 @@ curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID/archive \
 
 **Deprecated**
 
-**Deprecated.** This Admin API endpoint is superseded by `/v1/tunnels` on the Claude API and will be removed after a migration window. New integrations should use [`/v1/tunnels`](tunnels.md?sdk_languages=http) with the `anthropic-beta: mcp-tunnels-2026-06-22` header and a WIF token carrying the `workspace:manage_tunnels` scope. Existing integrations continue to work with the `mcp-tunnels-2026-05-19` header and `org:manage_tunnels` scope during the migration window.
+**Deprecated.** This Admin API endpoint is superseded by `/v1/tunnels` on the Claude API and will be removed after a migration window. New integrations should use [`/v1/tunnels`](tunnels.md) with the `anthropic-beta: mcp-tunnels-2026-06-22` header and a WIF token carrying the `workspace:manage_tunnels` scope. Existing integrations continue to work with the `mcp-tunnels-2026-05-19` header and `org:manage_tunnels` scope during the migration window.
 
 Return the tunnel's current connection token.
 
@@ -13473,7 +13473,7 @@ access logs.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": array of AnthropicBeta`
 
@@ -13630,7 +13630,7 @@ curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID/reveal_token 
 
 **Deprecated**
 
-**Deprecated.** This Admin API endpoint is superseded by `/v1/tunnels` on the Claude API and will be removed after a migration window. New integrations should use [`/v1/tunnels`](tunnels.md?sdk_languages=http) with the `anthropic-beta: mcp-tunnels-2026-06-22` header and a WIF token carrying the `workspace:manage_tunnels` scope. Existing integrations continue to work with the `mcp-tunnels-2026-05-19` header and `org:manage_tunnels` scope during the migration window.
+**Deprecated.** This Admin API endpoint is superseded by `/v1/tunnels` on the Claude API and will be removed after a migration window. New integrations should use [`/v1/tunnels`](tunnels.md) with the `anthropic-beta: mcp-tunnels-2026-06-22` header and a WIF token carrying the `workspace:manage_tunnels` scope. Existing integrations continue to work with the `mcp-tunnels-2026-05-19` header and `org:manage_tunnels` scope during the migration window.
 
 Invalidate the tunnel's current token for new connections and return a fresh value.
 
@@ -13650,7 +13650,7 @@ restarted after rotation must use the new value. An optional
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": array of AnthropicBeta`
 
@@ -13817,7 +13817,7 @@ curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID/rotate_token 
 
 **Deprecated**
 
-**Deprecated.** This Admin API endpoint is superseded by `/v1/tunnels` on the Claude API and will be removed after a migration window. New integrations should use [`/v1/tunnels`](tunnels.md?sdk_languages=http) with the `anthropic-beta: mcp-tunnels-2026-06-22` header and a WIF token carrying the `workspace:manage_tunnels` scope. Existing integrations continue to work with the `mcp-tunnels-2026-05-19` header and `org:manage_tunnels` scope during the migration window.
+**Deprecated.** This Admin API endpoint is superseded by `/v1/tunnels` on the Claude API and will be removed after a migration window. New integrations should use [`/v1/tunnels`](tunnels.md) with the `anthropic-beta: mcp-tunnels-2026-06-22` header and a WIF token carrying the `workspace:manage_tunnels` scope. Existing integrations continue to work with the `mcp-tunnels-2026-05-19` header and `org:manage_tunnels` scope during the migration window.
 
 Register a public CA certificate for the tunnel.
 
@@ -13838,7 +13838,7 @@ holds at most two non-archived certificates.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": array of AnthropicBeta`
 
@@ -14034,7 +14034,7 @@ curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID/certificates 
 
 **Deprecated**
 
-**Deprecated.** This Admin API endpoint is superseded by `/v1/tunnels` on the Claude API and will be removed after a migration window. New integrations should use [`/v1/tunnels`](tunnels.md?sdk_languages=http) with the `anthropic-beta: mcp-tunnels-2026-06-22` header and a WIF token carrying the `workspace:manage_tunnels` scope. Existing integrations continue to work with the `mcp-tunnels-2026-05-19` header and `org:manage_tunnels` scope during the migration window.
+**Deprecated.** This Admin API endpoint is superseded by `/v1/tunnels` on the Claude API and will be removed after a migration window. New integrations should use [`/v1/tunnels`](tunnels.md) with the `anthropic-beta: mcp-tunnels-2026-06-22` header and a WIF token carrying the `workspace:manage_tunnels` scope. Existing integrations continue to work with the `mcp-tunnels-2026-05-19` header and `org:manage_tunnels` scope during the migration window.
 
 List the certificates registered on a tunnel.
 
@@ -14072,7 +14072,7 @@ Archived certificates are excluded unless `include_archived` is set.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": array of AnthropicBeta`
 
@@ -14264,7 +14264,7 @@ curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID/certificates 
 
 **Deprecated**
 
-**Deprecated.** This Admin API endpoint is superseded by `/v1/tunnels` on the Claude API and will be removed after a migration window. New integrations should use [`/v1/tunnels`](tunnels.md?sdk_languages=http) with the `anthropic-beta: mcp-tunnels-2026-06-22` header and a WIF token carrying the `workspace:manage_tunnels` scope. Existing integrations continue to work with the `mcp-tunnels-2026-05-19` header and `org:manage_tunnels` scope during the migration window.
+**Deprecated.** This Admin API endpoint is superseded by `/v1/tunnels` on the Claude API and will be removed after a migration window. New integrations should use [`/v1/tunnels`](tunnels.md) with the `anthropic-beta: mcp-tunnels-2026-06-22` header and a WIF token carrying the `workspace:manage_tunnels` scope. Existing integrations continue to work with the `mcp-tunnels-2026-05-19` header and `org:manage_tunnels` scope during the migration window.
 
 Retrieve a single certificate registered on a tunnel by ID.
 
@@ -14284,7 +14284,7 @@ Retrieve a single certificate registered on a tunnel by ID.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": array of AnthropicBeta`
 
@@ -14467,7 +14467,7 @@ curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID/certificates/
 
 **Deprecated**
 
-**Deprecated.** This Admin API endpoint is superseded by `/v1/tunnels` on the Claude API and will be removed after a migration window. New integrations should use [`/v1/tunnels`](tunnels.md?sdk_languages=http) with the `anthropic-beta: mcp-tunnels-2026-06-22` header and a WIF token carrying the `workspace:manage_tunnels` scope. Existing integrations continue to work with the `mcp-tunnels-2026-05-19` header and `org:manage_tunnels` scope during the migration window.
+**Deprecated.** This Admin API endpoint is superseded by `/v1/tunnels` on the Claude API and will be removed after a migration window. New integrations should use [`/v1/tunnels`](tunnels.md) with the `anthropic-beta: mcp-tunnels-2026-06-22` header and a WIF token carrying the `workspace:manage_tunnels` scope. Existing integrations continue to work with the `mcp-tunnels-2026-05-19` header and `org:manage_tunnels` scope during the migration window.
 
 Archive a certificate, removing it from the set Anthropic trusts for this tunnel.
 
@@ -14491,7 +14491,7 @@ certificate is added.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": array of AnthropicBeta`
 
@@ -14724,7 +14724,7 @@ Enterprise plan. Requires an API key with the `read:analytics` scope.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 #### Returns
 
@@ -14994,7 +14994,7 @@ the `read:analytics` scope.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 #### Returns
 
@@ -15703,7 +15703,7 @@ plan. Requires an API key with the `read:analytics` scope.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 #### Returns
 
@@ -15891,7 +15891,7 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 #### Returns
 
@@ -16168,7 +16168,7 @@ range-rollup mode like `/skills`.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 #### Returns
 
@@ -16357,7 +16357,7 @@ on a Claude Enterprise plan. Requires an API key with the
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 #### Returns
 
@@ -16615,7 +16615,7 @@ can be broken out per product, per member, or per RBAC group via
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 #### Returns
 
@@ -16869,7 +16869,7 @@ key with the `read:analytics` scope.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 #### Returns
 
@@ -17268,7 +17268,7 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 #### Returns
 
@@ -17668,7 +17668,7 @@ Requires an API key with the `read:analytics` scope.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 #### Returns
 
@@ -18064,7 +18064,7 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 #### Returns
 
@@ -18295,7 +18295,7 @@ Anthropic account team.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -18639,7 +18639,7 @@ Retrieve a spend limit by ID.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 #### Returns
 
@@ -18819,7 +18819,7 @@ workspace limits through the API is in an early access preview.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 #### Returns
 
@@ -18902,7 +18902,7 @@ come in a fixed order that is not creation order.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -19223,7 +19223,7 @@ organizations.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 #### Returns
 
@@ -19478,7 +19478,7 @@ Requests whose requester is no longer a member are excluded.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 #### Returns
 
@@ -19787,7 +19787,7 @@ requester at the request's period.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 #### Returns
 
@@ -20091,7 +20091,7 @@ the member was blocked on. Anthropic emails the requester unless
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 #### Body parameters
 
@@ -20496,7 +20496,7 @@ Idempotent on `denied`; denying an already-`approved` request returns
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 #### Body parameters
 
@@ -20799,7 +20799,7 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 #### Body parameters
 
@@ -20909,7 +20909,7 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 #### Returns
 
@@ -21013,7 +21013,7 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 #### Returns
 
@@ -21103,7 +21103,7 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 #### Body parameters
 
@@ -21205,7 +21205,7 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 #### Returns
 
@@ -21275,7 +21275,7 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 #### Returns
 
@@ -21361,7 +21361,7 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 #### Body parameters
 
@@ -21447,7 +21447,7 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 #### Returns
 
@@ -21514,7 +21514,7 @@ The RBAC Roles API is available to Claude Enterprise organizations only.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 #### Returns
 
@@ -21603,7 +21603,7 @@ The RBAC Roles API is available to Claude Enterprise organizations only.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 #### Returns
 
@@ -21693,7 +21693,7 @@ The RBAC Roles API is available to Claude Enterprise organizations only.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 #### Returns
 
@@ -21875,7 +21875,7 @@ in `details`) but are not yet usable in claude.ai: do not retry the create (the
 retry would return `plugin_name_taken`); create a version on the stored Plugin
 instead, which completes it.
 
-For a worked example, see [Create a plugin](../../manage-claude/plugins-api.md?sdk_languages=http#create-a-plugin)
+For a worked example, see [Create a plugin](../../manage-claude/plugins-api.md#create-a-plugin)
 in the Plugins API guide.
 
 **Accepted credentials:** an Admin API key with the `write:plugins` scope.
@@ -23712,7 +23712,7 @@ claude.ai) is refused with a 409: `error_code` `skill_name_taken`, with that nam
 `registration_pending` means the version was stored but is not yet usable; a later
 version create on the Plugin completes it.
 
-For a worked example, see [Create a version](../../manage-claude/plugins-api.md?sdk_languages=http#create-a-version)
+For a worked example, see [Create a version](../../manage-claude/plugins-api.md#create-a-version)
 in the Plugins API guide.
 
 **Accepted credentials:** an Admin API key with the `write:plugins` scope.
@@ -26737,7 +26737,7 @@ report notes that it will be checked when the marketplace actually synchronizes.
 
 Nothing is recorded on the Compliance API activity feed.
 
-For a worked example, see [Validate marketplace content](../../manage-claude/plugins-api.md?sdk_languages=http#validate-marketplace-content)
+For a worked example, see [Validate marketplace content](../../manage-claude/plugins-api.md#validate-marketplace-content)
 in the Plugins API guide.
 
 **Accepted credentials:** an Admin API key with the `read:plugins` or `write:plugins` scope; `read:org_audit` and `read:compliance_org_data` do not grant it.
@@ -27007,7 +27007,7 @@ report notes that it will be checked when the marketplace actually synchronizes.
 
 Nothing is recorded on the Compliance API activity feed.
 
-For a worked example, see [Validate marketplace content](../../manage-claude/plugins-api.md?sdk_languages=http#validate-marketplace-content)
+For a worked example, see [Validate marketplace content](../../manage-claude/plugins-api.md#validate-marketplace-content)
 in the Plugins API guide.
 
 **Accepted credentials:** an Admin API key with the `read:plugins` or `write:plugins` scope; `read:org_audit` and `read:compliance_org_data` do not grant it.
@@ -27260,7 +27260,7 @@ Register an OpenTelemetry destination for the organization.
 
 The destination starts in state `enabled`. An organization can have at most 10 destinations, including disabled ones.
 
-See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md?sdk_languages=http#add-a-destination) to learn more about adding a destination.
+See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#add-a-destination) to learn more about adding a destination.
 
 #### Headers
 
@@ -27268,7 +27268,7 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md?sdk_la
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -27522,7 +27522,7 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md?sdk_la
 
       `last_error` and `last_error_at` always change together. A later successful delivery doesn't clear them. If `last_success_at` is later than `last_error_at`, a delivery has succeeded since this failure.
 
-      See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md?sdk_languages=http#delivery-errors) to learn the likely cause of each error.
+      See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#delivery-errors) to learn the likely cause of each error.
 
     - `last_error_at: string or null`
 
@@ -27717,7 +27717,7 @@ curl https://api.anthropic.com/v1/organizations/telemetry_destinations \
 
 List the organization's destinations, newest first, optionally only those that cover given workspaces.
 
-See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md?sdk_languages=http#set-up-api-tracing) to learn more about destinations.
+See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#set-up-api-tracing) to learn more about destinations.
 
 #### Query parameters
 
@@ -27743,7 +27743,7 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md?sdk_la
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -27885,7 +27885,7 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md?sdk_la
 
       `last_error` and `last_error_at` always change together. A later successful delivery doesn't clear them. If `last_success_at` is later than `last_error_at`, a delivery has succeeded since this failure.
 
-      See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md?sdk_languages=http#delivery-errors) to learn the likely cause of each error.
+      See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#delivery-errors) to learn the likely cause of each error.
 
     - `last_error_at: string or null`
 
@@ -28082,7 +28082,7 @@ curl https://api.anthropic.com/v1/organizations/telemetry_destinations \
 
 Read a destination's configuration, state, and most recent delivery results.
 
-See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md?sdk_languages=http#delivery-and-health) to learn how the API delivers spans and when it disables a destination.
+See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#delivery-and-health) to learn how the API delivers spans and when it disables a destination.
 
 #### Path parameters
 
@@ -28096,7 +28096,7 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md?sdk_la
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -28238,7 +28238,7 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md?sdk_la
 
       `last_error` and `last_error_at` always change together. A later successful delivery doesn't clear them. If `last_success_at` is later than `last_error_at`, a delivery has succeeded since this failure.
 
-      See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md?sdk_languages=http#delivery-errors) to learn the likely cause of each error.
+      See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#delivery-errors) to learn the likely cause of each error.
 
     - `last_error_at: string or null`
 
@@ -28430,7 +28430,7 @@ Send at least one field. Omitted fields keep their stored values, except the reg
 
 If another request changes the destination while the update runs, the API returns a 409 `conflict_error`. Read the destination again, then retry the update.
 
-See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md?sdk_languages=http#delivery-and-health) to learn more about changing a destination.
+See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#delivery-and-health) to learn more about changing a destination.
 
 #### Path parameters
 
@@ -28444,7 +28444,7 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md?sdk_la
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -28720,7 +28720,7 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md?sdk_la
 
       `last_error` and `last_error_at` always change together. A later successful delivery doesn't clear them. If `last_success_at` is later than `last_error_at`, a delivery has succeeded since this failure.
 
-      See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md?sdk_languages=http#delivery-errors) to learn the likely cause of each error.
+      See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#delivery-errors) to learn the likely cause of each error.
 
     - `last_error_at: string or null`
 
@@ -28912,7 +28912,7 @@ Delete a destination and its workspace list.
 
 The API stops sending spans to the destination. The spans of the workspaces it covered still go to the other destinations that cover them. A deleted destination can't be read, listed, or restored.
 
-See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md?sdk_languages=http#delivery-and-health) to learn more about managing a destination.
+See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#delivery-and-health) to learn more about managing a destination.
 
 #### Path parameters
 
@@ -28926,7 +28926,7 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md?sdk_la
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -29087,7 +29087,7 @@ Send one test span, named `anthropic.test`, to the destination with its register
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -29258,7 +29258,7 @@ List the workspaces on a destination's workspace list, newest entry first.
 
 A destination whose `workspaces.type` is `all` doesn't have a list, so its page is empty. The list includes archived workspaces.
 
-See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md?sdk_languages=http#choose-workspaces-for-a-destination) to learn more about choosing the workspaces of a destination.
+See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#choose-workspaces-for-a-destination) to learn more about choosing the workspaces of a destination.
 
 #### Path parameters
 
@@ -29284,7 +29284,7 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md?sdk_la
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -29457,7 +29457,7 @@ Under `include` the workspace's spans start going to the destination. Under `exc
 
 Adding a workspace that is already on the list changes nothing and returns the existing entry. An archived workspace that isn't on the list yet can't be added. A destination whose `workspaces.type` is `all` doesn't have a list, so the API returns 400. To change which workspaces such a destination covers, update its `workspaces`.
 
-See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md?sdk_languages=http#choose-workspaces-for-a-destination) to learn more about choosing the workspaces of a destination.
+See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#choose-workspaces-for-a-destination) to learn more about choosing the workspaces of a destination.
 
 #### Path parameters
 
@@ -29475,7 +29475,7 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md?sdk_la
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -29642,7 +29642,7 @@ Under `include` the workspace's spans stop going to the destination. Under `excl
 
 The API returns 404 when the workspace isn't on the list. A destination whose `workspaces.type` is `all` doesn't have a list, so the API returns 400.
 
-See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md?sdk_languages=http#choose-workspaces-for-a-destination) to learn more about choosing the workspaces of a destination.
+See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md#choose-workspaces-for-a-destination) to learn more about choosing the workspaces of a destination.
 
 #### Path parameters
 
@@ -29660,7 +29660,7 @@ See the [OpenTelemetry export guide](../../manage-claude/opentelemetry.md?sdk_la
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -29830,7 +29830,7 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -30100,7 +30100,7 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -30334,7 +30334,7 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -30550,7 +30550,7 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -30800,7 +30800,7 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -30970,7 +30970,7 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 

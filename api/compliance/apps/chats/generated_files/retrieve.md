@@ -23,7 +23,7 @@ Use the sibling `/content` endpoint to download the bytes.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../../../../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../../../../versioning.md).
 
 - `"x-api-key": optional string`
 

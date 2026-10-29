@@ -49,7 +49,7 @@ The Models API response can be used to determine which models are available for 
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](versioning.md).
 
 - `"anthropic-workspace-id": optional string`
 
@@ -397,7 +397,7 @@ The Models API response can be used to determine information about a specific mo
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](versioning.md).
 
 - `"anthropic-workspace-id": optional string`
 

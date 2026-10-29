@@ -11,7 +11,7 @@ Streams the results of a Message Batch as a `.jsonl` file.
 
 Each line in the file is a JSON object containing the result of a single request in the Message Batch. Results are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
-Learn more about the Message Batches API in our [user guide](../../../build-with-claude/batch-processing.md?sdk_languages=http)
+Learn more about the Message Batches API in our [user guide](../../../build-with-claude/batch-processing.md)
 
 ## Path parameters
 
@@ -25,7 +25,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../../versioning.md).
 
 - `"anthropic-workspace-id": optional string`
 
@@ -296,7 +296,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               This is an opaque field and should not be interpreted or parsed. When passing thinking blocks back to the API (required when using tools with extended thinking), pass them back exactly as received, with this field intact.
 
-              See [extended thinking](../../../build-with-claude/extended-thinking.md?sdk_languages=http) for details.
+              See [extended thinking](../../../build-with-claude/extended-thinking.md) for details.
 
             - `thinking: string`
 
@@ -314,7 +314,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               Pass `redacted_thinking` blocks back to the API unchanged when continuing a multi-turn conversation.
 
-              See [extended thinking](../../../build-with-claude/extended-thinking.md?sdk_languages=http#redacted-thinking-blocks) for details.
+              See [extended thinking](../../../build-with-claude/extended-thinking.md#redacted-thinking-blocks) for details.
 
           - `ToolUseBlock object`
 
@@ -840,7 +840,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               A `cache_miss_reason` for a request whose `model` or `speed` differs from the previous request's.
 
-              See the [cache diagnostics guide](../../../build-with-claude/cache-diagnostics.md?sdk_languages=http#cache-miss-reason-types) to learn what to change for each reason.
+              See the [cache diagnostics guide](../../../build-with-claude/cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
 
               - `type: "model_changed"`
 
@@ -854,7 +854,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               A `cache_miss_reason` for a request whose `system` differs from the previous request's.
 
-              See the [cache diagnostics guide](../../../build-with-claude/cache-diagnostics.md?sdk_languages=http#cache-miss-reason-types) to learn what to change for each reason.
+              See the [cache diagnostics guide](../../../build-with-claude/cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
 
               - `type: "system_changed"`
 
@@ -868,7 +868,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               A `cache_miss_reason` for a request whose `tools` differ from the previous request's, for example because tools were added, removed, or reordered.
 
-              See the [cache diagnostics guide](../../../build-with-claude/cache-diagnostics.md?sdk_languages=http#cache-miss-reason-types) to learn what to change for each reason.
+              See the [cache diagnostics guide](../../../build-with-claude/cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
 
               - `type: "tools_changed"`
 
@@ -882,7 +882,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               A `cache_miss_reason` for a request whose `messages` differ from the previous request's in an earlier entry, instead of only having entries appended. The `model`, `system`, and `tools` match.
 
-              See the [cache diagnostics guide](../../../build-with-claude/cache-diagnostics.md?sdk_languages=http#cache-miss-reason-types) to learn what to change for each reason.
+              See the [cache diagnostics guide](../../../build-with-claude/cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
 
               - `type: "messages_changed"`
 
@@ -898,7 +898,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               This doesn't mean that this request changed.
 
-              See the [cache diagnostics guide](../../../build-with-claude/cache-diagnostics.md?sdk_languages=http#cache-miss-reason-types) to learn what to change for each reason.
+              See the [cache diagnostics guide](../../../build-with-claude/cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
 
               - `type: "previous_message_not_found"`
 
@@ -910,7 +910,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
               This includes a request whose `model`, `system`, and `tools` match the previous request's but whose other prompt-affecting parameters, such as `thinking` or `tool_choice`, differ.
 
-              See the [cache diagnostics guide](../../../build-with-claude/cache-diagnostics.md?sdk_languages=http#cache-miss-reason-types) to learn what to change for each reason.
+              See the [cache diagnostics guide](../../../build-with-claude/cache-diagnostics.md#cache-miss-reason-types) to learn what to change for each reason.
 
               - `type: "unavailable"`
 

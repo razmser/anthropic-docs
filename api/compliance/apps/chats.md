@@ -125,7 +125,7 @@ no time filter) with the default `order_by`. `user_ids[]` with
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../../versioning.md).
 
 - `"x-api-key": optional string`
 
@@ -266,7 +266,7 @@ You can retry the request.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../../versioning.md).
 
 - `"x-api-key": optional string`
 
@@ -494,7 +494,7 @@ Retrieves message history and file metadata for a specific chat.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../../versioning.md).
 
 - `"x-api-key": optional string`
 
@@ -937,7 +937,7 @@ download the bytes.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../../versioning.md).
 
 - `"x-api-key": optional string`
 
@@ -1023,7 +1023,7 @@ operation that cannot be undone.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../../versioning.md).
 
 - `"x-api-key": optional string`
 
@@ -1075,7 +1075,7 @@ Downloads the binary content of a file referenced in chat messages.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../../versioning.md).
 
 - `"x-api-key": optional string`
 
@@ -1109,7 +1109,7 @@ Use the sibling `/content` endpoint to download the bytes.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../../versioning.md).
 
 - `"x-api-key": optional string`
 
@@ -1185,7 +1185,7 @@ Downloads the binary content of a file the assistant created via tool use.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../../versioning.md).
 
 - `"x-api-key": optional string`
 

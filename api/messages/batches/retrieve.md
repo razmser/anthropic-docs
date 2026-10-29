@@ -9,7 +9,7 @@ url: https://platform.claude.com/docs/en/api/messages/batches/retrieve
 
 This endpoint is idempotent and can be used to poll for Message Batch completion. To access the results of a Message Batch, make a request to the `results_url` field in the response.
 
-Learn more about the Message Batches API in our [user guide](../../../build-with-claude/batch-processing.md?sdk_languages=http)
+Learn more about the Message Batches API in our [user guide](../../../build-with-claude/batch-processing.md)
 
 ## Path parameters
 
@@ -23,7 +23,7 @@ Learn more about the Message Batches API in our [user guide](../../../build-with
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../../versioning.md).
 
 - `"anthropic-workspace-id": optional string`
 

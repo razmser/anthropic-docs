@@ -13,9 +13,9 @@ url: https://platform.claude.com/docs/en/api/completions
 
 [Legacy] Create a Text Completion.
 
-The Text Completions API is a legacy API. We recommend using the [Messages API](messages.md?sdk_languages=http) going forward.
+The Text Completions API is a legacy API. We recommend using the [Messages API](messages.md) going forward.
 
-Future models and features will not be compatible with Text Completions. See our [migration guide](../build-with-claude/working-with-messages.md?sdk_languages=http) for guidance in migrating from Text Completions to Messages.
+Future models and features will not be compatible with Text Completions. See our [migration guide](../build-with-claude/working-with-messages.md) for guidance in migrating from Text Completions to Messages.
 
 ### Headers
 
@@ -23,7 +23,7 @@ Future models and features will not be compatible with Text Completions. See our
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](versioning.md).
 
 - `"anthropic-workspace-id": optional string`
 
@@ -253,7 +253,7 @@ Future models and features will not be compatible with Text Completions. See our
   "\n\nHuman: {userQuestion}\n\nAssistant:"
   ```
 
-  See [prompt validation](../build-with-claude/working-with-messages.md?sdk_languages=http) and our guide to [prompt design](../build-with-claude/prompt-engineering/overview.md?sdk_languages=http) for more details.
+  See [prompt validation](../build-with-claude/working-with-messages.md) and our guide to [prompt design](../build-with-claude/prompt-engineering/overview.md) for more details.
 
   minLength: 1
 
@@ -279,7 +279,7 @@ Future models and features will not be compatible with Text Completions. See our
 
   Whether to incrementally stream the response using server-sent events.
 
-  See [streaming](../build-with-claude/streaming.md?sdk_languages=http) for details.
+  See [streaming](../build-with-claude/streaming.md) for details.
 
 - `temperature: optional number`
 

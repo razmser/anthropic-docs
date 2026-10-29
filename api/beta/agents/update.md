@@ -21,7 +21,7 @@ Update Agent
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -171,7 +171,7 @@ Update Agent
 
 - `mcp_servers: optional array of BetaManagedAgentsURLMCPServerParams or null`
 
-  MCP servers. Full replacement. Omit to preserve; send empty array or `null` to clear. Names must be unique. Maximum 20. Every server must be referenced by an `mcp_toolset` in the agent's resulting `tools`; unreferenced servers are rejected. See the [MCP connector guide](../../../managed-agents/mcp-connector.md?sdk_languages=http).
+  MCP servers. Full replacement. Omit to preserve; send empty array or `null` to clear. Names must be unique. Maximum 20. Every server must be referenced by an `mcp_toolset` in the agent's resulting `tools`; unreferenced servers are rejected. See the [MCP connector guide](../../../managed-agents/mcp-connector.md).
 
   - `type: "url"`
 

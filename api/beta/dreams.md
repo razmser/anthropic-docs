@@ -13,7 +13,7 @@ Start an asynchronous job that uses past sessions to produce a reorganized versi
 
 By default the dream writes its result to a new memory store and doesn't change the input memory store. The response has `status` set to `pending` and an empty `outputs` array. Poll the dream until `status` is `completed`, `failed`, or `canceled`.
 
-See the [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#create-a-dream) to learn more about creating dreams.
+See the [Dreams guide](../../managed-agents/dreams.md#create-a-dream) to learn more about creating dreams.
 
 ### Headers
 
@@ -21,7 +21,7 @@ See the [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#create-
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -173,7 +173,7 @@ See the [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#create-
 
       Give 1 to 100 IDs, with no duplicates. Each session must be in the same workspace as the dream. Responses list the IDs in sorted order.
 
-      The [limits table in the Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#limits) lists all the limits on a dream.
+      The [limits table in the Dreams guide](../../managed-agents/dreams.md#limits) lists all the limits on a dream.
 
 - `model: string or BetaDreamModelConfigParam`
 
@@ -181,7 +181,7 @@ See the [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#create-
 
   In the object form, `speed` can only be `standard`.
 
-  The [limits table in the Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#limits) lists the supported models.
+  The [limits table in the Dreams guide](../../managed-agents/dreams.md#limits) lists the supported models.
 
   - `string`
 
@@ -195,7 +195,7 @@ See the [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#create-
 
       The ID can be 1 to 256 characters long.
 
-      The [limits table in the Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#limits) lists the supported models.
+      The [limits table in the Dreams guide](../../managed-agents/dreams.md#limits) lists the supported models.
 
       minLength: 1, maxLength: 256
 
@@ -213,7 +213,7 @@ See the [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#create-
 
   Guidance that steers how the dream reads the sessions and organizes the output memory store, from 1 to 4,096 characters.
 
-  See the [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#steer-with-instructions) for what kinds of instructions work well.
+  See the [Dreams guide](../../managed-agents/dreams.md#steer-with-instructions) for what kinds of instructions work well.
 
   minLength: 1, maxLength: 4096
 
@@ -253,7 +253,7 @@ See the [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#create-
 
   The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to generally-available endpoints.
 
-  See the [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#how-it-works) for what a dream reads and produces.
+  See the [Dreams guide](../../managed-agents/dreams.md#how-it-works) for what a dream reads and produces.
 
   - `type: "dream"`
 
@@ -289,7 +289,7 @@ See the [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#create-
 
       A code for why the dream failed, such as `timeout` or `internal_error`.
 
-      The [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#errors) lists common error codes and when they occur.
+      The [Dreams guide](../../managed-agents/dreams.md#errors) lists common error codes and when they occur.
 
     - `message: string`
 
@@ -327,7 +327,7 @@ See the [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#create-
 
         Give 1 to 100 IDs, with no duplicates. Each session must be in the same workspace as the dream. Responses list the IDs in sorted order.
 
-        The [limits table in the Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#limits) lists all the limits on a dream.
+        The [limits table in the Dreams guide](../../managed-agents/dreams.md#limits) lists all the limits on a dream.
 
   - `instructions: string or null`
 
@@ -385,7 +385,7 @@ See the [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#create-
 
     The array is empty while the dream is `pending` and for a short time after it starts `running`. It can stay empty if the dream fails or is canceled before then. The memory store holds the complete result only once `status` is `completed`.
 
-    See the [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#use-the-output) for how to review and use the result.
+    See the [Dreams guide](../../managed-agents/dreams.md#use-the-output) for how to review and use the result.
 
     - `type: "memory_store"`
 
@@ -401,7 +401,7 @@ See the [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#create-
 
     Stream that session's events to follow what the dream reads and writes.
 
-    See the [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#watch-the-pipeline-run) for how to watch a running dream.
+    See the [Dreams guide](../../managed-agents/dreams.md#watch-the-pipeline-run) for how to watch a running dream.
 
   - `status: BetaDreamStatus`
 
@@ -409,7 +409,7 @@ See the [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#create-
 
     `completed`, `failed`, and `canceled` are final: once a dream has one of these statuses, its status doesn't change again.
 
-    See the [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#lifecycle) for what each status means.
+    See the [Dreams guide](../../managed-agents/dreams.md#lifecycle) for what each status means.
 
     - `"pending"`
 
@@ -538,7 +538,7 @@ List the dreams in the workspace, newest first.
 
 Archived dreams are left out unless `include_archived` is `true`.
 
-See the [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#list-dreams) for how to page through dreams.
+See the [Dreams guide](../../managed-agents/dreams.md#list-dreams) for how to page through dreams.
 
 ### Query parameters
 
@@ -610,7 +610,7 @@ See the [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#list-dr
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -768,7 +768,7 @@ See the [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#list-dr
 
       A code for why the dream failed, such as `timeout` or `internal_error`.
 
-      The [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#errors) lists common error codes and when they occur.
+      The [Dreams guide](../../managed-agents/dreams.md#errors) lists common error codes and when they occur.
 
     - `message: string`
 
@@ -806,7 +806,7 @@ See the [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#list-dr
 
         Give 1 to 100 IDs, with no duplicates. Each session must be in the same workspace as the dream. Responses list the IDs in sorted order.
 
-        The [limits table in the Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#limits) lists all the limits on a dream.
+        The [limits table in the Dreams guide](../../managed-agents/dreams.md#limits) lists all the limits on a dream.
 
   - `instructions: string or null`
 
@@ -864,7 +864,7 @@ See the [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#list-dr
 
     The array is empty while the dream is `pending` and for a short time after it starts `running`. It can stay empty if the dream fails or is canceled before then. The memory store holds the complete result only once `status` is `completed`.
 
-    See the [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#use-the-output) for how to review and use the result.
+    See the [Dreams guide](../../managed-agents/dreams.md#use-the-output) for how to review and use the result.
 
     - `type: "memory_store"`
 
@@ -880,7 +880,7 @@ See the [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#list-dr
 
     Stream that session's events to follow what the dream reads and writes.
 
-    See the [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#watch-the-pipeline-run) for how to watch a running dream.
+    See the [Dreams guide](../../managed-agents/dreams.md#watch-the-pipeline-run) for how to watch a running dream.
 
   - `status: BetaDreamStatus`
 
@@ -888,7 +888,7 @@ See the [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#list-dr
 
     `completed`, `failed`, and `canceled` are final: once a dream has one of these statuses, its status doesn't change again.
 
-    See the [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#lifecycle) for what each status means.
+    See the [Dreams guide](../../managed-agents/dreams.md#lifecycle) for what each status means.
 
     - `"pending"`
 
@@ -1018,7 +1018,7 @@ Get a dream by ID to check its status, output memory store, and token usage.
 
 Archived dreams are returned too.
 
-See the [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#track-progress) for how to poll a dream and what each status means.
+See the [Dreams guide](../../managed-agents/dreams.md#track-progress) for how to poll a dream and what each status means.
 
 ### Path parameters
 
@@ -1032,7 +1032,7 @@ See the [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#track-p
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -1160,7 +1160,7 @@ See the [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#track-p
 
   The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to generally-available endpoints.
 
-  See the [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#how-it-works) for what a dream reads and produces.
+  See the [Dreams guide](../../managed-agents/dreams.md#how-it-works) for what a dream reads and produces.
 
   - `type: "dream"`
 
@@ -1196,7 +1196,7 @@ See the [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#track-p
 
       A code for why the dream failed, such as `timeout` or `internal_error`.
 
-      The [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#errors) lists common error codes and when they occur.
+      The [Dreams guide](../../managed-agents/dreams.md#errors) lists common error codes and when they occur.
 
     - `message: string`
 
@@ -1234,7 +1234,7 @@ See the [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#track-p
 
         Give 1 to 100 IDs, with no duplicates. Each session must be in the same workspace as the dream. Responses list the IDs in sorted order.
 
-        The [limits table in the Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#limits) lists all the limits on a dream.
+        The [limits table in the Dreams guide](../../managed-agents/dreams.md#limits) lists all the limits on a dream.
 
   - `instructions: string or null`
 
@@ -1292,7 +1292,7 @@ See the [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#track-p
 
     The array is empty while the dream is `pending` and for a short time after it starts `running`. It can stay empty if the dream fails or is canceled before then. The memory store holds the complete result only once `status` is `completed`.
 
-    See the [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#use-the-output) for how to review and use the result.
+    See the [Dreams guide](../../managed-agents/dreams.md#use-the-output) for how to review and use the result.
 
     - `type: "memory_store"`
 
@@ -1308,7 +1308,7 @@ See the [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#track-p
 
     Stream that session's events to follow what the dream reads and writes.
 
-    See the [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#watch-the-pipeline-run) for how to watch a running dream.
+    See the [Dreams guide](../../managed-agents/dreams.md#watch-the-pipeline-run) for how to watch a running dream.
 
   - `status: BetaDreamStatus`
 
@@ -1316,7 +1316,7 @@ See the [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#track-p
 
     `completed`, `failed`, and `canceled` are final: once a dream has one of these statuses, its status doesn't change again.
 
-    See the [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#lifecycle) for what each status means.
+    See the [Dreams guide](../../managed-agents/dreams.md#lifecycle) for what each status means.
 
     - `"pending"`
 
@@ -1435,7 +1435,7 @@ Stop a `pending` or `running` dream.
 
 The response shows `status` as `canceled`, unless the dream reached `completed` or `failed` first. `usage` can keep changing after the response. Canceling a `canceled` dream returns it unchanged. Canceling a `completed` or `failed` dream returns a 400 error.
 
-See the [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#cancel-a-dream) to learn more about canceling dreams.
+See the [Dreams guide](../../managed-agents/dreams.md#cancel-a-dream) to learn more about canceling dreams.
 
 ### Path parameters
 
@@ -1449,7 +1449,7 @@ See the [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#cancel-
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -1577,7 +1577,7 @@ See the [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#cancel-
 
   The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to generally-available endpoints.
 
-  See the [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#how-it-works) for what a dream reads and produces.
+  See the [Dreams guide](../../managed-agents/dreams.md#how-it-works) for what a dream reads and produces.
 
   - `type: "dream"`
 
@@ -1613,7 +1613,7 @@ See the [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#cancel-
 
       A code for why the dream failed, such as `timeout` or `internal_error`.
 
-      The [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#errors) lists common error codes and when they occur.
+      The [Dreams guide](../../managed-agents/dreams.md#errors) lists common error codes and when they occur.
 
     - `message: string`
 
@@ -1651,7 +1651,7 @@ See the [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#cancel-
 
         Give 1 to 100 IDs, with no duplicates. Each session must be in the same workspace as the dream. Responses list the IDs in sorted order.
 
-        The [limits table in the Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#limits) lists all the limits on a dream.
+        The [limits table in the Dreams guide](../../managed-agents/dreams.md#limits) lists all the limits on a dream.
 
   - `instructions: string or null`
 
@@ -1709,7 +1709,7 @@ See the [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#cancel-
 
     The array is empty while the dream is `pending` and for a short time after it starts `running`. It can stay empty if the dream fails or is canceled before then. The memory store holds the complete result only once `status` is `completed`.
 
-    See the [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#use-the-output) for how to review and use the result.
+    See the [Dreams guide](../../managed-agents/dreams.md#use-the-output) for how to review and use the result.
 
     - `type: "memory_store"`
 
@@ -1725,7 +1725,7 @@ See the [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#cancel-
 
     Stream that session's events to follow what the dream reads and writes.
 
-    See the [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#watch-the-pipeline-run) for how to watch a running dream.
+    See the [Dreams guide](../../managed-agents/dreams.md#watch-the-pipeline-run) for how to watch a running dream.
 
   - `status: BetaDreamStatus`
 
@@ -1733,7 +1733,7 @@ See the [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#cancel-
 
     `completed`, `failed`, and `canceled` are final: once a dream has one of these statuses, its status doesn't change again.
 
-    See the [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#lifecycle) for what each status means.
+    See the [Dreams guide](../../managed-agents/dreams.md#lifecycle) for what each status means.
 
     - `"pending"`
 
@@ -1853,7 +1853,7 @@ Hide a `completed`, `failed`, or `canceled` dream from the default list of dream
 
 Archiving a `pending` or `running` dream returns a 400 error, so cancel it first. Archiving an archived dream returns it unchanged. An archived dream can still be fetched by ID. Archiving can't be undone.
 
-See the [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#archive-a-dream) to learn more about archiving dreams.
+See the [Dreams guide](../../managed-agents/dreams.md#archive-a-dream) to learn more about archiving dreams.
 
 ### Path parameters
 
@@ -1867,7 +1867,7 @@ See the [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#archive
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -1995,7 +1995,7 @@ See the [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#archive
 
   The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to generally-available endpoints.
 
-  See the [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#how-it-works) for what a dream reads and produces.
+  See the [Dreams guide](../../managed-agents/dreams.md#how-it-works) for what a dream reads and produces.
 
   - `type: "dream"`
 
@@ -2031,7 +2031,7 @@ See the [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#archive
 
       A code for why the dream failed, such as `timeout` or `internal_error`.
 
-      The [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#errors) lists common error codes and when they occur.
+      The [Dreams guide](../../managed-agents/dreams.md#errors) lists common error codes and when they occur.
 
     - `message: string`
 
@@ -2069,7 +2069,7 @@ See the [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#archive
 
         Give 1 to 100 IDs, with no duplicates. Each session must be in the same workspace as the dream. Responses list the IDs in sorted order.
 
-        The [limits table in the Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#limits) lists all the limits on a dream.
+        The [limits table in the Dreams guide](../../managed-agents/dreams.md#limits) lists all the limits on a dream.
 
   - `instructions: string or null`
 
@@ -2127,7 +2127,7 @@ See the [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#archive
 
     The array is empty while the dream is `pending` and for a short time after it starts `running`. It can stay empty if the dream fails or is canceled before then. The memory store holds the complete result only once `status` is `completed`.
 
-    See the [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#use-the-output) for how to review and use the result.
+    See the [Dreams guide](../../managed-agents/dreams.md#use-the-output) for how to review and use the result.
 
     - `type: "memory_store"`
 
@@ -2143,7 +2143,7 @@ See the [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#archive
 
     Stream that session's events to follow what the dream reads and writes.
 
-    See the [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#watch-the-pipeline-run) for how to watch a running dream.
+    See the [Dreams guide](../../managed-agents/dreams.md#watch-the-pipeline-run) for how to watch a running dream.
 
   - `status: BetaDreamStatus`
 
@@ -2151,7 +2151,7 @@ See the [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#archive
 
     `completed`, `failed`, and `canceled` are final: once a dream has one of these statuses, its status doesn't change again.
 
-    See the [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#lifecycle) for what each status means.
+    See the [Dreams guide](../../managed-agents/dreams.md#lifecycle) for what each status means.
 
     - `"pending"`
 
@@ -2275,7 +2275,7 @@ curl https://api.anthropic.com/v1/dreams/$DREAM_ID/archive \
 
   The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to generally-available endpoints.
 
-  See the [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#how-it-works) for what a dream reads and produces.
+  See the [Dreams guide](../../managed-agents/dreams.md#how-it-works) for what a dream reads and produces.
 
   - `type: "dream"`
 
@@ -2311,7 +2311,7 @@ curl https://api.anthropic.com/v1/dreams/$DREAM_ID/archive \
 
       A code for why the dream failed, such as `timeout` or `internal_error`.
 
-      The [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#errors) lists common error codes and when they occur.
+      The [Dreams guide](../../managed-agents/dreams.md#errors) lists common error codes and when they occur.
 
     - `message: string`
 
@@ -2349,7 +2349,7 @@ curl https://api.anthropic.com/v1/dreams/$DREAM_ID/archive \
 
         Give 1 to 100 IDs, with no duplicates. Each session must be in the same workspace as the dream. Responses list the IDs in sorted order.
 
-        The [limits table in the Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#limits) lists all the limits on a dream.
+        The [limits table in the Dreams guide](../../managed-agents/dreams.md#limits) lists all the limits on a dream.
 
   - `instructions: string or null`
 
@@ -2407,7 +2407,7 @@ curl https://api.anthropic.com/v1/dreams/$DREAM_ID/archive \
 
     The array is empty while the dream is `pending` and for a short time after it starts `running`. It can stay empty if the dream fails or is canceled before then. The memory store holds the complete result only once `status` is `completed`.
 
-    See the [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#use-the-output) for how to review and use the result.
+    See the [Dreams guide](../../managed-agents/dreams.md#use-the-output) for how to review and use the result.
 
     - `type: "memory_store"`
 
@@ -2423,7 +2423,7 @@ curl https://api.anthropic.com/v1/dreams/$DREAM_ID/archive \
 
     Stream that session's events to follow what the dream reads and writes.
 
-    See the [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#watch-the-pipeline-run) for how to watch a running dream.
+    See the [Dreams guide](../../managed-agents/dreams.md#watch-the-pipeline-run) for how to watch a running dream.
 
   - `status: BetaDreamStatus`
 
@@ -2431,7 +2431,7 @@ curl https://api.anthropic.com/v1/dreams/$DREAM_ID/archive \
 
     `completed`, `failed`, and `canceled` are final: once a dream has one of these statuses, its status doesn't change again.
 
-    See the [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#lifecycle) for what each status means.
+    See the [Dreams guide](../../managed-agents/dreams.md#lifecycle) for what each status means.
 
     - `"pending"`
 
@@ -2499,7 +2499,7 @@ curl https://api.anthropic.com/v1/dreams/$DREAM_ID/archive \
 
     A code for why the dream failed, such as `timeout` or `internal_error`.
 
-    The [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#errors) lists common error codes and when they occur.
+    The [Dreams guide](../../managed-agents/dreams.md#errors) lists common error codes and when they occur.
 
   - `message: string`
 
@@ -2539,7 +2539,7 @@ curl https://api.anthropic.com/v1/dreams/$DREAM_ID/archive \
 
       Give 1 to 100 IDs, with no duplicates. Each session must be in the same workspace as the dream. Responses list the IDs in sorted order.
 
-      The [limits table in the Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#limits) lists all the limits on a dream.
+      The [limits table in the Dreams guide](../../managed-agents/dreams.md#limits) lists all the limits on a dream.
 
 ### Beta Dream Memory Store Input
 
@@ -2607,7 +2607,7 @@ curl https://api.anthropic.com/v1/dreams/$DREAM_ID/archive \
 
     The ID can be 1 to 256 characters long.
 
-    The [limits table in the Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#limits) lists the supported models.
+    The [limits table in the Dreams guide](../../managed-agents/dreams.md#limits) lists the supported models.
 
     minLength: 1, maxLength: 256
 
@@ -2649,7 +2649,7 @@ curl https://api.anthropic.com/v1/dreams/$DREAM_ID/archive \
 
     Give 1 to 100 IDs, with no duplicates. Each session must be in the same workspace as the dream. Responses list the IDs in sorted order.
 
-    The [limits table in the Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#limits) lists all the limits on a dream.
+    The [limits table in the Dreams guide](../../managed-agents/dreams.md#limits) lists all the limits on a dream.
 
 ### Beta Dream Status
 
@@ -2659,7 +2659,7 @@ curl https://api.anthropic.com/v1/dreams/$DREAM_ID/archive \
 
   `completed`, `failed`, and `canceled` are final: once a dream has one of these statuses, its status doesn't change again.
 
-  See the [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#lifecycle) for what each status means.
+  See the [Dreams guide](../../managed-agents/dreams.md#lifecycle) for what each status means.
 
   - `"pending"`
 
@@ -2697,7 +2697,7 @@ curl https://api.anthropic.com/v1/dreams/$DREAM_ID/archive \
 
   The counts are zero while the dream is `pending` and update while it is `running`. They can keep changing after a cancel.
 
-  See the [Dreams guide](../../managed-agents/dreams.md?sdk_languages=http#billing) for how dreams are billed. See the [prompt caching guide](../../build-with-claude/prompt-caching.md?sdk_languages=http#tracking-cache-performance) for how the input token counts add up.
+  See the [Dreams guide](../../managed-agents/dreams.md#billing) for how dreams are billed. See the [prompt caching guide](../../build-with-claude/prompt-caching.md#tracking-cache-performance) for how the input token counts add up.
 
   - `cache_creation_input_tokens: number`
 

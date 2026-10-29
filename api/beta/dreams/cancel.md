@@ -11,7 +11,7 @@ Stop a `pending` or `running` dream.
 
 The response shows `status` as `canceled`, unless the dream reached `completed` or `failed` first. `usage` can keep changing after the response. Canceling a `canceled` dream returns it unchanged. Canceling a `completed` or `failed` dream returns a 400 error.
 
-See the [Dreams guide](../../../managed-agents/dreams.md?sdk_languages=http#cancel-a-dream) to learn more about canceling dreams.
+See the [Dreams guide](../../../managed-agents/dreams.md#cancel-a-dream) to learn more about canceling dreams.
 
 ## Path parameters
 
@@ -25,7 +25,7 @@ See the [Dreams guide](../../../managed-agents/dreams.md?sdk_languages=http#canc
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -153,7 +153,7 @@ See the [Dreams guide](../../../managed-agents/dreams.md?sdk_languages=http#canc
 
   The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to generally-available endpoints.
 
-  See the [Dreams guide](../../../managed-agents/dreams.md?sdk_languages=http#how-it-works) for what a dream reads and produces.
+  See the [Dreams guide](../../../managed-agents/dreams.md#how-it-works) for what a dream reads and produces.
 
   - `type: "dream"`
 
@@ -189,7 +189,7 @@ See the [Dreams guide](../../../managed-agents/dreams.md?sdk_languages=http#canc
 
       A code for why the dream failed, such as `timeout` or `internal_error`.
 
-      The [Dreams guide](../../../managed-agents/dreams.md?sdk_languages=http#errors) lists common error codes and when they occur.
+      The [Dreams guide](../../../managed-agents/dreams.md#errors) lists common error codes and when they occur.
 
     - `message: string`
 
@@ -227,7 +227,7 @@ See the [Dreams guide](../../../managed-agents/dreams.md?sdk_languages=http#canc
 
         Give 1 to 100 IDs, with no duplicates. Each session must be in the same workspace as the dream. Responses list the IDs in sorted order.
 
-        The [limits table in the Dreams guide](../../../managed-agents/dreams.md?sdk_languages=http#limits) lists all the limits on a dream.
+        The [limits table in the Dreams guide](../../../managed-agents/dreams.md#limits) lists all the limits on a dream.
 
   - `instructions: string or null`
 
@@ -285,7 +285,7 @@ See the [Dreams guide](../../../managed-agents/dreams.md?sdk_languages=http#canc
 
     The array is empty while the dream is `pending` and for a short time after it starts `running`. It can stay empty if the dream fails or is canceled before then. The memory store holds the complete result only once `status` is `completed`.
 
-    See the [Dreams guide](../../../managed-agents/dreams.md?sdk_languages=http#use-the-output) for how to review and use the result.
+    See the [Dreams guide](../../../managed-agents/dreams.md#use-the-output) for how to review and use the result.
 
     - `type: "memory_store"`
 
@@ -301,7 +301,7 @@ See the [Dreams guide](../../../managed-agents/dreams.md?sdk_languages=http#canc
 
     Stream that session's events to follow what the dream reads and writes.
 
-    See the [Dreams guide](../../../managed-agents/dreams.md?sdk_languages=http#watch-the-pipeline-run) for how to watch a running dream.
+    See the [Dreams guide](../../../managed-agents/dreams.md#watch-the-pipeline-run) for how to watch a running dream.
 
   - `status: BetaDreamStatus`
 
@@ -309,7 +309,7 @@ See the [Dreams guide](../../../managed-agents/dreams.md?sdk_languages=http#canc
 
     `completed`, `failed`, and `canceled` are final: once a dream has one of these statuses, its status doesn't change again.
 
-    See the [Dreams guide](../../../managed-agents/dreams.md?sdk_languages=http#lifecycle) for what each status means.
+    See the [Dreams guide](../../../managed-agents/dreams.md#lifecycle) for what each status means.
 
     - `"pending"`
 

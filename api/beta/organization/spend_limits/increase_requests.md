@@ -44,7 +44,7 @@ Requests whose requester is no longer a member are excluded.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../../../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../../../versioning.md).
 
 ### Returns
 
@@ -353,7 +353,7 @@ requester at the request's period.
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../../../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../../../versioning.md).
 
 ### Returns
 
@@ -657,7 +657,7 @@ the member was blocked on. Anthropic emails the requester unless
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../../../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../../../versioning.md).
 
 ### Body parameters
 
@@ -1062,7 +1062,7 @@ Idempotent on `denied`; denying an already-`approved` request returns
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../../../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../../../versioning.md).
 
 ### Body parameters
 

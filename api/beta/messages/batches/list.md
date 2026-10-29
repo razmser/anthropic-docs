@@ -9,7 +9,7 @@ url: https://platform.claude.com/docs/en/api/beta/messages/batches/list
 
 List all Message Batches within a Workspace. Most recently created batches are returned first.
 
-Learn more about the Message Batches API in our [user guide](../../../../build-with-claude/batch-processing.md?sdk_languages=http)
+Learn more about the Message Batches API in our [user guide](../../../../build-with-claude/batch-processing.md)
 
 ## Query parameters
 
@@ -35,7 +35,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../../../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../../../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 

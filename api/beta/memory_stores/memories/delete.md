@@ -33,7 +33,7 @@ Delete a Memory
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../../../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../../../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -155,11 +155,11 @@ Delete a Memory
 
 - `BetaManagedAgentsDeletedMemory object`
 
-  The confirmation that [Delete a Memory](delete.md?sdk_languages=http) returns.
+  The confirmation that [Delete a Memory](delete.md) returns.
 
-  Deleting a memory doesn't delete its versions. [List Memory Versions](../memory_versions/list.md?sdk_languages=http) returns them while they are retained: each version is kept for at least the version retention period after it was written, unless the store itself is deleted.
+  Deleting a memory doesn't delete its versions. [List Memory Versions](../memory_versions/list.md) returns them while they are retained: each version is kept for at least the version retention period after it was written, unless the store itself is deleted.
 
-  See the [memory guide](../../../../managed-agents/memory.md?sdk_languages=http#audit-memory-changes) to learn more about how long versions are kept.
+  See the [memory guide](../../../../managed-agents/memory.md#audit-memory-changes) to learn more about how long versions are kept.
 
   - `type: "memory_deleted"`
 

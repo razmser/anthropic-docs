@@ -11,7 +11,7 @@ Delete a Message Batch.
 
 Message Batches can only be deleted once they've finished processing. If you'd like to delete an in-progress batch, you must first cancel it.
 
-Learn more about the Message Batches API in our [user guide](../../../../build-with-claude/batch-processing.md?sdk_languages=http)
+Learn more about the Message Batches API in our [user guide](../../../../build-with-claude/batch-processing.md)
 
 ## Path parameters
 
@@ -25,7 +25,7 @@ Learn more about the Message Batches API in our [user guide](../../../../build-w
 
   The version of the Claude API you want to use.
 
-  Read more about versioning and our version history [here](../../../versioning.md?sdk_languages=http).
+  Read more about versioning and our version history [here](../../../versioning.md).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
