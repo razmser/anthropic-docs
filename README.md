@@ -2,7 +2,7 @@
 
 Markdown mirror of [Anthropic's documentation](https://platform.claude.com/docs/en/home).
 
-Contains **821 pages**, discovered from the [page index](https://platform.claude.com/llms.txt) and [supplementary index](https://platform.claude.com/sitemap.xml).
+Contains **846 pages**, discovered from the [page index](https://platform.claude.com/llms.txt) and [supplementary index](https://platform.claude.com/sitemap.xml).
 
 Links to mirrored pages point to local files; external links and images remain online. Code examples and OpenAPI blocks are preserved.
 
@@ -11,7 +11,7 @@ Generated files are replaced by the next successful sync. Original content belon
 ## Pages
 
 - [Additional resources](about-claude/additional-resources.md)
-- [API credits for Max and Team plans](about-claude/api-credits-for-subscribers.md)
+- [API credits for Max, Ultra, and Team plans](about-claude/api-credits-for-subscribers.md)
 - [Glossary](about-claude/glossary.md)
 - [Model deprecations](about-claude/model-deprecations.md)
 - [Choosing the right model](about-claude/models/choosing-a-model.md)
@@ -158,6 +158,8 @@ Generated files are replaced by the next successful sync. Original content belon
 - [Get Artifact Activity](api/beta/organization/analytics/artifacts/list.md)
 - [Connectors](api/beta/organization/analytics/connectors.md)
 - [Get Connector Usage](api/beta/organization/analytics/connectors/list.md)
+- [Cost](api/beta/organization/analytics/cost.md)
+- [Get Cost By Dimension](api/beta/organization/analytics/cost/list.md)
 - [Cost Report](api/beta/organization/analytics/cost_report.md)
 - [Get Cost Over Time](api/beta/organization/analytics/cost_report/list.md)
 - [Plugins](api/beta/organization/analytics/plugins.md)
@@ -166,6 +168,8 @@ Generated files are replaced by the next successful sync. Original content belon
 - [Get Skill Usage](api/beta/organization/analytics/skills/list.md)
 - [Summaries](api/beta/organization/analytics/summaries.md)
 - [Get Activity Summaries](api/beta/organization/analytics/summaries/list.md)
+- [Usage](api/beta/organization/analytics/usage.md)
+- [Get Token Usage By Dimension](api/beta/organization/analytics/usage/list.md)
 - [Usage Report](api/beta/organization/analytics/usage_report.md)
 - [Get Token Usage Over Time](api/beta/organization/analytics/usage_report/list.md)
 - [User Cost Report](api/beta/organization/analytics/user_cost_report.md)
@@ -178,6 +182,25 @@ Generated files are replaced by the next successful sync. Original content belon
 - [List API Keys](api/beta/organization/api_keys/list.md)
 - [Retrieve API Key (Admin API)](api/beta/organization/api_keys/retrieve.md)
 - [Update API Key](api/beta/organization/api_keys/update.md)
+- [Claude Tag](api/beta/organization/claude_tag.md)
+- [Bundles](api/beta/organization/claude_tag/bundles.md)
+- [List Bundles](api/beta/organization/claude_tag/bundles/list.md)
+- [Get Bundle](api/beta/organization/claude_tag/bundles/retrieve.md)
+- [Targets](api/beta/organization/claude_tag/bundles/targets.md)
+- [Attach Bundle](api/beta/organization/claude_tag/bundles/targets/create.md)
+- [Detach Bundle](api/beta/organization/claude_tag/bundles/targets/delete.md)
+- [List Bundle Targets](api/beta/organization/claude_tag/bundles/targets/list.md)
+- [Get Bundle Target](api/beta/organization/claude_tag/bundles/targets/retrieve.md)
+- [Slack Channels](api/beta/organization/claude_tag/slack_channels.md)
+- [Set Up Slack Channel](api/beta/organization/claude_tag/slack_channels/create.md)
+- [Remove Slack Channel](api/beta/organization/claude_tag/slack_channels/delete.md)
+- [List Slack Channels](api/beta/organization/claude_tag/slack_channels/list.md)
+- [Get Slack Channel](api/beta/organization/claude_tag/slack_channels/retrieve.md)
+- [Update Slack Channel](api/beta/organization/claude_tag/slack_channels/update.md)
+- [Slack Workspaces](api/beta/organization/claude_tag/slack_workspaces.md)
+- [List Slack Workspaces](api/beta/organization/claude_tag/slack_workspaces/list.md)
+- [Get Slack Workspace](api/beta/organization/claude_tag/slack_workspaces/retrieve.md)
+- [Update Slack Workspace](api/beta/organization/claude_tag/slack_workspaces/update.md)
 - [Compliance Settings](api/beta/organization/compliance_settings.md)
 - [Get Compliance Settings](api/beta/organization/compliance_settings/retrieve.md)
 - [Update Compliance Settings](api/beta/organization/compliance_settings/update.md)
@@ -622,6 +645,7 @@ Generated files are replaced by the next successful sync. Original content belon
 - [Fast mode](build-with-claude/fast-mode.md)
 - [Files API](build-with-claude/files.md)
 - [Stop reasons and fallback](build-with-claude/handling-stop-reasons.md)
+- [Message threads](build-with-claude/message-threads.md)
 - [Build an orchestration mode](build-with-claude/mid-conversation-effort-example.md)
 - [Mid-conversation system messages and tool changes](build-with-claude/mid-conversation-system-messages.md)
 - [Multilingual support](build-with-claude/multilingual-support.md)
@@ -718,6 +742,7 @@ Generated files are replaced by the next successful sync. Original content belon
 - [Plugins API](manage-claude/plugins-api.md)
 - [Rate Limits API](manage-claude/rate-limits-api.md)
 - [Spend Limits API](manage-claude/spend-limits-api.md)
+- [Usage and Cost Analytics API](manage-claude/usage-cost-analytics-api.md)
 - [Usage and Cost API](manage-claude/usage-cost-api.md)
 - [User management](manage-claude/user-management.md)
 - [Send an end customer a link to the Verification Portal](manage-claude/user-profiles-verification-portal.md)

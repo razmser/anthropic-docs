@@ -3,7 +3,7 @@ title: Vision
 url: https://platform.claude.com/docs/en/build-with-claude/vision
 description: Claude's vision capabilities allow it to process and analyze images, opening up exciting possibilities for multimodal interaction.
 featureMetadata:
-  status: ga
+  status: stable
   supportedModels:
     - claude-fable-5-1
     - claude-mythos-5-1
@@ -23,19 +23,19 @@ featureMetadata:
     - claude-opus-4-5-20251101
     - claude-sonnet-4-5-20250929
   supportedPlatforms:
-    Claude API: ga
-    Claude Platform on AWS: ga
-    Claude Models on Google Cloud (Anthropic managed): ga
+    Claude API: stable
+    Claude Platform on AWS: stable
+    Claude Models on Google Cloud (Anthropic managed): stable
     Amazon Bedrock:
-      availability: ga
+      availability: stable
       note: Only base64 image sources; per-image limit 5 MB (base64-encoded) and a lower total request size.
     Amazon Bedrock (InvokeModel):
-      availability: ga
+      availability: stable
       note: Only base64 image sources; per-image limit 5 MB (base64-encoded) and a lower total request size.
     Claude Models on Google Cloud (Google managed):
-      availability: ga
+      availability: stable
       note: Only base64 image sources; per-image limit 5 MB (base64-encoded) and a lower total request size.
-    Microsoft Foundry: ga
+    Microsoft Foundry: stable
 ---
 
 This guide describes how to send images to Claude, the limits and costs that apply, and where to find guidance for [coordinate-based workflows](vision-coordinates.md).
@@ -1274,7 +1274,7 @@ The maximum number of images for each message or request is:
 
 The maximum dimensions for each image are 8000x8000 px.
 
-If a single API request contains more than 20 images, a stricter per-image dimension limit applies to every image in that request. All `image` blocks in the request count toward this threshold, including images from earlier conversation turns that you resend and images nested inside `tool_result` content (for example, screenshots returned to the computer use tool). On Amazon Bedrock and Claude Models on Google Cloud (Google managed), document blocks such as PDFs also count toward this threshold. Images exceeding the stricter limit are rejected with an `invalid_request_error` whose message references “many-image requests” and states the current limit in pixels. To stay under the limit on all platforms, either resize each image so that neither dimension exceeds 2000 px, or keep the request to 20 or fewer image and document blocks.
+If a single API request contains more than 20 images, a stricter per-image dimension limit applies to every image in that request. All `image` blocks in the request count toward this threshold, including images from earlier conversation turns that you resend and images nested inside `tool_result` content (for example, screenshots returned to the computer use tool). On Amazon Bedrock and Claude Models on Google Cloud (Google managed), document blocks such as PDFs also count toward this threshold. Images exceeding the stricter limit are rejected with an `invalid_request_error` whose message references “many-image requests” and states the current limit in pixels. To stay under the limit on all platforms, either resize each image so that neither dimension exceeds 3,000 px, or keep the request to 20 or fewer image and document blocks.
 
 The maximum size per image is:
 
@@ -1379,7 +1379,7 @@ Always carefully review and verify Claude’s image interpretations, especially 
   </Accordion>
 
   <Accordion title="Can I delete images I’ve uploaded?">
-    No. Image uploads are ephemeral and not stored beyond the duration of the API request. Uploaded images are automatically deleted after they have been processed.
+    No. See [API and data retention](../manage-claude/api-and-data-retention.md) for how long images are kept. If you upload images with the [Files API](files.md), you can delete them there.
   </Accordion>
 
   <Accordion title="Where can I find details on data privacy for image uploads?">

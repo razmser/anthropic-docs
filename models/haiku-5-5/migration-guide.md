@@ -28,7 +28,7 @@ Work down the groups and stop after the one that names your current model. If yo
 4. If your code reads the first content block as the answer, select blocks by `type` instead. See [Configure thinking](migration-guide.md#configure-thinking).
 5. Remove `temperature`, `top_p`, and `top_k` from your requests. See [Remove sampling parameters](migration-guide.md#remove-sampling-parameters).
 6. If your requests end `messages` with an assistant turn for the model to continue, end them with a user turn instead. See [Replace assistant prefill](migration-guide.md#replace-assistant-prefill).
-7. If you use computer use, replace `computer_20250124`: on the Claude API and Claude Models on Google Cloud (Google managed), with the `computer_toolset_20260801` toolset; on Amazon Bedrock, with `computer_20251124` and the `computer-use-2025-11-24` beta header. See [Move computer use to the toolset](migration-guide.md#computer-use-toolset).
+7. If you use computer use, replace `computer_20250124` with the `computer_toolset_20260801` toolset. On Amazon Bedrock, `computer_20251124` also works. See [Move computer use to the toolset](migration-guide.md#computer-use-toolset).
 8. If you replay stored conversations through a different account, replay each one through the account that produced it. See [Replay thinking blocks through the account that produced them](migration-guide.md#replay-thinking-blocks-through-the-producing-account).
 9. If your code changes `system`, `tools`, or earlier `messages` between requests in a conversation and sends thinking blocks back, keep the conversation append-only. See [Keep earlier turns unchanged](migration-guide.md#keep-earlier-turns-unchanged).
 10. Handle `stop_reason: "refusal"`. Claude Haiku 5.5 runs safety classifiers that can decline a request, and it has no server-side fallback. See [Safeguard refusals](../../build-with-claude/prompt-engineering/prompting-claude-haiku-5-5.md#safeguard-refusals).
@@ -48,13 +48,14 @@ If your organization has a [Priority Tier](../../api/service-tiers.md#supported-
 
 Replace the Claude Haiku 4.5 model ID with the Claude Haiku 5.5 ID for your platform.
 
-| Platform                                       | Claude Haiku 4.5                                  | Claude Haiku 5.5             |
-| ---------------------------------------------- | ------------------------------------------------- | ---------------------------- |
-| Claude API                                     | `claude-haiku-4-5-20251001` or `claude-haiku-4-5` | `claude-haiku-5-5`           |
-| Amazon Bedrock                                 | `anthropic.claude-haiku-4-5`                      | `anthropic.claude-haiku-5-5` |
-| Claude Platform on AWS                         | `claude-haiku-4-5`                                | `claude-haiku-5-5`           |
-| Claude Models on Google Cloud (Google managed) | `claude-haiku-4-5@20251001`                       | `claude-haiku-5-5`           |
-| Microsoft Foundry                              | `claude-haiku-4-5`                                | `claude-haiku-5-5`           |
+| Platform                                          | Claude Haiku 4.5                                  | Claude Haiku 5.5             |
+| ------------------------------------------------- | ------------------------------------------------- | ---------------------------- |
+| Claude API                                        | `claude-haiku-4-5-20251001` or `claude-haiku-4-5` | `claude-haiku-5-5`           |
+| Amazon Bedrock                                    | `anthropic.claude-haiku-4-5`                      | `anthropic.claude-haiku-5-5` |
+| Claude Platform on AWS                            | `claude-haiku-4-5`                                | `claude-haiku-5-5`           |
+| Claude Models on Google Cloud (Anthropic managed) | `claude-haiku-4-5-20251001`                       | `claude-haiku-5-5`           |
+| Claude Models on Google Cloud (Google managed)    | `claude-haiku-4-5@20251001`                       | `claude-haiku-5-5`           |
+| Microsoft Foundry                                 | `claude-haiku-4-5`                                | `claude-haiku-5-5`           |
 
 `claude-haiku-5-5` is a fixed model ID with no date suffix and no separate alias.
 
@@ -125,19 +126,21 @@ A prefill is a final assistant turn in `messages` that the model continues. Clau
 
 ## Move computer use to the toolset
 
-Claude Haiku 4.5 supports [computer use](../../agents-and-tools/tool-use/computer-use-tool.md) through the `computer_20250124` tool, with the `computer-use-2025-01-24` beta header. On the Claude API and Claude Models on Google Cloud (Google managed), Claude Haiku 5.5 supports computer use only through the `computer_toolset_20260801` toolset, and a request that declares `computer_20250124` returns a 400 error. On Amazon Bedrock, Claude Haiku 5.5 doesn’t accept `computer_20250124` either; use the `computer_20251124` tool version with the `computer-use-2025-11-24` beta header.
+Claude Haiku 4.5 supports [computer use](../../agents-and-tools/tool-use/computer-use-tool.md) through the `computer_20250124` tool, with the `computer-use-2025-01-24` beta header. Claude Haiku 5.5 supports computer use through the `computer_toolset_20260801` toolset. A request to Claude Haiku 5.5 that declares `computer_20250124` returns a 400 error.
 
-To move an integration to the toolset, drop the `computer-use-2025-01-24` beta header and replace the `tools` entry with `{"type": "computer_toolset_20260801"}`. Then make the other request and agent-loop changes in [Migrate from `computer_20251124`](../../agents-and-tools/tool-use/computer-use-tool.md#migrate-from-computer-20251124): dispatch on each member `tool_use` block’s `name` and `toolset_name` rather than on `input.action`, handle every such block in a turn, and echo `toolset_name` on results. Zoom is on by default in the toolset; if your environment doesn’t implement it, add `"configs": {"zoom": {"enabled": false}}`. If you send the `fine-grained-tool-streaming-2025-05-14` beta header, remove it. Alongside a toolset entry, it returns a 400 error. For other platforms, see the computer use tool’s [API support](../../agents-and-tools/tool-use/computer-use-tool.md#availability-feature-support) section.
+To move an integration to the toolset, drop the `computer-use-2025-01-24` beta header and replace the `tools` entry with `{"type": "computer_toolset_20260801"}`. Then make the other request and agent-loop changes in [Migrate from `computer_20251124`](../../agents-and-tools/tool-use/computer-use-tool.md#migrate-from-computer-20251124). Dispatch on each member `tool_use` block’s `name` and `toolset_name` rather than on `input.action`. Handle every such block in a turn and echo `toolset_name` on results. Zoom is on by default in the toolset; if your environment doesn’t implement it, add `"configs": {"zoom": {"enabled": false}}`. If you send the `fine-grained-tool-streaming-2025-05-14` beta header, remove it. Alongside a toolset entry, it returns a 400 error.
 
-On the Claude API and Claude Models on Google Cloud (Google managed), Claude Haiku 5.5 also supports the [browser use tool](../../agents-and-tools/tool-use/browser-use-tool.md) (`browser_toolset_20260801`) for tasks inside webpages. Claude Haiku 4.5 doesn’t support it.
+On Amazon Bedrock, Claude Haiku 5.5 also accepts the `computer_20251124` tool with the `computer-use-2025-11-24` beta header.
+
+Claude Haiku 5.5 supports the [browser use tool](../../agents-and-tools/tool-use/browser-use-tool.md) (`browser_toolset_20260801`) for tasks inside webpages. Claude Haiku 4.5 doesn’t support it.
 
 ## Replay thinking blocks through the account that produced them
 
-Thinking blocks from Claude Haiku 5.5 work only in the account that produced them, or in an account linked to it. When another account sends one of these blocks, the API drops the block before the model receives it, and the request succeeds without that reasoning. This affects code that stores conversations and replays them through a different account, for example a service that serves several customers from one conversation store. Replay each conversation through the account that produced it. See [Thinking blocks stay with the account that produced them](../../build-with-claude/preserved-thinking.md#account-bound-thinking).
+Thinking blocks from Claude Haiku 5.5 work only in the account that produced them or in an account linked to it. When another account sends one of these blocks, the API drops the block before the model receives it, and the request succeeds without that reasoning. This affects code that stores conversations and replays them through a different account, for example a service that serves several customers from one conversation store. Replay each conversation through the account that produced it. See [Thinking blocks stay with the account that produced them](../../build-with-claude/preserved-thinking.md#account-bound-thinking).
 
 ## Keep earlier turns unchanged
 
-A Claude Haiku 5.5 thinking block stays valid only while everything sent before it is unchanged: a request that sends a thinking block back after a change to `system`, `tools`, or earlier `messages` returns a 400 error. Claude Haiku 4.5 doesn’t run this check. Keep conversations append-only. On accounts created before August 31, 2026, 00:00 UTC, the error comes only on requests that set `thinking.block_binding.prefix_mismatch_behavior`. For the changes that trigger the error and what to do instead, see [Who needs to change anything](../../build-with-claude/preserved-thinking.md#who-is-affected).
+A Claude Haiku 5.5 thinking block stays valid only while everything sent before it is unchanged: the `system` prompt, the `tools`, and every earlier message. Claude Haiku 4.5 doesn’t run the prefix check. Keep conversations append-only. A request that sends a block back after such a change and leaves `thinking.block_binding.prefix_mismatch_behavior` unset gets a 400 error on accounts created on or after August 31, 2026, 00:00 UTC. On accounts created before that date, the request gets the error only when it sets the field to `"error"`. For the changes that trigger the error and what to do instead, see [Who the prefix check affects](../../build-with-claude/preserved-thinking.md#who-is-affected).
 
 ## Migrating to Claude Haiku 5.5 from Claude Haiku 3.5 and earlier Haiku models
 

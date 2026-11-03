@@ -19,7 +19,7 @@ compliance activities that can be filtered by various criteria.
 
 #### Query parameters
 
-- `activity_types: optional array of "abuse_decision_received" or "account_deleted" or "account_migration_completed" or 558 more`
+- `activity_types: optional array of "abuse_decision_received" or "account_deleted" or "account_migration_completed" or 571 more`
 
   Filter activities by type. See the response `data` schema for the additional fields each type returns. Cannot be combined with `exclude_activity_types[]`.
 
@@ -74,6 +74,9 @@ compliance activities that can be filtered by various criteria.
   - `"age_verified"`
 
     User age was verified.
+
+    This activity type is retired: this feed no longer records age
+    verifications. Activities of this type recorded earlier are still returned.
 
   - `"anonymous_mobile_login_attempted"`
 
@@ -313,7 +316,7 @@ compliance activities that can be filtered by various criteria.
 
   - `"claude_chat_deleted"`
 
-    A user deleted a Claude.ai chat conversation.
+    A Claude.ai chat conversation was deleted.
 
   - `"claude_chat_deletion_failed"`
 
@@ -635,6 +638,10 @@ compliance activities that can be filtered by various criteria.
 
     A security scan of a plugin completed and produced a verdict.
 
+  - `"claude_plugin_security_scan_override_updated"`
+
+    An administrator allowed a plugin version despite its security scan's verdict, or that allowance was revoked.
+
   - `"claude_plugin_served_version_updated"`
 
     A plugin's served version was updated: an administrator or the owner chose a version, a saved version became the served version, or an accepted library submission was published into the plugin.
@@ -733,11 +740,51 @@ compliance activities that can be filtered by various criteria.
 
   - `"claude_published_artifact_deleted"`
 
-    A published artifact was deleted or unpublished — by its creator, by an organization admin, or by Anthropic (for example, when it was removed for a policy violation).
+    A published artifact was deleted or unpublished — by its creator, by an organization admin, through the Compliance API, or by Anthropic (for example, when it was removed for a policy violation); one artifact can have more than one of these activities, such as when its deletion is retried.
 
   - `"claude_pubsec_identity_configured"`
 
     SAML IdP configuration updated for a public sector organization.
+
+  - `"claude_security_finding_deleted"`
+
+    A Claude Security finding was permanently deleted by a user.
+
+  - `"claude_security_finding_updated"`
+
+    A Claude Security finding was resolved or reopened by a user, or by an automated Claude Security process (a system actor whose service field names the process).
+
+  - `"claude_security_knowledge_document_created"`
+
+    A knowledge document was created in a Claude Security scan project.
+
+  - `"claude_security_knowledge_document_deleted"`
+
+    A knowledge document was deleted from a Claude Security scan project.
+
+  - `"claude_security_knowledge_document_updated"`
+
+    A Claude Security scan project's knowledge document, such as its threat model, was changed.
+
+  - `"claude_security_knowledge_document_version_restored"`
+
+    An earlier version of a Claude Security scan project's knowledge document, such as its threat model, was written back as the document's newest version.
+
+  - `"claude_security_scan_project_asset_added"`
+
+    A repository was added to a Claude Security scan project.
+
+  - `"claude_security_scan_project_asset_removed"`
+
+    A repository was removed from a Claude Security scan project.
+
+  - `"claude_security_scan_project_asset_updated"`
+
+    A repository's scan settings, such as its branch or directories, were changed in a Claude Security scan project.
+
+  - `"claude_security_scan_project_ownership_transferred"`
+
+    Ownership of a Claude Security scan project was transferred to a member of the organization.
 
   - `"claude_skill_auto_disabled"`
 
@@ -775,6 +822,10 @@ compliance activities that can be filtered by various criteria.
 
     A security scan of a skill completed and produced a verdict.
 
+  - `"claude_skill_security_scan_override_updated"`
+
+    An administrator allowed a skill version despite its security scan's verdict, or that allowance was revoked.
+
   - `"claude_survey_closed"`
 
     An organization admin closed an in-app survey before its end date, ending the collection of responses; a survey that reaches its end date records no event.
@@ -805,7 +856,7 @@ compliance activities that can be filtered by various criteria.
 
   - `"claude_user_settings_updated"`
 
-    User updated their personal settings.
+    User updated their personal settings. Only changes to `analysis_tool_enabled`, `artifacts_enabled`, `cli_op_permissions_enabled`, `conversation_preferences`, `cowork_global_instructions`, `google_calendar_integration_enabled`, `mcp_tools_enabled` and `web_search_enabled` are recorded; older events may also list other settings.
 
   - `"cli_plugin_exec_policy_updated"`
 
@@ -1990,6 +2041,10 @@ compliance activities that can be filtered by various criteria.
   - `"platform_workspace_updated"`
 
     A workspace was updated.
+
+  - `"platform_workspace_user_profile_attached"`
+
+    A user profile was attached to a workspace, so that inference requests served by the workspace must name that profile.
 
   - `"plugin_installation_preference_updated"`
 
@@ -2322,7 +2377,7 @@ compliance activities that can be filtered by various criteria.
 
     format: date-time
 
-- `exclude_activity_types: optional array of "abuse_decision_received" or "account_deleted" or "account_migration_completed" or 558 more`
+- `exclude_activity_types: optional array of "abuse_decision_received" or "account_deleted" or "account_migration_completed" or 571 more`
 
   Exclude activities of these types. Cannot be combined with `activity_types[]`.
 
@@ -2377,6 +2432,9 @@ compliance activities that can be filtered by various criteria.
   - `"age_verified"`
 
     User age was verified.
+
+    This activity type is retired: this feed no longer records age
+    verifications. Activities of this type recorded earlier are still returned.
 
   - `"anonymous_mobile_login_attempted"`
 
@@ -2616,7 +2674,7 @@ compliance activities that can be filtered by various criteria.
 
   - `"claude_chat_deleted"`
 
-    A user deleted a Claude.ai chat conversation.
+    A Claude.ai chat conversation was deleted.
 
   - `"claude_chat_deletion_failed"`
 
@@ -2938,6 +2996,10 @@ compliance activities that can be filtered by various criteria.
 
     A security scan of a plugin completed and produced a verdict.
 
+  - `"claude_plugin_security_scan_override_updated"`
+
+    An administrator allowed a plugin version despite its security scan's verdict, or that allowance was revoked.
+
   - `"claude_plugin_served_version_updated"`
 
     A plugin's served version was updated: an administrator or the owner chose a version, a saved version became the served version, or an accepted library submission was published into the plugin.
@@ -3036,11 +3098,51 @@ compliance activities that can be filtered by various criteria.
 
   - `"claude_published_artifact_deleted"`
 
-    A published artifact was deleted or unpublished — by its creator, by an organization admin, or by Anthropic (for example, when it was removed for a policy violation).
+    A published artifact was deleted or unpublished — by its creator, by an organization admin, through the Compliance API, or by Anthropic (for example, when it was removed for a policy violation); one artifact can have more than one of these activities, such as when its deletion is retried.
 
   - `"claude_pubsec_identity_configured"`
 
     SAML IdP configuration updated for a public sector organization.
+
+  - `"claude_security_finding_deleted"`
+
+    A Claude Security finding was permanently deleted by a user.
+
+  - `"claude_security_finding_updated"`
+
+    A Claude Security finding was resolved or reopened by a user, or by an automated Claude Security process (a system actor whose service field names the process).
+
+  - `"claude_security_knowledge_document_created"`
+
+    A knowledge document was created in a Claude Security scan project.
+
+  - `"claude_security_knowledge_document_deleted"`
+
+    A knowledge document was deleted from a Claude Security scan project.
+
+  - `"claude_security_knowledge_document_updated"`
+
+    A Claude Security scan project's knowledge document, such as its threat model, was changed.
+
+  - `"claude_security_knowledge_document_version_restored"`
+
+    An earlier version of a Claude Security scan project's knowledge document, such as its threat model, was written back as the document's newest version.
+
+  - `"claude_security_scan_project_asset_added"`
+
+    A repository was added to a Claude Security scan project.
+
+  - `"claude_security_scan_project_asset_removed"`
+
+    A repository was removed from a Claude Security scan project.
+
+  - `"claude_security_scan_project_asset_updated"`
+
+    A repository's scan settings, such as its branch or directories, were changed in a Claude Security scan project.
+
+  - `"claude_security_scan_project_ownership_transferred"`
+
+    Ownership of a Claude Security scan project was transferred to a member of the organization.
 
   - `"claude_skill_auto_disabled"`
 
@@ -3078,6 +3180,10 @@ compliance activities that can be filtered by various criteria.
 
     A security scan of a skill completed and produced a verdict.
 
+  - `"claude_skill_security_scan_override_updated"`
+
+    An administrator allowed a skill version despite its security scan's verdict, or that allowance was revoked.
+
   - `"claude_survey_closed"`
 
     An organization admin closed an in-app survey before its end date, ending the collection of responses; a survey that reaches its end date records no event.
@@ -3108,7 +3214,7 @@ compliance activities that can be filtered by various criteria.
 
   - `"claude_user_settings_updated"`
 
-    User updated their personal settings.
+    User updated their personal settings. Only changes to `analysis_tool_enabled`, `artifacts_enabled`, `cli_op_permissions_enabled`, `conversation_preferences`, `cowork_global_instructions`, `google_calendar_integration_enabled`, `mcp_tools_enabled` and `web_search_enabled` are recorded; older events may also list other settings.
 
   - `"cli_plugin_exec_policy_updated"`
 
@@ -4294,6 +4400,10 @@ compliance activities that can be filtered by various criteria.
 
     A workspace was updated.
 
+  - `"platform_workspace_user_profile_attached"`
+
+    A user profile was attached to a workspace, so that inference requests served by the workspace must name that profile.
+
   - `"plugin_installation_preference_updated"`
 
     An org admin changed the installation preference for a plugin.
@@ -4623,7 +4733,7 @@ compliance activities that can be filtered by various criteria.
 
 #### Returns
 
-- `data: optional array of AbuseDecisionReceived or AccountDeleted or AccountMigrationCompleted or 558 more`
+- `data: optional array of AbuseDecisionReceived or AccountDeleted or AccountMigrationCompleted or 571 more`
 
   List of activity records. Each element's `type` field identifies which activity it is and which additional fields are present.
 
@@ -4769,9 +4879,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -4785,7 +4895,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -4795,7 +4905,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -4805,7 +4915,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -5013,9 +5123,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -5029,7 +5139,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -5039,7 +5149,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -5049,7 +5159,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -5249,9 +5359,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -5265,7 +5375,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -5275,7 +5385,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -5285,7 +5395,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -5493,9 +5603,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -5509,7 +5619,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -5519,7 +5629,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -5529,7 +5639,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -5771,9 +5881,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -5787,7 +5897,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -5797,7 +5907,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -5807,7 +5917,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -6011,9 +6121,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -6027,7 +6137,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -6037,7 +6147,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -6047,7 +6157,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -6251,9 +6361,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -6267,7 +6377,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -6277,7 +6387,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -6287,7 +6397,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -6487,9 +6597,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -6503,7 +6613,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -6513,7 +6623,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -6523,7 +6633,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -6745,9 +6855,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -6761,7 +6871,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -6771,7 +6881,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -6781,7 +6891,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -6989,9 +7099,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -7005,7 +7115,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -7015,7 +7125,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -7025,7 +7135,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -7223,9 +7333,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -7239,7 +7349,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -7249,7 +7359,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -7259,7 +7369,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -7467,9 +7577,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -7483,7 +7593,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -7493,7 +7603,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -7503,7 +7613,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -7564,6 +7674,9 @@ compliance activities that can be filtered by various criteria.
   - `AgeVerified object`
 
     User age was verified.
+
+    This activity type is retired: this feed no longer records age
+    verifications. Activities of this type recorded earlier are still returned.
 
     - `type: optional "age_verified"`
 
@@ -7703,9 +7816,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -7719,7 +7832,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -7729,7 +7842,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -7739,7 +7852,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -7935,9 +8048,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -7951,7 +8064,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -7961,7 +8074,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -7971,7 +8084,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -8167,9 +8280,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -8183,7 +8296,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -8193,7 +8306,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -8203,7 +8316,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -8411,9 +8524,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -8427,7 +8540,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -8437,7 +8550,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -8447,7 +8560,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -8655,9 +8768,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -8671,7 +8784,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -8681,7 +8794,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -8691,7 +8804,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -8937,9 +9050,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -8953,7 +9066,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -8963,7 +9076,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -8973,7 +9086,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -9177,9 +9290,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -9193,7 +9306,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -9203,7 +9316,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -9213,7 +9326,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -9273,7 +9386,7 @@ compliance activities that can be filtered by various criteria.
 
   - `ClaudePublishedArtifactDeleted object`
 
-    A published artifact was deleted or unpublished — by its creator, by an organization admin, or by Anthropic (for example, when it was removed for a policy violation).
+    A published artifact was deleted or unpublished — by its creator, by an organization admin, through the Compliance API, or by Anthropic (for example, when it was removed for a policy violation); one artifact can have more than one of these activities, such as when its deletion is retried.
 
     - `type: optional "claude_published_artifact_deleted"`
 
@@ -9413,9 +9526,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -9429,7 +9542,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -9439,7 +9552,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -9449,7 +9562,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -9649,9 +9762,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -9665,7 +9778,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -9675,7 +9788,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -9685,7 +9798,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -9911,9 +10024,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -9927,7 +10040,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -9937,7 +10050,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -9947,7 +10060,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -10243,9 +10356,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -10259,7 +10372,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -10269,7 +10382,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -10279,7 +10392,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -10483,9 +10596,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -10499,7 +10612,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -10509,7 +10622,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -10519,7 +10632,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -10715,9 +10828,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -10731,7 +10844,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -10741,7 +10854,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -10751,7 +10864,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -10955,9 +11068,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -10971,7 +11084,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -10981,7 +11094,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -10991,7 +11104,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -11199,9 +11312,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -11215,7 +11328,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -11225,7 +11338,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -11235,7 +11348,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -11463,9 +11576,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -11479,7 +11592,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -11489,7 +11602,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -11499,7 +11612,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -11711,9 +11824,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -11727,7 +11840,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -11737,7 +11850,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -11747,7 +11860,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -12001,9 +12114,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -12017,7 +12130,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -12027,7 +12140,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -12037,7 +12150,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -12311,9 +12424,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -12327,7 +12440,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -12337,7 +12450,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -12347,7 +12460,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -12599,9 +12712,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -12615,7 +12728,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -12625,7 +12738,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -12635,7 +12748,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -12871,9 +12984,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -12887,7 +13000,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -12897,7 +13010,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -12907,7 +13020,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -13163,9 +13276,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -13179,7 +13292,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -13189,7 +13302,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -13199,7 +13312,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -13451,9 +13564,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -13467,7 +13580,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -13477,7 +13590,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -13487,7 +13600,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -13699,9 +13812,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -13715,7 +13828,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -13725,7 +13838,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -13735,7 +13848,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -13941,9 +14054,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -13957,7 +14070,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -13967,7 +14080,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -13977,7 +14090,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -14185,9 +14298,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -14201,7 +14314,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -14211,7 +14324,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -14221,7 +14334,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -14461,9 +14574,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -14477,7 +14590,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -14487,7 +14600,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -14497,7 +14610,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -14721,9 +14834,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -14737,7 +14850,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -14747,7 +14860,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -14757,7 +14870,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -14965,9 +15078,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -14981,7 +15094,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -14991,7 +15104,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -15001,7 +15114,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -15249,9 +15362,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -15265,7 +15378,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -15275,7 +15388,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -15285,7 +15398,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -15501,9 +15614,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -15517,7 +15630,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -15527,7 +15640,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -15537,7 +15650,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -15749,9 +15862,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -15765,7 +15878,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -15775,7 +15888,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -15785,7 +15898,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -15989,9 +16102,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -16005,7 +16118,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -16015,7 +16128,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -16025,7 +16138,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -16229,9 +16342,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -16245,7 +16358,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -16255,7 +16368,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -16265,7 +16378,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -16493,9 +16606,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -16509,7 +16622,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -16519,7 +16632,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -16529,7 +16642,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -16819,9 +16932,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -16835,7 +16948,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -16845,7 +16958,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -16855,7 +16968,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -17079,9 +17192,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -17095,7 +17208,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -17105,7 +17218,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -17115,7 +17228,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -17409,9 +17522,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -17425,7 +17538,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -17435,7 +17548,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -17445,7 +17558,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -17657,9 +17770,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -17673,7 +17786,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -17683,7 +17796,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -17693,7 +17806,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -17901,9 +18014,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -17917,7 +18030,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -17927,7 +18040,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -17937,7 +18050,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -18145,9 +18258,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -18161,7 +18274,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -18171,7 +18284,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -18181,7 +18294,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -18389,9 +18502,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -18405,7 +18518,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -18415,7 +18528,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -18425,7 +18538,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -18649,9 +18762,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -18665,7 +18778,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -18675,7 +18788,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -18685,7 +18798,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -18897,9 +19010,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -18913,7 +19026,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -18923,7 +19036,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -18933,7 +19046,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -19145,9 +19258,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -19161,7 +19274,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -19171,7 +19284,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -19181,7 +19294,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -19385,9 +19498,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -19401,7 +19514,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -19411,7 +19524,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -19421,7 +19534,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -19633,9 +19746,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -19649,7 +19762,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -19659,7 +19772,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -19669,7 +19782,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -19873,9 +19986,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -19889,7 +20002,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -19899,7 +20012,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -19909,7 +20022,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -20109,9 +20222,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -20125,7 +20238,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -20135,7 +20248,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -20145,7 +20258,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -20349,9 +20462,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -20365,7 +20478,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -20375,7 +20488,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -20385,7 +20498,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -20589,9 +20702,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -20605,7 +20718,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -20615,7 +20728,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -20625,7 +20738,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -20829,9 +20942,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -20845,7 +20958,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -20855,7 +20968,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -20865,7 +20978,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -21065,9 +21178,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -21081,7 +21194,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -21091,7 +21204,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -21101,7 +21214,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -21301,9 +21414,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -21317,7 +21430,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -21327,7 +21440,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -21337,7 +21450,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -21537,9 +21650,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -21553,7 +21666,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -21563,7 +21676,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -21573,7 +21686,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -21791,9 +21904,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -21807,7 +21920,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -21817,7 +21930,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -21827,7 +21940,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -22027,9 +22140,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -22043,7 +22156,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -22053,7 +22166,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -22063,7 +22176,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -22279,9 +22392,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -22295,7 +22408,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -22305,7 +22418,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -22315,7 +22428,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -22527,9 +22640,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -22543,7 +22656,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -22553,7 +22666,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -22563,7 +22676,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -22779,9 +22892,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -22795,7 +22908,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -22805,7 +22918,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -22815,7 +22928,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -23035,9 +23148,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -23051,7 +23164,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -23061,7 +23174,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -23071,7 +23184,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -23301,9 +23414,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -23317,7 +23430,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -23327,7 +23440,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -23337,7 +23450,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -23559,9 +23672,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -23575,7 +23688,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -23585,7 +23698,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -23595,7 +23708,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -23799,9 +23912,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -23815,7 +23928,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -23825,7 +23938,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -23835,7 +23948,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -24035,9 +24148,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -24051,7 +24164,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -24061,7 +24174,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -24071,7 +24184,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -24135,7 +24248,7 @@ compliance activities that can be filtered by various criteria.
 
   - `ClaudeChatDeleted object`
 
-    A user deleted a Claude.ai chat conversation.
+    A Claude.ai chat conversation was deleted.
 
     - `type: optional "claude_chat_deleted"`
 
@@ -24275,9 +24388,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -24291,7 +24404,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -24301,7 +24414,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -24311,7 +24424,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -24515,9 +24628,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -24531,7 +24644,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -24541,7 +24654,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -24551,7 +24664,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -24589,7 +24702,7 @@ compliance activities that can be filtered by various criteria.
 
     - `claude_chat_id: string`
 
-      The chat conversation the user attempted to delete, e.g. "claude_chat_01HX...".
+      The chat conversation the deletion targeted, e.g. "claude_chat_01HX...".
 
     - `id: optional string`
 
@@ -24751,9 +24864,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -24767,7 +24880,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -24777,7 +24890,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -24787,7 +24900,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -24995,9 +25108,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -25011,7 +25124,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -25021,7 +25134,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -25031,7 +25144,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -25235,9 +25348,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -25251,7 +25364,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -25261,7 +25374,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -25271,7 +25384,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -25483,9 +25596,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -25499,7 +25612,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -25509,7 +25622,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -25519,7 +25632,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -25723,9 +25836,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -25739,7 +25852,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -25749,7 +25862,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -25759,7 +25872,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -25963,9 +26076,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -25979,7 +26092,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -25989,7 +26102,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -25999,7 +26112,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -26235,9 +26348,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -26251,7 +26364,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -26261,7 +26374,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -26271,7 +26384,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -26523,9 +26636,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -26539,7 +26652,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -26549,7 +26662,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -26559,7 +26672,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -26765,9 +26878,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -26781,7 +26894,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -26791,7 +26904,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -26801,7 +26914,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -27013,9 +27126,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -27029,7 +27142,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -27039,7 +27152,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -27049,7 +27162,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -27257,9 +27370,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -27273,7 +27386,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -27283,7 +27396,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -27293,7 +27406,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -27369,7 +27482,7 @@ compliance activities that can be filtered by various criteria.
 
     - `status: optional string or null`
 
-      Updated status (ACTIVE/INACTIVE)
+      Status of the repository configuration after the change: "active" or "disabled". Absent when the change did not set a status.
 
     - `trigger_mode: optional string or null`
 
@@ -27517,9 +27630,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -27533,7 +27646,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -27543,7 +27656,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -27553,7 +27666,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -27757,9 +27870,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -27773,7 +27886,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -27783,7 +27896,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -27793,7 +27906,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -27997,9 +28110,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -28013,7 +28126,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -28023,7 +28136,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -28033,7 +28146,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -28237,9 +28350,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -28253,7 +28366,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -28263,7 +28376,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -28273,7 +28386,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -28499,9 +28612,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -28515,7 +28628,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -28525,7 +28638,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -28535,7 +28648,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -28743,9 +28856,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -28759,7 +28872,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -28769,7 +28882,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -28779,7 +28892,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -28987,9 +29100,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -29003,7 +29116,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -29013,7 +29126,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -29023,7 +29136,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -29227,9 +29340,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -29243,7 +29356,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -29253,7 +29366,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -29263,7 +29376,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -29465,9 +29578,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -29481,7 +29594,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -29491,7 +29604,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -29501,7 +29614,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -29573,7 +29686,7 @@ compliance activities that can be filtered by various criteria.
 
     - `action: "member_added" or "member_removed" or "member_role_changed" or "unspecified"`
 
-      Whether the member was granted access, had their role changed, or was revoked
+      Whether the member was granted access, had their role changed, or was revoked. A member who becomes the scan project's owner, as recorded by a claude_security_scan_project_ownership_transferred entry, is also recorded as "member_removed"; they keep access as the owner.
 
       - `"member_added"`
 
@@ -29717,9 +29830,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -29733,7 +29846,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -29743,7 +29856,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -29753,7 +29866,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -29997,9 +30110,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -30013,7 +30126,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -30023,7 +30136,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -30033,7 +30146,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -30257,9 +30370,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -30273,7 +30386,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -30283,7 +30396,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -30293,7 +30406,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -30527,9 +30640,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -30543,7 +30656,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -30553,7 +30666,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -30563,7 +30676,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -30763,9 +30876,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -30779,7 +30892,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -30789,7 +30902,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -30799,7 +30912,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -30999,9 +31112,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -31015,7 +31128,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -31025,7 +31138,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -31035,7 +31148,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -31237,9 +31350,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -31253,7 +31366,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -31263,7 +31376,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -31273,7 +31386,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -31477,9 +31590,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -31493,7 +31606,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -31503,7 +31616,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -31513,7 +31626,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -31745,9 +31858,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -31761,7 +31874,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -31771,7 +31884,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -31781,7 +31894,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -31985,9 +32098,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -32001,7 +32114,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -32011,7 +32124,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -32021,7 +32134,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -32227,9 +32340,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -32243,7 +32356,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -32253,7 +32366,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -32263,7 +32376,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -32467,9 +32580,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -32483,7 +32596,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -32493,7 +32606,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -32503,7 +32616,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -32707,9 +32820,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -32723,7 +32836,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -32733,7 +32846,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -32743,7 +32856,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -32957,9 +33070,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -32973,7 +33086,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -32983,7 +33096,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -32993,7 +33106,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -33201,9 +33314,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -33217,7 +33330,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -33227,7 +33340,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -33237,7 +33350,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -33481,9 +33594,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -33497,7 +33610,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -33507,7 +33620,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -33517,7 +33630,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -33733,9 +33846,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -33749,7 +33862,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -33759,7 +33872,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -33769,7 +33882,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -33993,9 +34106,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -34009,7 +34122,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -34019,7 +34132,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -34029,7 +34142,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -34257,9 +34370,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -34273,7 +34386,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -34283,7 +34396,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -34293,7 +34406,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -34517,9 +34630,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -34533,7 +34646,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -34543,7 +34656,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -34553,7 +34666,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -34787,9 +34900,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -34803,7 +34916,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -34813,7 +34926,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -34823,7 +34936,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -35019,9 +35132,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -35035,7 +35148,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -35045,7 +35158,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -35055,7 +35168,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -35269,9 +35382,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -35285,7 +35398,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -35295,7 +35408,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -35305,7 +35418,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -35523,9 +35636,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -35539,7 +35652,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -35549,7 +35662,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -35559,7 +35672,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -35773,9 +35886,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -35789,7 +35902,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -35799,7 +35912,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -35809,7 +35922,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -36013,9 +36126,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -36029,7 +36142,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -36039,7 +36152,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -36049,7 +36162,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -36249,9 +36362,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -36265,7 +36378,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -36275,7 +36388,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -36285,7 +36398,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -36497,9 +36610,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -36513,7 +36626,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -36523,7 +36636,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -36533,7 +36646,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -36737,9 +36850,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -36753,7 +36866,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -36763,7 +36876,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -36773,7 +36886,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -36973,9 +37086,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -36989,7 +37102,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -36999,7 +37112,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -37009,7 +37122,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -37209,9 +37322,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -37225,7 +37338,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -37235,7 +37348,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -37245,7 +37358,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -37457,9 +37570,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -37473,7 +37586,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -37483,7 +37596,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -37493,7 +37606,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -37747,9 +37860,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -37763,7 +37876,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -37773,7 +37886,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -37783,7 +37896,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -37983,9 +38096,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -37999,7 +38112,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -38009,7 +38122,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -38019,7 +38132,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -38235,9 +38348,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -38251,7 +38364,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -38261,7 +38374,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -38271,7 +38384,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -38491,9 +38604,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -38507,7 +38620,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -38517,7 +38630,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -38527,7 +38640,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -38739,9 +38852,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -38755,7 +38868,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -38765,7 +38878,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -38775,7 +38888,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -38850,6 +38963,336 @@ compliance activities that can be filtered by various criteria.
       - `"unspecified"`
 
       - `"user_action"`
+
+  - `ClaudePluginSecurityScanOverrideUpdated object`
+
+    An administrator allowed a plugin version despite its security scan's verdict, or that allowance was revoked.
+
+    - `type: optional "claude_plugin_security_scan_override_updated"`
+
+      default: claude_plugin_security_scan_override_updated
+
+    - `action: "allowed" or "revoked" or "unspecified"`
+
+      Whether the allowance was recorded or revoked.
+
+      - `"allowed"`
+
+      - `"revoked"`
+
+      - `"unspecified"`
+
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
+
+      - `APIActor object`
+
+        - `type: optional "api_actor"`
+
+          default: api_actor
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+      - `UserActor object`
+
+        - `type: optional "user_actor"`
+
+          default: user_actor
+
+        - `email_address: string`
+
+          format: email
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+      - `UnauthenticatedUserActor object`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          default: unauthenticated_user_actor
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `unauthenticated_email_address: optional string or null`
+
+          format: email
+
+      - `AnthropicActor object`
+
+        - `type: optional "anthropic_actor"`
+
+          default: anthropic_actor
+
+        - `email_address: optional string or null`
+
+          format: email
+
+      - `SystemActor object`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `type: optional "system_actor"`
+
+          default: system_actor
+
+        - `service: optional string or null`
+
+          Name of the automated process that performed the action, when known.
+
+      - `AdminAPIKeyActor object`
+
+        - `type: optional "admin_api_key_actor"`
+
+          default: admin_api_key_actor
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+      - `ServiceAccountActor object`
+
+        - `type: optional "service_account_actor"`
+
+          default: service_account_actor
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+      - `ScimDirectorySyncActor object`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          default: scim_directory_sync_actor
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string or null`
+
+      - `FederatedIdentityActor object`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `type: optional "federated_identity_actor"`
+
+          default: federated_identity_actor
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string or null`
+
+        - `user_agent: optional string or null`
+
+      - `FederatedActor object`
+
+        An external identity asserted by a trusted provider — a cloud-provider
+        gateway or a customer-registered federation issuer — acting without an
+        Anthropic-provisioned account or service account.
+
+        - `type: optional "federated_actor"`
+
+          default: federated_actor
+
+        - `provider: Aws or Azure or Gcp or Oidc`
+
+          - `Aws object`
+
+            Asserting party: the AWS account the organization is bound to.
+
+            - `type: optional "aws"`
+
+              default: aws
+
+            - `account_id: string`
+
+            - `signed_principal: string`
+
+              The AWS-signed ARN of the IAM principal that requested the token.
+
+          - `Azure object`
+
+            Asserting party: the Azure subscription the organization is bound to.
+
+            - `type: optional "azure"`
+
+              default: azure
+
+            - `subscription_id: string`
+
+          - `Gcp object`
+
+            Asserting party: the GCP project the organization is bound to.
+
+            - `type: optional "gcp"`
+
+              default: gcp
+
+            - `project_number: string`
+
+          - `Oidc object`
+
+            Asserting party: a customer-registered OIDC federation issuer.
+
+            - `type: optional "oidc"`
+
+              default: oidc
+
+            - `issuer: optional string or null`
+
+              The federation issuer's URL. Null when the presented credential failed verification.
+
+        - `ip_address: optional string or null`
+
+        - `subject: optional string or null`
+
+          The provider's verified identifier for the caller; its form depends on the provider.
+
+        - `user_agent: optional string or null`
+
+      - `AttestedDeviceActor object`
+
+        An attested mobile device authenticated via Apple App Attest.
+
+        - `type: optional "attested_device_actor"`
+
+          default: attested_device_actor
+
+        - `external_client_id: string`
+
+        - `kid_hash: string`
+
+        - `ip_address: optional string or null`
+
+        - `user_agent: optional string or null`
+
+    - `marketplace_id: string`
+
+      The marketplace the plugin belongs to.
+
+    - `plugin_id: string`
+
+      Identifier of the plugin.
+
+    - `plugin_version: string`
+
+      Version of the plugin the decision applies to, as the security scan reported it.
+
+    - `plugin_version_id: string`
+
+      Identifier of the plugin version the decision applies to.
+
+    - `revocation_reason: "admin" or "superseded" or "unspecified"`
+
+      Why the allowance was revoked: admin when an administrator revoked it; superseded when the system revoked it because a newer completed scan replaced the allowed one or the allowed scan was no longer on record; unspecified when the allowance was recorded. The system records a superseded revocation only when an administrator next allows or revokes on the version, so the event can come long after the allowance stopped applying, or not at all.
+
+      - `"admin"`
+
+      - `"superseded"`
+
+      - `"unspecified"`
+
+    - `scan_id: string`
+
+      Identifier of the security scan whose verdict the decision applies to.
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `allowed_at: optional string or null`
+
+      When the allowance was recorded (on a revocation, when the revoked allowance had been recorded).
+
+      format: date-time
+
+    - `allowed_by_user_id: optional string or null`
+
+      On a revocation, the administrator who had recorded the allowance; null on an allow, where the event's actor is the administrator who allowed it.
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+      format: date-time
+
+    - `organization_id: optional string or null`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string or null`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `scan: optional object or null`
+
+      A snapshot of the security scan in effect for the version at that moment; null when the version had no scan or the scan's result could not be read.
+
+      - `assessment: "fail" or "pass" or "unknown" or 2 more`
+
+        The Anthropic security scan's own verdict.
+
+        - `"fail"`
+
+        - `"pass"`
+
+        - `"unknown"`
+
+        - `"unspecified"`
+
+        - `"warn"`
+
+      - `combined_assessment: "fail" or "pass" or "unknown" or 2 more`
+
+        The scan's overall verdict; never less strict than assessment. From least to most strict: pass, warn, unknown, fail.
+
+        - `"fail"`
+
+        - `"pass"`
+
+        - `"unknown"`
+
+        - `"unspecified"`
+
+        - `"warn"`
+
+      - `scan_id: string`
+
+        Identifier of the scan described here. It differs from the event's scan_id when a newer completed scan had replaced the allowed one, or the allowed scan was no longer on record.
+
+      - `content_hash: optional string or null`
+
+        A fingerprint of the scanned files: scans with the same value scanned the same content. Null when the scan had not completed, or was recorded before fingerprints were kept.
+
+      - `reason: optional string or null`
+
+        The main reason code behind the scan's own warn or fail verdict, for example "covert-record-tampering".
+
+      - `secondary_reasons: optional array of string`
+
+        Further reason codes the scan reported.
 
   - `ClaudePluginServedVersionUpdated object`
 
@@ -38993,9 +39436,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -39009,7 +39452,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -39019,7 +39462,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -39029,7 +39472,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -39253,9 +39696,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -39269,7 +39712,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -39279,7 +39722,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -39289,7 +39732,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -39517,9 +39960,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -39533,7 +39976,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -39543,7 +39986,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -39553,7 +39996,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -39765,9 +40208,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -39781,7 +40224,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -39791,7 +40234,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -39801,7 +40244,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -40009,9 +40452,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -40025,7 +40468,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -40035,7 +40478,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -40045,7 +40488,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -40118,6 +40561,2620 @@ compliance activities that can be filtered by various criteria.
     - `resource_descriptor: optional string or null`
 
       A short provider-specific identifier for the external resource after the update, e.g. `owner/repo` for GitHub or a file ID for Google Drive.
+
+  - `ClaudeSecurityFindingDeleted object`
+
+    A Claude Security finding was permanently deleted by a user.
+
+    - `type: optional "claude_security_finding_deleted"`
+
+      default: claude_security_finding_deleted
+
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
+
+      - `APIActor object`
+
+        - `type: optional "api_actor"`
+
+          default: api_actor
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+      - `UserActor object`
+
+        - `type: optional "user_actor"`
+
+          default: user_actor
+
+        - `email_address: string`
+
+          format: email
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+      - `UnauthenticatedUserActor object`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          default: unauthenticated_user_actor
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `unauthenticated_email_address: optional string or null`
+
+          format: email
+
+      - `AnthropicActor object`
+
+        - `type: optional "anthropic_actor"`
+
+          default: anthropic_actor
+
+        - `email_address: optional string or null`
+
+          format: email
+
+      - `SystemActor object`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `type: optional "system_actor"`
+
+          default: system_actor
+
+        - `service: optional string or null`
+
+          Name of the automated process that performed the action, when known.
+
+      - `AdminAPIKeyActor object`
+
+        - `type: optional "admin_api_key_actor"`
+
+          default: admin_api_key_actor
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+      - `ServiceAccountActor object`
+
+        - `type: optional "service_account_actor"`
+
+          default: service_account_actor
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+      - `ScimDirectorySyncActor object`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          default: scim_directory_sync_actor
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string or null`
+
+      - `FederatedIdentityActor object`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `type: optional "federated_identity_actor"`
+
+          default: federated_identity_actor
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string or null`
+
+        - `user_agent: optional string or null`
+
+      - `FederatedActor object`
+
+        An external identity asserted by a trusted provider — a cloud-provider
+        gateway or a customer-registered federation issuer — acting without an
+        Anthropic-provisioned account or service account.
+
+        - `type: optional "federated_actor"`
+
+          default: federated_actor
+
+        - `provider: Aws or Azure or Gcp or Oidc`
+
+          - `Aws object`
+
+            Asserting party: the AWS account the organization is bound to.
+
+            - `type: optional "aws"`
+
+              default: aws
+
+            - `account_id: string`
+
+            - `signed_principal: string`
+
+              The AWS-signed ARN of the IAM principal that requested the token.
+
+          - `Azure object`
+
+            Asserting party: the Azure subscription the organization is bound to.
+
+            - `type: optional "azure"`
+
+              default: azure
+
+            - `subscription_id: string`
+
+          - `Gcp object`
+
+            Asserting party: the GCP project the organization is bound to.
+
+            - `type: optional "gcp"`
+
+              default: gcp
+
+            - `project_number: string`
+
+          - `Oidc object`
+
+            Asserting party: a customer-registered OIDC federation issuer.
+
+            - `type: optional "oidc"`
+
+              default: oidc
+
+            - `issuer: optional string or null`
+
+              The federation issuer's URL. Null when the presented credential failed verification.
+
+        - `ip_address: optional string or null`
+
+        - `subject: optional string or null`
+
+          The provider's verified identifier for the caller; its form depends on the provider.
+
+        - `user_agent: optional string or null`
+
+      - `AttestedDeviceActor object`
+
+        An attested mobile device authenticated via Apple App Attest.
+
+        - `type: optional "attested_device_actor"`
+
+          default: attested_device_actor
+
+        - `external_client_id: string`
+
+        - `kid_hash: string`
+
+        - `ip_address: optional string or null`
+
+        - `user_agent: optional string or null`
+
+    - `finding_id: string`
+
+      The finding that was deleted, e.g. "find_...".
+
+    - `scan_project_id: string`
+
+      The scan project the finding belonged to, e.g. "spj_...".
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `access_via: optional "member" or "organization_admin" or "organization_share" or 2 more or null`
+
+      How the actor was authorized to make this change: "owner" (the scan project's owner), "member" (an individually added member), "organization_share" (the project is shared with the actor's organization), or "organization_admin" (an administrator of the organization's security scanning). Absent when no project relationship was involved; events recorded before this field was introduced omit it.
+
+      - `"member"`
+
+      - `"organization_admin"`
+
+      - `"organization_share"`
+
+      - `"owner"`
+
+      - `"unspecified"`
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+      format: date-time
+
+    - `organization_id: optional string or null`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string or null`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+  - `ClaudeSecurityFindingUpdated object`
+
+    A Claude Security finding was resolved or reopened by a user, or by an automated Claude Security process (a system actor whose service field names the process).
+
+    - `type: optional "claude_security_finding_updated"`
+
+      default: claude_security_finding_updated
+
+    - `action: "reopened" or "resolved" or "unspecified"`
+
+      The state change applied to the finding.
+
+      - `"reopened"`
+
+      - `"resolved"`
+
+      - `"unspecified"`
+
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
+
+      - `APIActor object`
+
+        - `type: optional "api_actor"`
+
+          default: api_actor
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+      - `UserActor object`
+
+        - `type: optional "user_actor"`
+
+          default: user_actor
+
+        - `email_address: string`
+
+          format: email
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+      - `UnauthenticatedUserActor object`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          default: unauthenticated_user_actor
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `unauthenticated_email_address: optional string or null`
+
+          format: email
+
+      - `AnthropicActor object`
+
+        - `type: optional "anthropic_actor"`
+
+          default: anthropic_actor
+
+        - `email_address: optional string or null`
+
+          format: email
+
+      - `SystemActor object`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `type: optional "system_actor"`
+
+          default: system_actor
+
+        - `service: optional string or null`
+
+          Name of the automated process that performed the action, when known.
+
+      - `AdminAPIKeyActor object`
+
+        - `type: optional "admin_api_key_actor"`
+
+          default: admin_api_key_actor
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+      - `ServiceAccountActor object`
+
+        - `type: optional "service_account_actor"`
+
+          default: service_account_actor
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+      - `ScimDirectorySyncActor object`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          default: scim_directory_sync_actor
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string or null`
+
+      - `FederatedIdentityActor object`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `type: optional "federated_identity_actor"`
+
+          default: federated_identity_actor
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string or null`
+
+        - `user_agent: optional string or null`
+
+      - `FederatedActor object`
+
+        An external identity asserted by a trusted provider — a cloud-provider
+        gateway or a customer-registered federation issuer — acting without an
+        Anthropic-provisioned account or service account.
+
+        - `type: optional "federated_actor"`
+
+          default: federated_actor
+
+        - `provider: Aws or Azure or Gcp or Oidc`
+
+          - `Aws object`
+
+            Asserting party: the AWS account the organization is bound to.
+
+            - `type: optional "aws"`
+
+              default: aws
+
+            - `account_id: string`
+
+            - `signed_principal: string`
+
+              The AWS-signed ARN of the IAM principal that requested the token.
+
+          - `Azure object`
+
+            Asserting party: the Azure subscription the organization is bound to.
+
+            - `type: optional "azure"`
+
+              default: azure
+
+            - `subscription_id: string`
+
+          - `Gcp object`
+
+            Asserting party: the GCP project the organization is bound to.
+
+            - `type: optional "gcp"`
+
+              default: gcp
+
+            - `project_number: string`
+
+          - `Oidc object`
+
+            Asserting party: a customer-registered OIDC federation issuer.
+
+            - `type: optional "oidc"`
+
+              default: oidc
+
+            - `issuer: optional string or null`
+
+              The federation issuer's URL. Null when the presented credential failed verification.
+
+        - `ip_address: optional string or null`
+
+        - `subject: optional string or null`
+
+          The provider's verified identifier for the caller; its form depends on the provider.
+
+        - `user_agent: optional string or null`
+
+      - `AttestedDeviceActor object`
+
+        An attested mobile device authenticated via Apple App Attest.
+
+        - `type: optional "attested_device_actor"`
+
+          default: attested_device_actor
+
+        - `external_client_id: string`
+
+        - `kid_hash: string`
+
+        - `ip_address: optional string or null`
+
+        - `user_agent: optional string or null`
+
+    - `finding_id: string`
+
+      The finding that was acted on, e.g. "find_...".
+
+    - `scan_project_id: string`
+
+      The scan project the finding belongs to, e.g. "spj_...".
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `access_via: optional "member" or "organization_admin" or "organization_share" or 2 more or null`
+
+      How the actor was authorized to make this change: "owner" (the scan project's owner), "member" (an individually added member), "organization_share" (the project is shared with the actor's organization), or "organization_admin" (an administrator of the organization's security scanning). Absent when the change was made by an automated process, or when no project relationship was involved; events recorded before this field was introduced omit it.
+
+      - `"member"`
+
+      - `"organization_admin"`
+
+      - `"organization_share"`
+
+      - `"owner"`
+
+      - `"unspecified"`
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+      format: date-time
+
+    - `organization_id: optional string or null`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string or null`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `resolution_reason: optional string or null`
+
+      The categorized reason the finding was resolved: "false_positive", "accepted_risk", "fixed", "duplicate", or "other". Set only when the action is "resolved".
+
+  - `ClaudeSecurityKnowledgeDocumentCreated object`
+
+    A knowledge document was created in a Claude Security scan project.
+
+    - `type: optional "claude_security_knowledge_document_created"`
+
+      default: claude_security_knowledge_document_created
+
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
+
+      - `APIActor object`
+
+        - `type: optional "api_actor"`
+
+          default: api_actor
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+      - `UserActor object`
+
+        - `type: optional "user_actor"`
+
+          default: user_actor
+
+        - `email_address: string`
+
+          format: email
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+      - `UnauthenticatedUserActor object`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          default: unauthenticated_user_actor
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `unauthenticated_email_address: optional string or null`
+
+          format: email
+
+      - `AnthropicActor object`
+
+        - `type: optional "anthropic_actor"`
+
+          default: anthropic_actor
+
+        - `email_address: optional string or null`
+
+          format: email
+
+      - `SystemActor object`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `type: optional "system_actor"`
+
+          default: system_actor
+
+        - `service: optional string or null`
+
+          Name of the automated process that performed the action, when known.
+
+      - `AdminAPIKeyActor object`
+
+        - `type: optional "admin_api_key_actor"`
+
+          default: admin_api_key_actor
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+      - `ServiceAccountActor object`
+
+        - `type: optional "service_account_actor"`
+
+          default: service_account_actor
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+      - `ScimDirectorySyncActor object`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          default: scim_directory_sync_actor
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string or null`
+
+      - `FederatedIdentityActor object`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `type: optional "federated_identity_actor"`
+
+          default: federated_identity_actor
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string or null`
+
+        - `user_agent: optional string or null`
+
+      - `FederatedActor object`
+
+        An external identity asserted by a trusted provider — a cloud-provider
+        gateway or a customer-registered federation issuer — acting without an
+        Anthropic-provisioned account or service account.
+
+        - `type: optional "federated_actor"`
+
+          default: federated_actor
+
+        - `provider: Aws or Azure or Gcp or Oidc`
+
+          - `Aws object`
+
+            Asserting party: the AWS account the organization is bound to.
+
+            - `type: optional "aws"`
+
+              default: aws
+
+            - `account_id: string`
+
+            - `signed_principal: string`
+
+              The AWS-signed ARN of the IAM principal that requested the token.
+
+          - `Azure object`
+
+            Asserting party: the Azure subscription the organization is bound to.
+
+            - `type: optional "azure"`
+
+              default: azure
+
+            - `subscription_id: string`
+
+          - `Gcp object`
+
+            Asserting party: the GCP project the organization is bound to.
+
+            - `type: optional "gcp"`
+
+              default: gcp
+
+            - `project_number: string`
+
+          - `Oidc object`
+
+            Asserting party: a customer-registered OIDC federation issuer.
+
+            - `type: optional "oidc"`
+
+              default: oidc
+
+            - `issuer: optional string or null`
+
+              The federation issuer's URL. Null when the presented credential failed verification.
+
+        - `ip_address: optional string or null`
+
+        - `subject: optional string or null`
+
+          The provider's verified identifier for the caller; its form depends on the provider.
+
+        - `user_agent: optional string or null`
+
+      - `AttestedDeviceActor object`
+
+        An attested mobile device authenticated via Apple App Attest.
+
+        - `type: optional "attested_device_actor"`
+
+          default: attested_device_actor
+
+        - `external_client_id: string`
+
+        - `kid_hash: string`
+
+        - `ip_address: optional string or null`
+
+        - `user_agent: optional string or null`
+
+    - `memory_id: string`
+
+      The memory ID of the knowledge document that was created, e.g. "mem_...".
+
+    - `scan_project_id: string`
+
+      The scan project the document belongs to, e.g. "spj_...".
+
+    - `workspace_id: string`
+
+      The workspace the scan project belongs to, e.g. "wrkspc_...".
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `access_via: optional "member" or "organization_admin" or "organization_share" or 2 more or null`
+
+      How the actor was authorized to make this change: "owner" (the scan project's owner), "member" (an individually added member), "organization_share" (the project is shared with the actor's organization), or "organization_admin" (an administrator of the organization's security scanning). Absent when no project relationship was involved; events recorded before this field was introduced omit it.
+
+      - `"member"`
+
+      - `"organization_admin"`
+
+      - `"organization_share"`
+
+      - `"owner"`
+
+      - `"unspecified"`
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+      format: date-time
+
+    - `memory_version_id: optional string or null`
+
+      The version of the document this change produced, e.g. "memver_...", which links this event to the document's version history; absent in the rare case that no version identifier is available for the change.
+
+    - `organization_id: optional string or null`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string or null`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+  - `ClaudeSecurityKnowledgeDocumentDeleted object`
+
+    A knowledge document was deleted from a Claude Security scan project.
+
+    - `type: optional "claude_security_knowledge_document_deleted"`
+
+      default: claude_security_knowledge_document_deleted
+
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
+
+      - `APIActor object`
+
+        - `type: optional "api_actor"`
+
+          default: api_actor
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+      - `UserActor object`
+
+        - `type: optional "user_actor"`
+
+          default: user_actor
+
+        - `email_address: string`
+
+          format: email
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+      - `UnauthenticatedUserActor object`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          default: unauthenticated_user_actor
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `unauthenticated_email_address: optional string or null`
+
+          format: email
+
+      - `AnthropicActor object`
+
+        - `type: optional "anthropic_actor"`
+
+          default: anthropic_actor
+
+        - `email_address: optional string or null`
+
+          format: email
+
+      - `SystemActor object`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `type: optional "system_actor"`
+
+          default: system_actor
+
+        - `service: optional string or null`
+
+          Name of the automated process that performed the action, when known.
+
+      - `AdminAPIKeyActor object`
+
+        - `type: optional "admin_api_key_actor"`
+
+          default: admin_api_key_actor
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+      - `ServiceAccountActor object`
+
+        - `type: optional "service_account_actor"`
+
+          default: service_account_actor
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+      - `ScimDirectorySyncActor object`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          default: scim_directory_sync_actor
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string or null`
+
+      - `FederatedIdentityActor object`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `type: optional "federated_identity_actor"`
+
+          default: federated_identity_actor
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string or null`
+
+        - `user_agent: optional string or null`
+
+      - `FederatedActor object`
+
+        An external identity asserted by a trusted provider — a cloud-provider
+        gateway or a customer-registered federation issuer — acting without an
+        Anthropic-provisioned account or service account.
+
+        - `type: optional "federated_actor"`
+
+          default: federated_actor
+
+        - `provider: Aws or Azure or Gcp or Oidc`
+
+          - `Aws object`
+
+            Asserting party: the AWS account the organization is bound to.
+
+            - `type: optional "aws"`
+
+              default: aws
+
+            - `account_id: string`
+
+            - `signed_principal: string`
+
+              The AWS-signed ARN of the IAM principal that requested the token.
+
+          - `Azure object`
+
+            Asserting party: the Azure subscription the organization is bound to.
+
+            - `type: optional "azure"`
+
+              default: azure
+
+            - `subscription_id: string`
+
+          - `Gcp object`
+
+            Asserting party: the GCP project the organization is bound to.
+
+            - `type: optional "gcp"`
+
+              default: gcp
+
+            - `project_number: string`
+
+          - `Oidc object`
+
+            Asserting party: a customer-registered OIDC federation issuer.
+
+            - `type: optional "oidc"`
+
+              default: oidc
+
+            - `issuer: optional string or null`
+
+              The federation issuer's URL. Null when the presented credential failed verification.
+
+        - `ip_address: optional string or null`
+
+        - `subject: optional string or null`
+
+          The provider's verified identifier for the caller; its form depends on the provider.
+
+        - `user_agent: optional string or null`
+
+      - `AttestedDeviceActor object`
+
+        An attested mobile device authenticated via Apple App Attest.
+
+        - `type: optional "attested_device_actor"`
+
+          default: attested_device_actor
+
+        - `external_client_id: string`
+
+        - `kid_hash: string`
+
+        - `ip_address: optional string or null`
+
+        - `user_agent: optional string or null`
+
+    - `memory_id: string`
+
+      The memory ID of the knowledge document that was deleted, e.g. "mem_..."; empty when the deletion did not return the document's ID.
+
+    - `scan_project_id: string`
+
+      The scan project the document belonged to, e.g. "spj_...".
+
+    - `workspace_id: string`
+
+      The workspace the scan project belongs to, e.g. "wrkspc_...".
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `access_via: optional "member" or "organization_admin" or "organization_share" or 2 more or null`
+
+      How the actor was authorized to make this change: "owner" (the scan project's owner), "member" (an individually added member), "organization_share" (the project is shared with the actor's organization), or "organization_admin" (an administrator of the organization's security scanning). Absent when no project relationship was involved.
+
+      - `"member"`
+
+      - `"organization_admin"`
+
+      - `"organization_share"`
+
+      - `"owner"`
+
+      - `"unspecified"`
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+      format: date-time
+
+    - `organization_id: optional string or null`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string or null`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `previous_memory_version_id: optional string or null`
+
+      The document's current version when it was deleted, e.g. "memver_...", which links this event to the document's version history; absent when it could not be confirmed which version was deleted.
+
+  - `ClaudeSecurityKnowledgeDocumentUpdated object`
+
+    A Claude Security scan project's knowledge document, such as its threat model, was changed.
+
+    - `type: optional "claude_security_knowledge_document_updated"`
+
+      default: claude_security_knowledge_document_updated
+
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
+
+      - `APIActor object`
+
+        - `type: optional "api_actor"`
+
+          default: api_actor
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+      - `UserActor object`
+
+        - `type: optional "user_actor"`
+
+          default: user_actor
+
+        - `email_address: string`
+
+          format: email
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+      - `UnauthenticatedUserActor object`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          default: unauthenticated_user_actor
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `unauthenticated_email_address: optional string or null`
+
+          format: email
+
+      - `AnthropicActor object`
+
+        - `type: optional "anthropic_actor"`
+
+          default: anthropic_actor
+
+        - `email_address: optional string or null`
+
+          format: email
+
+      - `SystemActor object`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `type: optional "system_actor"`
+
+          default: system_actor
+
+        - `service: optional string or null`
+
+          Name of the automated process that performed the action, when known.
+
+      - `AdminAPIKeyActor object`
+
+        - `type: optional "admin_api_key_actor"`
+
+          default: admin_api_key_actor
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+      - `ServiceAccountActor object`
+
+        - `type: optional "service_account_actor"`
+
+          default: service_account_actor
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+      - `ScimDirectorySyncActor object`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          default: scim_directory_sync_actor
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string or null`
+
+      - `FederatedIdentityActor object`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `type: optional "federated_identity_actor"`
+
+          default: federated_identity_actor
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string or null`
+
+        - `user_agent: optional string or null`
+
+      - `FederatedActor object`
+
+        An external identity asserted by a trusted provider — a cloud-provider
+        gateway or a customer-registered federation issuer — acting without an
+        Anthropic-provisioned account or service account.
+
+        - `type: optional "federated_actor"`
+
+          default: federated_actor
+
+        - `provider: Aws or Azure or Gcp or Oidc`
+
+          - `Aws object`
+
+            Asserting party: the AWS account the organization is bound to.
+
+            - `type: optional "aws"`
+
+              default: aws
+
+            - `account_id: string`
+
+            - `signed_principal: string`
+
+              The AWS-signed ARN of the IAM principal that requested the token.
+
+          - `Azure object`
+
+            Asserting party: the Azure subscription the organization is bound to.
+
+            - `type: optional "azure"`
+
+              default: azure
+
+            - `subscription_id: string`
+
+          - `Gcp object`
+
+            Asserting party: the GCP project the organization is bound to.
+
+            - `type: optional "gcp"`
+
+              default: gcp
+
+            - `project_number: string`
+
+          - `Oidc object`
+
+            Asserting party: a customer-registered OIDC federation issuer.
+
+            - `type: optional "oidc"`
+
+              default: oidc
+
+            - `issuer: optional string or null`
+
+              The federation issuer's URL. Null when the presented credential failed verification.
+
+        - `ip_address: optional string or null`
+
+        - `subject: optional string or null`
+
+          The provider's verified identifier for the caller; its form depends on the provider.
+
+        - `user_agent: optional string or null`
+
+      - `AttestedDeviceActor object`
+
+        An attested mobile device authenticated via Apple App Attest.
+
+        - `type: optional "attested_device_actor"`
+
+          default: attested_device_actor
+
+        - `external_client_id: string`
+
+        - `kid_hash: string`
+
+        - `ip_address: optional string or null`
+
+        - `user_agent: optional string or null`
+
+    - `memory_id: string`
+
+      The memory ID of the knowledge document that was changed, e.g. "mem_...".
+
+    - `scan_project_id: string`
+
+      The scan project the document belongs to, e.g. "spj_...".
+
+    - `workspace_id: string`
+
+      The workspace the scan project belongs to, e.g. "wrkspc_...".
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `access_via: optional "member" or "organization_admin" or "organization_share" or 2 more or null`
+
+      How the actor was authorized to make this change: "owner" (the scan project's owner), "member" (an individually added member), "organization_share" (the project is shared with the actor's organization), or "organization_admin" (an administrator of the organization's security scanning). Absent when no project relationship was involved; events recorded before this field was introduced omit it.
+
+      - `"member"`
+
+      - `"organization_admin"`
+
+      - `"organization_share"`
+
+      - `"owner"`
+
+      - `"unspecified"`
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+      format: date-time
+
+    - `memory_version_id: optional string or null`
+
+      The version of the document this change produced, e.g. "memver_...", which links this event to the document's version history; absent in the rare case that no version identifier is available for the change.
+
+    - `organization_id: optional string or null`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string or null`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `updated_fields: optional array of string`
+
+      The parts of the document that were changed: "content" (its text), "name". Absent or empty on events that did not record which parts were changed.
+
+  - `ClaudeSecurityKnowledgeDocumentVersionRestored object`
+
+    An earlier version of a Claude Security scan project's knowledge document, such as its threat model, was written back as the document's newest version.
+
+    - `type: optional "claude_security_knowledge_document_version_restored"`
+
+      default: claude_security_knowledge_document_version_restored
+
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
+
+      - `APIActor object`
+
+        - `type: optional "api_actor"`
+
+          default: api_actor
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+      - `UserActor object`
+
+        - `type: optional "user_actor"`
+
+          default: user_actor
+
+        - `email_address: string`
+
+          format: email
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+      - `UnauthenticatedUserActor object`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          default: unauthenticated_user_actor
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `unauthenticated_email_address: optional string or null`
+
+          format: email
+
+      - `AnthropicActor object`
+
+        - `type: optional "anthropic_actor"`
+
+          default: anthropic_actor
+
+        - `email_address: optional string or null`
+
+          format: email
+
+      - `SystemActor object`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `type: optional "system_actor"`
+
+          default: system_actor
+
+        - `service: optional string or null`
+
+          Name of the automated process that performed the action, when known.
+
+      - `AdminAPIKeyActor object`
+
+        - `type: optional "admin_api_key_actor"`
+
+          default: admin_api_key_actor
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+      - `ServiceAccountActor object`
+
+        - `type: optional "service_account_actor"`
+
+          default: service_account_actor
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+      - `ScimDirectorySyncActor object`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          default: scim_directory_sync_actor
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string or null`
+
+      - `FederatedIdentityActor object`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `type: optional "federated_identity_actor"`
+
+          default: federated_identity_actor
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string or null`
+
+        - `user_agent: optional string or null`
+
+      - `FederatedActor object`
+
+        An external identity asserted by a trusted provider — a cloud-provider
+        gateway or a customer-registered federation issuer — acting without an
+        Anthropic-provisioned account or service account.
+
+        - `type: optional "federated_actor"`
+
+          default: federated_actor
+
+        - `provider: Aws or Azure or Gcp or Oidc`
+
+          - `Aws object`
+
+            Asserting party: the AWS account the organization is bound to.
+
+            - `type: optional "aws"`
+
+              default: aws
+
+            - `account_id: string`
+
+            - `signed_principal: string`
+
+              The AWS-signed ARN of the IAM principal that requested the token.
+
+          - `Azure object`
+
+            Asserting party: the Azure subscription the organization is bound to.
+
+            - `type: optional "azure"`
+
+              default: azure
+
+            - `subscription_id: string`
+
+          - `Gcp object`
+
+            Asserting party: the GCP project the organization is bound to.
+
+            - `type: optional "gcp"`
+
+              default: gcp
+
+            - `project_number: string`
+
+          - `Oidc object`
+
+            Asserting party: a customer-registered OIDC federation issuer.
+
+            - `type: optional "oidc"`
+
+              default: oidc
+
+            - `issuer: optional string or null`
+
+              The federation issuer's URL. Null when the presented credential failed verification.
+
+        - `ip_address: optional string or null`
+
+        - `subject: optional string or null`
+
+          The provider's verified identifier for the caller; its form depends on the provider.
+
+        - `user_agent: optional string or null`
+
+      - `AttestedDeviceActor object`
+
+        An attested mobile device authenticated via Apple App Attest.
+
+        - `type: optional "attested_device_actor"`
+
+          default: attested_device_actor
+
+        - `external_client_id: string`
+
+        - `kid_hash: string`
+
+        - `ip_address: optional string or null`
+
+        - `user_agent: optional string or null`
+
+    - `memory_id: string`
+
+      The memory ID of the knowledge document that was restored, e.g. "mem_...".
+
+    - `restored_from_memory_version_id: string`
+
+      The earlier version whose text was written back, e.g. "memver_...".
+
+    - `scan_project_id: string`
+
+      The scan project the document belongs to, e.g. "spj_...".
+
+    - `workspace_id: string`
+
+      The workspace the scan project belongs to, e.g. "wrkspc_...".
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `access_via: optional "member" or "organization_admin" or "organization_share" or 2 more or null`
+
+      How the actor was authorized to make this change: "owner" (the scan project's owner), "member" (an individually added member), "organization_share" (the project is shared with the actor's organization), or "organization_admin" (an administrator of the organization's security scanning). Absent when no project relationship was involved; events recorded before this field was introduced omit it.
+
+      - `"member"`
+
+      - `"organization_admin"`
+
+      - `"organization_share"`
+
+      - `"owner"`
+
+      - `"unspecified"`
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+      format: date-time
+
+    - `memory_version_id: optional string or null`
+
+      The new version this restore produced, e.g. "memver_...", which links this event to the document's version history; absent in the rare case that no version identifier is available for the change.
+
+    - `organization_id: optional string or null`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string or null`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+  - `ClaudeSecurityScanProjectAssetAdded object`
+
+    A repository was added to a Claude Security scan project.
+
+    - `type: optional "claude_security_scan_project_asset_added"`
+
+      default: claude_security_scan_project_asset_added
+
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
+
+      - `APIActor object`
+
+        - `type: optional "api_actor"`
+
+          default: api_actor
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+      - `UserActor object`
+
+        - `type: optional "user_actor"`
+
+          default: user_actor
+
+        - `email_address: string`
+
+          format: email
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+      - `UnauthenticatedUserActor object`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          default: unauthenticated_user_actor
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `unauthenticated_email_address: optional string or null`
+
+          format: email
+
+      - `AnthropicActor object`
+
+        - `type: optional "anthropic_actor"`
+
+          default: anthropic_actor
+
+        - `email_address: optional string or null`
+
+          format: email
+
+      - `SystemActor object`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `type: optional "system_actor"`
+
+          default: system_actor
+
+        - `service: optional string or null`
+
+          Name of the automated process that performed the action, when known.
+
+      - `AdminAPIKeyActor object`
+
+        - `type: optional "admin_api_key_actor"`
+
+          default: admin_api_key_actor
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+      - `ServiceAccountActor object`
+
+        - `type: optional "service_account_actor"`
+
+          default: service_account_actor
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+      - `ScimDirectorySyncActor object`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          default: scim_directory_sync_actor
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string or null`
+
+      - `FederatedIdentityActor object`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `type: optional "federated_identity_actor"`
+
+          default: federated_identity_actor
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string or null`
+
+        - `user_agent: optional string or null`
+
+      - `FederatedActor object`
+
+        An external identity asserted by a trusted provider — a cloud-provider
+        gateway or a customer-registered federation issuer — acting without an
+        Anthropic-provisioned account or service account.
+
+        - `type: optional "federated_actor"`
+
+          default: federated_actor
+
+        - `provider: Aws or Azure or Gcp or Oidc`
+
+          - `Aws object`
+
+            Asserting party: the AWS account the organization is bound to.
+
+            - `type: optional "aws"`
+
+              default: aws
+
+            - `account_id: string`
+
+            - `signed_principal: string`
+
+              The AWS-signed ARN of the IAM principal that requested the token.
+
+          - `Azure object`
+
+            Asserting party: the Azure subscription the organization is bound to.
+
+            - `type: optional "azure"`
+
+              default: azure
+
+            - `subscription_id: string`
+
+          - `Gcp object`
+
+            Asserting party: the GCP project the organization is bound to.
+
+            - `type: optional "gcp"`
+
+              default: gcp
+
+            - `project_number: string`
+
+          - `Oidc object`
+
+            Asserting party: a customer-registered OIDC federation issuer.
+
+            - `type: optional "oidc"`
+
+              default: oidc
+
+            - `issuer: optional string or null`
+
+              The federation issuer's URL. Null when the presented credential failed verification.
+
+        - `ip_address: optional string or null`
+
+        - `subject: optional string or null`
+
+          The provider's verified identifier for the caller; its form depends on the provider.
+
+        - `user_agent: optional string or null`
+
+      - `AttestedDeviceActor object`
+
+        An attested mobile device authenticated via Apple App Attest.
+
+        - `type: optional "attested_device_actor"`
+
+          default: attested_device_actor
+
+        - `external_client_id: string`
+
+        - `kid_hash: string`
+
+        - `ip_address: optional string or null`
+
+        - `user_agent: optional string or null`
+
+    - `asset_id: string`
+
+      The asset ID of the repository, e.g. "asst_...".
+
+    - `scan_project_id: string`
+
+      The scan project the repository was added to, e.g. "spj_...".
+
+    - `workspace_id: string`
+
+      The workspace the scan project belongs to, e.g. "wrkspc_...".
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `access_via: optional "member" or "organization_admin" or "organization_share" or 2 more or null`
+
+      How the actor was authorized to make this change: "owner" (the scan project's owner), "member" (an individually added member), "organization_share" (the project is shared with the actor's organization), or "organization_admin" (an administrator of the organization's security scanning). Absent when no project relationship was involved.
+
+      - `"member"`
+
+      - `"organization_admin"`
+
+      - `"organization_share"`
+
+      - `"owner"`
+
+      - `"unspecified"`
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+      format: date-time
+
+    - `organization_id: optional string or null`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string or null`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+  - `ClaudeSecurityScanProjectAssetRemoved object`
+
+    A repository was removed from a Claude Security scan project.
+
+    - `type: optional "claude_security_scan_project_asset_removed"`
+
+      default: claude_security_scan_project_asset_removed
+
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
+
+      - `APIActor object`
+
+        - `type: optional "api_actor"`
+
+          default: api_actor
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+      - `UserActor object`
+
+        - `type: optional "user_actor"`
+
+          default: user_actor
+
+        - `email_address: string`
+
+          format: email
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+      - `UnauthenticatedUserActor object`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          default: unauthenticated_user_actor
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `unauthenticated_email_address: optional string or null`
+
+          format: email
+
+      - `AnthropicActor object`
+
+        - `type: optional "anthropic_actor"`
+
+          default: anthropic_actor
+
+        - `email_address: optional string or null`
+
+          format: email
+
+      - `SystemActor object`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `type: optional "system_actor"`
+
+          default: system_actor
+
+        - `service: optional string or null`
+
+          Name of the automated process that performed the action, when known.
+
+      - `AdminAPIKeyActor object`
+
+        - `type: optional "admin_api_key_actor"`
+
+          default: admin_api_key_actor
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+      - `ServiceAccountActor object`
+
+        - `type: optional "service_account_actor"`
+
+          default: service_account_actor
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+      - `ScimDirectorySyncActor object`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          default: scim_directory_sync_actor
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string or null`
+
+      - `FederatedIdentityActor object`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `type: optional "federated_identity_actor"`
+
+          default: federated_identity_actor
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string or null`
+
+        - `user_agent: optional string or null`
+
+      - `FederatedActor object`
+
+        An external identity asserted by a trusted provider — a cloud-provider
+        gateway or a customer-registered federation issuer — acting without an
+        Anthropic-provisioned account or service account.
+
+        - `type: optional "federated_actor"`
+
+          default: federated_actor
+
+        - `provider: Aws or Azure or Gcp or Oidc`
+
+          - `Aws object`
+
+            Asserting party: the AWS account the organization is bound to.
+
+            - `type: optional "aws"`
+
+              default: aws
+
+            - `account_id: string`
+
+            - `signed_principal: string`
+
+              The AWS-signed ARN of the IAM principal that requested the token.
+
+          - `Azure object`
+
+            Asserting party: the Azure subscription the organization is bound to.
+
+            - `type: optional "azure"`
+
+              default: azure
+
+            - `subscription_id: string`
+
+          - `Gcp object`
+
+            Asserting party: the GCP project the organization is bound to.
+
+            - `type: optional "gcp"`
+
+              default: gcp
+
+            - `project_number: string`
+
+          - `Oidc object`
+
+            Asserting party: a customer-registered OIDC federation issuer.
+
+            - `type: optional "oidc"`
+
+              default: oidc
+
+            - `issuer: optional string or null`
+
+              The federation issuer's URL. Null when the presented credential failed verification.
+
+        - `ip_address: optional string or null`
+
+        - `subject: optional string or null`
+
+          The provider's verified identifier for the caller; its form depends on the provider.
+
+        - `user_agent: optional string or null`
+
+      - `AttestedDeviceActor object`
+
+        An attested mobile device authenticated via Apple App Attest.
+
+        - `type: optional "attested_device_actor"`
+
+          default: attested_device_actor
+
+        - `external_client_id: string`
+
+        - `kid_hash: string`
+
+        - `ip_address: optional string or null`
+
+        - `user_agent: optional string or null`
+
+    - `asset_id: string`
+
+      The asset ID of the repository, e.g. "asst_...".
+
+    - `scan_project_id: string`
+
+      The scan project the repository was removed from, e.g. "spj_...".
+
+    - `workspace_id: string`
+
+      The workspace the scan project belongs to, e.g. "wrkspc_...".
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `access_via: optional "member" or "organization_admin" or "organization_share" or 2 more or null`
+
+      How the actor was authorized to make this change: "owner" (the scan project's owner), "member" (an individually added member), "organization_share" (the project is shared with the actor's organization), or "organization_admin" (an administrator of the organization's security scanning). Absent when no project relationship was involved.
+
+      - `"member"`
+
+      - `"organization_admin"`
+
+      - `"organization_share"`
+
+      - `"owner"`
+
+      - `"unspecified"`
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+      format: date-time
+
+    - `organization_id: optional string or null`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string or null`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+  - `ClaudeSecurityScanProjectAssetUpdated object`
+
+    A repository's scan settings, such as its branch or directories, were changed in a Claude Security scan project.
+
+    - `type: optional "claude_security_scan_project_asset_updated"`
+
+      default: claude_security_scan_project_asset_updated
+
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
+
+      - `APIActor object`
+
+        - `type: optional "api_actor"`
+
+          default: api_actor
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+      - `UserActor object`
+
+        - `type: optional "user_actor"`
+
+          default: user_actor
+
+        - `email_address: string`
+
+          format: email
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+      - `UnauthenticatedUserActor object`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          default: unauthenticated_user_actor
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `unauthenticated_email_address: optional string or null`
+
+          format: email
+
+      - `AnthropicActor object`
+
+        - `type: optional "anthropic_actor"`
+
+          default: anthropic_actor
+
+        - `email_address: optional string or null`
+
+          format: email
+
+      - `SystemActor object`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `type: optional "system_actor"`
+
+          default: system_actor
+
+        - `service: optional string or null`
+
+          Name of the automated process that performed the action, when known.
+
+      - `AdminAPIKeyActor object`
+
+        - `type: optional "admin_api_key_actor"`
+
+          default: admin_api_key_actor
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+      - `ServiceAccountActor object`
+
+        - `type: optional "service_account_actor"`
+
+          default: service_account_actor
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+      - `ScimDirectorySyncActor object`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          default: scim_directory_sync_actor
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string or null`
+
+      - `FederatedIdentityActor object`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `type: optional "federated_identity_actor"`
+
+          default: federated_identity_actor
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string or null`
+
+        - `user_agent: optional string or null`
+
+      - `FederatedActor object`
+
+        An external identity asserted by a trusted provider — a cloud-provider
+        gateway or a customer-registered federation issuer — acting without an
+        Anthropic-provisioned account or service account.
+
+        - `type: optional "federated_actor"`
+
+          default: federated_actor
+
+        - `provider: Aws or Azure or Gcp or Oidc`
+
+          - `Aws object`
+
+            Asserting party: the AWS account the organization is bound to.
+
+            - `type: optional "aws"`
+
+              default: aws
+
+            - `account_id: string`
+
+            - `signed_principal: string`
+
+              The AWS-signed ARN of the IAM principal that requested the token.
+
+          - `Azure object`
+
+            Asserting party: the Azure subscription the organization is bound to.
+
+            - `type: optional "azure"`
+
+              default: azure
+
+            - `subscription_id: string`
+
+          - `Gcp object`
+
+            Asserting party: the GCP project the organization is bound to.
+
+            - `type: optional "gcp"`
+
+              default: gcp
+
+            - `project_number: string`
+
+          - `Oidc object`
+
+            Asserting party: a customer-registered OIDC federation issuer.
+
+            - `type: optional "oidc"`
+
+              default: oidc
+
+            - `issuer: optional string or null`
+
+              The federation issuer's URL. Null when the presented credential failed verification.
+
+        - `ip_address: optional string or null`
+
+        - `subject: optional string or null`
+
+          The provider's verified identifier for the caller; its form depends on the provider.
+
+        - `user_agent: optional string or null`
+
+      - `AttestedDeviceActor object`
+
+        An attested mobile device authenticated via Apple App Attest.
+
+        - `type: optional "attested_device_actor"`
+
+          default: attested_device_actor
+
+        - `external_client_id: string`
+
+        - `kid_hash: string`
+
+        - `ip_address: optional string or null`
+
+        - `user_agent: optional string or null`
+
+    - `asset_id: string`
+
+      The asset ID of the repository, e.g. "asst_...".
+
+    - `scan_project_id: string`
+
+      The scan project the repository belongs to, e.g. "spj_...".
+
+    - `workspace_id: string`
+
+      The workspace the scan project belongs to, e.g. "wrkspc_...".
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `access_via: optional "member" or "organization_admin" or "organization_share" or 2 more or null`
+
+      How the actor was authorized to make this change: "owner" (the scan project's owner), "member" (an individually added member), "organization_share" (the project is shared with the actor's organization), or "organization_admin" (an administrator of the organization's security scanning). Absent when no project relationship was involved.
+
+      - `"member"`
+
+      - `"organization_admin"`
+
+      - `"organization_share"`
+
+      - `"owner"`
+
+      - `"unspecified"`
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+      format: date-time
+
+    - `organization_id: optional string or null`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string or null`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `updated_fields: optional array of string`
+
+      The settings whose value changed, e.g. "branch", "base_paths" (directories that are scanned) or "exclude_paths" (directories left out). The list can be empty.
+
+  - `ClaudeSecurityScanProjectOwnershipTransferred object`
+
+    Ownership of a Claude Security scan project was transferred to a member of the organization.
+
+    - `type: optional "claude_security_scan_project_ownership_transferred"`
+
+      default: claude_security_scan_project_ownership_transferred
+
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
+
+      - `APIActor object`
+
+        - `type: optional "api_actor"`
+
+          default: api_actor
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+      - `UserActor object`
+
+        - `type: optional "user_actor"`
+
+          default: user_actor
+
+        - `email_address: string`
+
+          format: email
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+      - `UnauthenticatedUserActor object`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          default: unauthenticated_user_actor
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `unauthenticated_email_address: optional string or null`
+
+          format: email
+
+      - `AnthropicActor object`
+
+        - `type: optional "anthropic_actor"`
+
+          default: anthropic_actor
+
+        - `email_address: optional string or null`
+
+          format: email
+
+      - `SystemActor object`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `type: optional "system_actor"`
+
+          default: system_actor
+
+        - `service: optional string or null`
+
+          Name of the automated process that performed the action, when known.
+
+      - `AdminAPIKeyActor object`
+
+        - `type: optional "admin_api_key_actor"`
+
+          default: admin_api_key_actor
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+      - `ServiceAccountActor object`
+
+        - `type: optional "service_account_actor"`
+
+          default: service_account_actor
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+      - `ScimDirectorySyncActor object`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          default: scim_directory_sync_actor
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string or null`
+
+      - `FederatedIdentityActor object`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `type: optional "federated_identity_actor"`
+
+          default: federated_identity_actor
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string or null`
+
+        - `user_agent: optional string or null`
+
+      - `FederatedActor object`
+
+        An external identity asserted by a trusted provider — a cloud-provider
+        gateway or a customer-registered federation issuer — acting without an
+        Anthropic-provisioned account or service account.
+
+        - `type: optional "federated_actor"`
+
+          default: federated_actor
+
+        - `provider: Aws or Azure or Gcp or Oidc`
+
+          - `Aws object`
+
+            Asserting party: the AWS account the organization is bound to.
+
+            - `type: optional "aws"`
+
+              default: aws
+
+            - `account_id: string`
+
+            - `signed_principal: string`
+
+              The AWS-signed ARN of the IAM principal that requested the token.
+
+          - `Azure object`
+
+            Asserting party: the Azure subscription the organization is bound to.
+
+            - `type: optional "azure"`
+
+              default: azure
+
+            - `subscription_id: string`
+
+          - `Gcp object`
+
+            Asserting party: the GCP project the organization is bound to.
+
+            - `type: optional "gcp"`
+
+              default: gcp
+
+            - `project_number: string`
+
+          - `Oidc object`
+
+            Asserting party: a customer-registered OIDC federation issuer.
+
+            - `type: optional "oidc"`
+
+              default: oidc
+
+            - `issuer: optional string or null`
+
+              The federation issuer's URL. Null when the presented credential failed verification.
+
+        - `ip_address: optional string or null`
+
+        - `subject: optional string or null`
+
+          The provider's verified identifier for the caller; its form depends on the provider.
+
+        - `user_agent: optional string or null`
+
+      - `AttestedDeviceActor object`
+
+        An attested mobile device authenticated via Apple App Attest.
+
+        - `type: optional "attested_device_actor"`
+
+          default: attested_device_actor
+
+        - `external_client_id: string`
+
+        - `kid_hash: string`
+
+        - `ip_address: optional string or null`
+
+        - `user_agent: optional string or null`
+
+    - `new_owner_id: string`
+
+      The person who became the scan project's owner, e.g. "user_...".
+
+    - `scan_project_id: string`
+
+      The scan project whose ownership was transferred, e.g. "spj_...".
+
+    - `workspace_id: string`
+
+      The workspace the scan project belongs to, e.g. "wrkspc_...".
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `access_via: optional "organization_admin" or "owner" or "unspecified" or null`
+
+      How the actor was authorized to make this change: "owner" (the scan project's owner before the transfer) or "organization_admin" (an administrator of the organization's security scanning); absent when no project relationship was involved.
+
+      - `"organization_admin"`
+
+      - `"owner"`
+
+      - `"unspecified"`
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+      format: date-time
+
+    - `organization_id: optional string or null`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string or null`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `previous_owner_id: optional string or null`
+
+      The person who owned the scan project before the transfer, e.g. "user_..."; absent when the scan project had no owner before the transfer.
 
   - `ClaudeSkillAutoDisabled object`
 
@@ -40261,9 +43318,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -40277,7 +43334,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -40287,7 +43344,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -40297,7 +43354,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -40523,9 +43580,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -40539,7 +43596,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -40549,7 +43606,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -40559,7 +43616,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -40799,9 +43856,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -40815,7 +43872,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -40825,7 +43882,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -40835,7 +43892,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -40934,6 +43991,332 @@ compliance activities that can be filtered by various criteria.
     - `skill_version: optional string or null`
 
       The version that was downloaded; unset for an unversioned skill.
+
+  - `ClaudeSkillSecurityScanOverrideUpdated object`
+
+    An administrator allowed a skill version despite its security scan's verdict, or that allowance was revoked.
+
+    - `type: optional "claude_skill_security_scan_override_updated"`
+
+      default: claude_skill_security_scan_override_updated
+
+    - `action: "allowed" or "revoked" or "unspecified"`
+
+      Whether the allowance was recorded or revoked.
+
+      - `"allowed"`
+
+      - `"revoked"`
+
+      - `"unspecified"`
+
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
+
+      - `APIActor object`
+
+        - `type: optional "api_actor"`
+
+          default: api_actor
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+      - `UserActor object`
+
+        - `type: optional "user_actor"`
+
+          default: user_actor
+
+        - `email_address: string`
+
+          format: email
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+      - `UnauthenticatedUserActor object`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          default: unauthenticated_user_actor
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `unauthenticated_email_address: optional string or null`
+
+          format: email
+
+      - `AnthropicActor object`
+
+        - `type: optional "anthropic_actor"`
+
+          default: anthropic_actor
+
+        - `email_address: optional string or null`
+
+          format: email
+
+      - `SystemActor object`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `type: optional "system_actor"`
+
+          default: system_actor
+
+        - `service: optional string or null`
+
+          Name of the automated process that performed the action, when known.
+
+      - `AdminAPIKeyActor object`
+
+        - `type: optional "admin_api_key_actor"`
+
+          default: admin_api_key_actor
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+      - `ServiceAccountActor object`
+
+        - `type: optional "service_account_actor"`
+
+          default: service_account_actor
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+      - `ScimDirectorySyncActor object`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          default: scim_directory_sync_actor
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string or null`
+
+      - `FederatedIdentityActor object`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `type: optional "federated_identity_actor"`
+
+          default: federated_identity_actor
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string or null`
+
+        - `user_agent: optional string or null`
+
+      - `FederatedActor object`
+
+        An external identity asserted by a trusted provider — a cloud-provider
+        gateway or a customer-registered federation issuer — acting without an
+        Anthropic-provisioned account or service account.
+
+        - `type: optional "federated_actor"`
+
+          default: federated_actor
+
+        - `provider: Aws or Azure or Gcp or Oidc`
+
+          - `Aws object`
+
+            Asserting party: the AWS account the organization is bound to.
+
+            - `type: optional "aws"`
+
+              default: aws
+
+            - `account_id: string`
+
+            - `signed_principal: string`
+
+              The AWS-signed ARN of the IAM principal that requested the token.
+
+          - `Azure object`
+
+            Asserting party: the Azure subscription the organization is bound to.
+
+            - `type: optional "azure"`
+
+              default: azure
+
+            - `subscription_id: string`
+
+          - `Gcp object`
+
+            Asserting party: the GCP project the organization is bound to.
+
+            - `type: optional "gcp"`
+
+              default: gcp
+
+            - `project_number: string`
+
+          - `Oidc object`
+
+            Asserting party: a customer-registered OIDC federation issuer.
+
+            - `type: optional "oidc"`
+
+              default: oidc
+
+            - `issuer: optional string or null`
+
+              The federation issuer's URL. Null when the presented credential failed verification.
+
+        - `ip_address: optional string or null`
+
+        - `subject: optional string or null`
+
+          The provider's verified identifier for the caller; its form depends on the provider.
+
+        - `user_agent: optional string or null`
+
+      - `AttestedDeviceActor object`
+
+        An attested mobile device authenticated via Apple App Attest.
+
+        - `type: optional "attested_device_actor"`
+
+          default: attested_device_actor
+
+        - `external_client_id: string`
+
+        - `kid_hash: string`
+
+        - `ip_address: optional string or null`
+
+        - `user_agent: optional string or null`
+
+    - `revocation_reason: "admin" or "superseded" or "unspecified"`
+
+      Why the allowance was revoked: admin when an administrator revoked it; superseded when the system revoked it because a newer completed scan replaced the allowed one or the allowed scan was no longer on record; unspecified when the allowance was recorded. The system records a superseded revocation only when an administrator next allows or revokes on the version, so the event can come long after the allowance stopped applying, or not at all.
+
+      - `"admin"`
+
+      - `"superseded"`
+
+      - `"unspecified"`
+
+    - `scan_id: string`
+
+      Identifier of the security scan whose verdict the decision applies to.
+
+    - `skill_version: string`
+
+      Version of the skill the decision applies to, as the security scan reported it.
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `allowed_at: optional string or null`
+
+      When the allowance was recorded (on a revocation, when the revoked allowance had been recorded).
+
+      format: date-time
+
+    - `allowed_by_user_id: optional string or null`
+
+      On a revocation, the administrator who had recorded the allowance; null on an allow, where the event's actor is the administrator who allowed it.
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+      format: date-time
+
+    - `organization_id: optional string or null`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string or null`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `scan: optional object or null`
+
+      A snapshot of the security scan in effect for the version at that moment; null when the version had no scan or the scan's result could not be read.
+
+      - `assessment: "fail" or "pass" or "unknown" or 2 more`
+
+        The Anthropic security scan's own verdict.
+
+        - `"fail"`
+
+        - `"pass"`
+
+        - `"unknown"`
+
+        - `"unspecified"`
+
+        - `"warn"`
+
+      - `combined_assessment: "fail" or "pass" or "unknown" or 2 more`
+
+        The scan's overall verdict; never less strict than assessment. From least to most strict: pass, warn, unknown, fail.
+
+        - `"fail"`
+
+        - `"pass"`
+
+        - `"unknown"`
+
+        - `"unspecified"`
+
+        - `"warn"`
+
+      - `scan_id: string`
+
+        Identifier of the scan described here. It differs from the event's scan_id when a newer completed scan had replaced the allowed one, or the allowed scan was no longer on record.
+
+      - `content_hash: optional string or null`
+
+        A fingerprint of the scanned files: scans with the same value scanned the same content. Null when the scan had not completed, or was recorded before fingerprints were kept.
+
+      - `reason: optional string or null`
+
+        The main reason code behind the scan's own warn or fail verdict, for example "covert-record-tampering".
+
+      - `secondary_reasons: optional array of string`
+
+        Further reason codes the scan reported.
+
+    - `skill_id: optional string or null`
+
+      Identifier of the skill; null when it could not be looked up.
+
+    - `skill_name: optional string or null`
+
+      Name of the skill (its SKILL.md name, as on the other skill activities).
 
   - `ClaudeSurveyClosed object`
 
@@ -41077,9 +44460,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -41093,7 +44476,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -41103,7 +44486,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -41113,7 +44496,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -41313,9 +44696,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -41329,7 +44712,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -41339,7 +44722,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -41349,7 +44732,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -41569,9 +44952,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -41585,7 +44968,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -41595,7 +44978,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -41605,7 +44988,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -41809,9 +45192,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -41825,7 +45208,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -41835,7 +45218,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -41845,7 +45228,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -42045,9 +45428,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -42061,7 +45444,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -42071,7 +45454,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -42081,7 +45464,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -42285,9 +45668,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -42301,7 +45684,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -42311,7 +45694,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -42321,7 +45704,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -42533,9 +45916,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -42549,7 +45932,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -42559,7 +45942,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -42569,7 +45952,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -42793,9 +46176,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -42809,7 +46192,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -42819,7 +46202,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -42829,7 +46212,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -43029,9 +46412,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -43045,7 +46428,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -43055,7 +46438,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -43065,7 +46448,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -43265,9 +46648,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -43281,7 +46664,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -43291,7 +46674,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -43301,7 +46684,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -43501,9 +46884,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -43517,7 +46900,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -43527,7 +46910,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -43537,7 +46920,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -43763,9 +47146,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -43779,7 +47162,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -43789,7 +47172,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -43799,7 +47182,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -44003,9 +47386,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -44019,7 +47402,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -44029,7 +47412,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -44039,7 +47422,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -44247,9 +47630,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -44263,7 +47646,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -44273,7 +47656,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -44283,7 +47666,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -44495,9 +47878,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -44511,7 +47894,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -44521,7 +47904,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -44531,7 +47914,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -44731,9 +48114,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -44747,7 +48130,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -44757,7 +48140,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -44767,7 +48150,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -44983,9 +48366,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -44999,7 +48382,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -45009,7 +48392,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -45019,7 +48402,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -45231,9 +48614,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -45247,7 +48630,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -45257,7 +48640,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -45267,7 +48650,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -45487,9 +48870,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -45503,7 +48886,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -45513,7 +48896,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -45523,7 +48906,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -45727,9 +49110,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -45743,7 +49126,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -45753,7 +49136,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -45763,7 +49146,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -45983,9 +49366,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -45999,7 +49382,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -46009,7 +49392,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -46019,7 +49402,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -46223,9 +49606,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -46239,7 +49622,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -46249,7 +49632,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -46259,7 +49642,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -46467,9 +49850,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -46483,7 +49866,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -46493,7 +49876,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -46503,7 +49886,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -46711,9 +50094,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -46727,7 +50110,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -46737,7 +50120,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -46747,7 +50130,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -46959,9 +50342,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -46975,7 +50358,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -46985,7 +50368,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -46995,7 +50378,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -47207,9 +50590,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -47223,7 +50606,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -47233,7 +50616,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -47243,7 +50626,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -47443,9 +50826,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -47459,7 +50842,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -47469,7 +50852,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -47479,7 +50862,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -47683,9 +51066,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -47699,7 +51082,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -47709,7 +51092,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -47719,7 +51102,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -47919,9 +51302,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -47935,7 +51318,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -47945,7 +51328,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -47955,7 +51338,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -48155,9 +51538,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -48171,7 +51554,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -48181,7 +51564,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -48191,7 +51574,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -48407,9 +51790,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -48423,7 +51806,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -48433,7 +51816,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -48443,7 +51826,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -48659,9 +52042,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -48675,7 +52058,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -48685,7 +52068,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -48695,7 +52078,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -48891,9 +52274,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -48907,7 +52290,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -48917,7 +52300,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -48927,7 +52310,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -49016,6 +52399,10 @@ compliance activities that can be filtered by various criteria.
     - `organization_uuid: optional string or null`
 
       Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `rbac_inclusion_enabled: optional boolean or null`
+
+      Whether Inference hooks apply only to members whose role grants the Inference hooks inspection permission, as configured after this change. Null means the setting is off: either nothing has been saved for it, or it is not available to the organization. When on, requests from members whose roles do not grant that permission are not sent to the organization's endpoint. Only a custom role that this permission was added to grants it; a role set to grant all capabilities, or all generally available capabilities, does not grant it. Members on one of the organization's built-in roles (such as User, Admin, or Owner) rather than a custom role never have this permission. Requests not tied to a member, such as those made with an API key, are not sent either, and neither are requests from Claude in Slack conversations.
 
     - `reset_circuit_breaker: optional boolean or null`
 
@@ -49175,9 +52562,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -49191,7 +52578,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -49201,7 +52588,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -49211,7 +52598,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -49411,9 +52798,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -49427,7 +52814,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -49437,7 +52824,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -49447,7 +52834,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -49657,9 +53044,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -49673,7 +53060,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -49683,7 +53070,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -49693,7 +53080,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -49905,9 +53292,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -49921,7 +53308,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -49931,7 +53318,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -49941,7 +53328,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -50137,9 +53524,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -50153,7 +53540,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -50163,7 +53550,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -50173,7 +53560,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -50371,9 +53758,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -50387,7 +53774,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -50397,7 +53784,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -50407,7 +53794,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -50603,9 +53990,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -50619,7 +54006,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -50629,7 +54016,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -50639,7 +54026,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -50835,9 +54222,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -50851,7 +54238,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -50861,7 +54248,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -50871,7 +54258,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -51089,9 +54476,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -51105,7 +54492,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -51115,7 +54502,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -51125,7 +54512,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -51331,9 +54718,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -51347,7 +54734,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -51357,7 +54744,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -51367,7 +54754,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -51579,9 +54966,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -51595,7 +54982,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -51605,7 +54992,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -51615,7 +55002,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -51819,9 +55206,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -51835,7 +55222,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -51845,7 +55232,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -51855,7 +55242,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -52073,9 +55460,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -52089,7 +55476,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -52099,7 +55486,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -52109,7 +55496,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -52315,9 +55702,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -52331,7 +55718,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -52341,7 +55728,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -52351,7 +55738,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -52565,9 +55952,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -52581,7 +55968,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -52591,7 +55978,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -52601,7 +55988,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -52813,9 +56200,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -52829,7 +56216,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -52839,7 +56226,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -52849,7 +56236,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -53061,9 +56448,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -53077,7 +56464,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -53087,7 +56474,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -53097,7 +56484,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -53361,9 +56748,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -53377,7 +56764,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -53387,7 +56774,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -53397,7 +56784,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -53597,9 +56984,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -53613,7 +57000,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -53623,7 +57010,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -53633,7 +57020,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -53833,9 +57220,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -53849,7 +57236,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -53859,7 +57246,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -53869,7 +57256,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -54069,9 +57456,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -54085,7 +57472,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -54095,7 +57482,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -54105,7 +57492,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -54333,9 +57720,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -54349,7 +57736,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -54359,7 +57746,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -54369,7 +57756,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -54585,9 +57972,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -54601,7 +57988,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -54611,7 +57998,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -54621,7 +58008,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -54829,9 +58216,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -54845,7 +58232,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -54855,7 +58242,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -54865,7 +58252,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -55073,9 +58460,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -55089,7 +58476,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -55099,7 +58486,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -55109,7 +58496,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -55317,9 +58704,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -55333,7 +58720,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -55343,7 +58730,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -55353,7 +58740,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -55585,9 +58972,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -55601,7 +58988,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -55611,7 +58998,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -55621,7 +59008,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -55833,9 +59220,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -55849,7 +59236,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -55859,7 +59246,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -55869,7 +59256,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -56081,9 +59468,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -56097,7 +59484,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -56107,7 +59494,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -56117,7 +59504,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -56353,9 +59740,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -56369,7 +59756,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -56379,7 +59766,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -56389,7 +59776,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -56605,9 +59992,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -56621,7 +60008,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -56631,7 +60018,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -56641,7 +60028,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -56845,9 +60232,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -56861,7 +60248,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -56871,7 +60258,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -56881,7 +60268,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -57085,9 +60472,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -57101,7 +60488,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -57111,7 +60498,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -57121,7 +60508,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -57325,9 +60712,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -57341,7 +60728,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -57351,7 +60738,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -57361,7 +60748,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -57561,9 +60948,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -57577,7 +60964,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -57587,7 +60974,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -57597,7 +60984,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -57793,9 +61180,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -57809,7 +61196,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -57819,7 +61206,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -57829,7 +61216,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -58033,9 +61420,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -58049,7 +61436,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -58059,7 +61446,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -58069,7 +61456,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -58273,9 +61660,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -58289,7 +61676,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -58299,7 +61686,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -58309,7 +61696,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -58509,9 +61896,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -58525,7 +61912,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -58535,7 +61922,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -58545,7 +61932,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -58749,9 +62136,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -58765,7 +62152,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -58775,7 +62162,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -58785,7 +62172,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -58989,9 +62376,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -59005,7 +62392,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -59015,7 +62402,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -59025,7 +62412,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -59233,9 +62620,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -59249,7 +62636,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -59259,7 +62646,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -59269,7 +62656,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -59481,9 +62868,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -59497,7 +62884,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -59507,7 +62894,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -59517,7 +62904,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -59717,9 +63104,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -59733,7 +63120,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -59743,7 +63130,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -59753,7 +63140,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -59953,9 +63340,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -59969,7 +63356,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -59979,7 +63366,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -59989,7 +63376,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -60245,9 +63632,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -60261,7 +63648,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -60271,7 +63658,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -60281,7 +63668,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -60489,9 +63876,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -60505,7 +63892,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -60515,7 +63902,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -60525,7 +63912,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -60741,9 +64128,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -60757,7 +64144,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -60767,7 +64154,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -60777,7 +64164,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -60997,9 +64384,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -61013,7 +64400,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -61023,7 +64410,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -61033,7 +64420,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -61245,9 +64632,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -61261,7 +64648,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -61271,7 +64658,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -61281,7 +64668,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -61489,9 +64876,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -61505,7 +64892,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -61515,7 +64902,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -61525,7 +64912,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -61725,9 +65112,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -61741,7 +65128,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -61751,7 +65138,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -61761,7 +65148,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -61957,9 +65344,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -61973,7 +65360,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -61983,7 +65370,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -61993,7 +65380,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -62189,9 +65576,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -62205,7 +65592,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -62215,7 +65602,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -62225,7 +65612,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -62421,9 +65808,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -62437,7 +65824,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -62447,7 +65834,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -62457,7 +65844,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -62661,9 +66048,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -62677,7 +66064,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -62687,7 +66074,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -62697,7 +66084,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -62901,9 +66288,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -62917,7 +66304,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -62927,7 +66314,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -62937,7 +66324,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -63133,9 +66520,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -63149,7 +66536,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -63159,7 +66546,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -63169,7 +66556,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -63365,9 +66752,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -63381,7 +66768,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -63391,7 +66778,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -63401,7 +66788,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -63613,9 +67000,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -63629,7 +67016,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -63639,7 +67026,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -63649,7 +67036,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -63845,9 +67232,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -63861,7 +67248,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -63871,7 +67258,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -63881,7 +67268,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -64097,9 +67484,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -64113,7 +67500,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -64123,7 +67510,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -64133,7 +67520,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -64333,9 +67720,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -64349,7 +67736,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -64359,7 +67746,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -64369,7 +67756,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -64601,9 +67988,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -64617,7 +68004,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -64627,7 +68014,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -64637,7 +68024,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -64837,9 +68224,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -64853,7 +68240,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -64863,7 +68250,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -64873,7 +68260,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -65077,9 +68464,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -65093,7 +68480,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -65103,7 +68490,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -65113,7 +68500,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -65317,9 +68704,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -65333,7 +68720,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -65343,7 +68730,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -65353,7 +68740,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -65569,9 +68956,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -65585,7 +68972,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -65595,7 +68982,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -65605,7 +68992,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -65809,9 +69196,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -65825,7 +69212,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -65835,7 +69222,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -65845,7 +69232,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -66077,9 +69464,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -66093,7 +69480,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -66103,7 +69490,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -66113,7 +69500,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -66357,9 +69744,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -66373,7 +69760,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -66383,7 +69770,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -66393,7 +69780,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -66609,9 +69996,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -66625,7 +70012,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -66635,7 +70022,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -66645,7 +70032,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -66877,9 +70264,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -66893,7 +70280,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -66903,7 +70290,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -66913,7 +70300,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -67117,9 +70504,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -67133,7 +70520,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -67143,7 +70530,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -67153,7 +70540,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -67349,9 +70736,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -67365,7 +70752,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -67375,7 +70762,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -67385,7 +70772,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -67599,9 +70986,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -67615,7 +71002,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -67625,7 +71012,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -67635,7 +71022,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -67849,9 +71236,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -67865,7 +71252,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -67875,7 +71262,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -67885,7 +71272,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -68089,9 +71476,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -68105,7 +71492,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -68115,7 +71502,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -68125,7 +71512,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -68329,9 +71716,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -68345,7 +71732,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -68355,7 +71742,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -68365,7 +71752,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -68569,9 +71956,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -68585,7 +71972,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -68595,7 +71982,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -68605,7 +71992,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -68809,9 +72196,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -68825,7 +72212,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -68835,7 +72222,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -68845,7 +72232,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -69049,9 +72436,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -69065,7 +72452,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -69075,7 +72462,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -69085,7 +72472,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -69289,9 +72676,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -69305,7 +72692,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -69315,7 +72702,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -69325,7 +72712,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -69521,9 +72908,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -69537,7 +72924,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -69547,7 +72934,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -69557,7 +72944,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -69761,9 +73148,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -69777,7 +73164,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -69787,7 +73174,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -69797,7 +73184,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -69995,9 +73382,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -70011,7 +73398,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -70021,7 +73408,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -70031,7 +73418,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -70227,9 +73614,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -70243,7 +73630,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -70253,7 +73640,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -70263,7 +73650,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -70459,9 +73846,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -70475,7 +73862,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -70485,7 +73872,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -70495,7 +73882,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -70699,9 +74086,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -70715,7 +74102,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -70725,7 +74112,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -70735,7 +74122,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -70939,9 +74326,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -70955,7 +74342,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -70965,7 +74352,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -70975,7 +74362,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -71171,9 +74558,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -71187,7 +74574,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -71197,7 +74584,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -71207,7 +74594,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -71403,9 +74790,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -71419,7 +74806,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -71429,7 +74816,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -71439,7 +74826,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -71635,9 +75022,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -71651,7 +75038,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -71661,7 +75048,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -71671,7 +75058,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -71867,9 +75254,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -71883,7 +75270,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -71893,7 +75280,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -71903,7 +75290,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -72107,9 +75494,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -72123,7 +75510,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -72133,7 +75520,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -72143,7 +75530,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -72347,9 +75734,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -72363,7 +75750,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -72373,7 +75760,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -72383,7 +75770,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -72579,9 +75966,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -72595,7 +75982,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -72605,7 +75992,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -72615,7 +76002,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -72811,9 +76198,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -72827,7 +76214,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -72837,7 +76224,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -72847,7 +76234,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -73085,9 +76472,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -73101,7 +76488,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -73111,7 +76498,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -73121,7 +76508,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -73317,9 +76704,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -73333,7 +76720,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -73343,7 +76730,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -73353,7 +76740,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -73549,9 +76936,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -73565,7 +76952,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -73575,7 +76962,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -73585,7 +76972,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -73785,9 +77172,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -73801,7 +77188,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -73811,7 +77198,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -73821,7 +77208,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -74027,9 +77414,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -74043,7 +77430,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -74053,7 +77440,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -74063,7 +77450,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -74269,9 +77656,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -74285,7 +77672,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -74295,7 +77682,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -74305,7 +77692,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -74521,9 +77908,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -74537,7 +77924,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -74547,7 +77934,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -74557,7 +77944,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -74775,9 +78162,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -74791,7 +78178,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -74801,7 +78188,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -74811,7 +78198,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -75007,9 +78394,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -75023,7 +78410,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -75033,7 +78420,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -75043,7 +78430,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -75239,9 +78626,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -75255,7 +78642,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -75265,7 +78652,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -75275,7 +78662,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -75475,9 +78862,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -75491,7 +78878,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -75501,7 +78888,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -75511,7 +78898,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -75711,9 +79098,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -75727,7 +79114,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -75737,7 +79124,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -75747,7 +79134,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -75951,9 +79338,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -75967,7 +79354,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -75977,7 +79364,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -75987,7 +79374,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -76183,9 +79570,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -76199,7 +79586,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -76209,7 +79596,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -76219,7 +79606,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -76415,9 +79802,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -76431,7 +79818,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -76441,7 +79828,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -76451,7 +79838,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -76647,9 +80034,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -76663,7 +80050,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -76673,7 +80060,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -76683,7 +80070,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -76879,9 +80266,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -76895,7 +80282,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -76905,7 +80292,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -76915,7 +80302,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -77111,9 +80498,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -77127,7 +80514,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -77137,7 +80524,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -77147,7 +80534,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -77343,9 +80730,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -77359,7 +80746,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -77369,7 +80756,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -77379,7 +80766,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -77575,9 +80962,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -77591,7 +80978,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -77601,7 +80988,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -77611,7 +80998,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -77811,9 +81198,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -77827,7 +81214,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -77837,7 +81224,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -77847,7 +81234,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -78047,9 +81434,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -78063,7 +81450,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -78073,7 +81460,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -78083,7 +81470,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -78152,6 +81539,10 @@ compliance activities that can be filtered by various criteria.
     - `organization_uuid: optional string or null`
 
       Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
+
+    - `user_profile_id: optional string or null`
+
+      Tagged ID of the user profile the key is bound to; null when it is not bound to one
 
   - `OrgExternalKeyDeleted object`
 
@@ -78295,9 +81686,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -78311,7 +81702,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -78321,7 +81712,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -78331,7 +81722,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -78531,9 +81922,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -78547,7 +81938,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -78557,7 +81948,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -78567,7 +81958,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -78791,9 +82182,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -78807,7 +82198,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -78817,7 +82208,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -78827,7 +82218,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -79037,9 +82428,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -79053,7 +82444,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -79063,7 +82454,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -79073,7 +82464,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -79277,9 +82668,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -79293,7 +82684,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -79303,7 +82694,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -79313,7 +82704,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -79509,9 +82900,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -79525,7 +82916,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -79535,7 +82926,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -79545,7 +82936,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -79751,9 +83142,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -79767,7 +83158,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -79777,7 +83168,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -79787,7 +83178,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -79995,9 +83386,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -80011,7 +83402,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -80021,7 +83412,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -80031,7 +83422,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -80080,6 +83471,10 @@ compliance activities that can be filtered by various criteria.
     - `ip_range: optional string or null`
 
       The IP range added to the allowlist, e.g. "192.0.2.0/24", which is not enforced while it is inactive or the IP allowlist is turned off; absent for activities recorded before this field was added.
+
+    - `ip_range_active: optional boolean or null`
+
+      Whether the IP range is active on the allowlist (true) or saved but inactive (false) when it was added; absent for activities recorded before this field was added.
 
     - `organization_id: optional string or null`
 
@@ -80231,9 +83626,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -80247,7 +83642,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -80257,7 +83652,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -80267,7 +83662,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -80316,6 +83711,10 @@ compliance activities that can be filtered by various criteria.
     - `ip_range: optional string or null`
 
       The IP range removed from the allowlist, e.g. "192.0.2.0/24"; absent for activities recorded before this field was added.
+
+    - `ip_range_active: optional boolean or null`
+
+      Whether the IP range was active on the allowlist (true) or saved but inactive (false) before it was removed; absent for activities recorded before this field was added.
 
     - `organization_id: optional string or null`
 
@@ -80467,9 +83866,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -80483,7 +83882,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -80493,7 +83892,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -80503,7 +83902,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -80715,9 +84114,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -80731,7 +84130,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -80741,7 +84140,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -80751,7 +84150,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -80947,9 +84346,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -80963,7 +84362,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -80973,7 +84372,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -80983,7 +84382,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -81179,9 +84578,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -81195,7 +84594,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -81205,7 +84604,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -81215,7 +84614,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -81411,9 +84810,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -81427,7 +84826,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -81437,7 +84836,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -81447,7 +84846,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -81647,9 +85046,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -81663,7 +85062,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -81673,7 +85072,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -81683,7 +85082,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -81879,9 +85278,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -81895,7 +85294,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -81905,7 +85304,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -81915,7 +85314,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -82117,9 +85516,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -82133,7 +85532,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -82143,7 +85542,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -82153,7 +85552,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -82349,9 +85748,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -82365,7 +85764,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -82375,7 +85774,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -82385,7 +85784,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -82581,9 +85980,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -82597,7 +85996,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -82607,7 +86006,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -82617,7 +86016,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -82813,9 +86212,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -82829,7 +86228,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -82839,7 +86238,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -82849,7 +86248,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -83045,9 +86444,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -83061,7 +86460,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -83071,7 +86470,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -83081,7 +86480,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -83277,9 +86676,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -83293,7 +86692,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -83303,7 +86702,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -83313,7 +86712,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -83547,9 +86946,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -83563,7 +86962,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -83573,7 +86972,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -83583,7 +86982,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -83853,9 +87252,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -83869,7 +87268,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -83879,7 +87278,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -83889,7 +87288,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -84115,9 +87514,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -84131,7 +87530,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -84141,7 +87540,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -84151,7 +87550,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -84351,9 +87750,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -84367,7 +87766,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -84377,7 +87776,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -84387,7 +87786,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -84587,9 +87986,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -84603,7 +88002,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -84613,7 +88012,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -84623,7 +88022,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -84819,9 +88218,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -84835,7 +88234,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -84845,7 +88244,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -84855,7 +88254,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -85051,9 +88450,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -85067,7 +88466,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -85077,7 +88476,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -85087,7 +88486,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -85293,9 +88692,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -85309,7 +88708,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -85319,7 +88718,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -85329,7 +88728,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -85563,9 +88962,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -85579,7 +88978,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -85589,7 +88988,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -85599,7 +88998,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -85799,9 +89198,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -85815,7 +89214,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -85825,7 +89224,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -85835,7 +89234,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -86031,9 +89430,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -86047,7 +89446,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -86057,7 +89456,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -86067,7 +89466,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -86263,9 +89662,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -86279,7 +89678,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -86289,7 +89688,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -86299,7 +89698,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -86503,9 +89902,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -86519,7 +89918,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -86529,7 +89928,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -86539,7 +89938,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -86739,9 +90138,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -86755,7 +90154,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -86765,7 +90164,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -86775,7 +90174,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -86975,9 +90374,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -86991,7 +90390,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -87001,7 +90400,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -87011,7 +90410,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -87207,9 +90606,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -87223,7 +90622,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -87233,7 +90632,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -87243,7 +90642,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -87447,9 +90846,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -87463,7 +90862,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -87473,7 +90872,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -87483,7 +90882,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -87687,9 +91086,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -87703,7 +91102,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -87713,7 +91112,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -87723,7 +91122,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -87927,9 +91326,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -87943,7 +91342,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -87953,7 +91352,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -87963,7 +91362,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -88183,9 +91582,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -88199,7 +91598,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -88209,7 +91608,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -88219,7 +91618,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -88419,9 +91818,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -88435,7 +91834,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -88445,7 +91844,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -88455,7 +91854,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -88651,9 +92050,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -88667,7 +92066,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -88677,7 +92076,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -88687,7 +92086,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -88883,9 +92282,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -88899,7 +92298,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -88909,7 +92308,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -88919,7 +92318,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -89123,9 +92522,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -89139,7 +92538,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -89149,7 +92548,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -89159,7 +92558,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -89359,9 +92758,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -89375,7 +92774,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -89385,7 +92784,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -89395,7 +92794,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -89599,9 +92998,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -89615,7 +93014,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -89625,7 +93024,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -89635,7 +93034,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -89839,9 +93238,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -89855,7 +93254,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -89865,7 +93264,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -89875,7 +93274,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -90075,9 +93474,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -90091,7 +93490,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -90101,7 +93500,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -90111,7 +93510,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -90319,9 +93718,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -90335,7 +93734,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -90345,7 +93744,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -90355,7 +93754,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -90555,9 +93954,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -90571,7 +93970,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -90581,7 +93980,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -90591,7 +93990,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -90803,9 +94202,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -90819,7 +94218,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -90829,7 +94228,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -90839,7 +94238,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -91039,9 +94438,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -91055,7 +94454,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -91065,7 +94464,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -91075,7 +94474,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -91303,9 +94702,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -91319,7 +94718,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -91329,7 +94728,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -91339,7 +94738,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -91551,9 +94950,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -91567,7 +94966,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -91577,7 +94976,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -91587,7 +94986,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -91787,9 +95186,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -91803,7 +95202,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -91813,7 +95212,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -91823,7 +95222,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -92019,9 +95418,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -92035,7 +95434,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -92045,7 +95444,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -92055,7 +95454,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -92259,9 +95658,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -92275,7 +95674,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -92285,7 +95684,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -92295,7 +95694,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -92499,9 +95898,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -92515,7 +95914,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -92525,7 +95924,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -92535,7 +95934,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -92747,9 +96146,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -92763,7 +96162,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -92773,7 +96172,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -92783,7 +96182,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -92979,9 +96378,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -92995,7 +96394,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -93005,7 +96404,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -93015,7 +96414,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -93211,9 +96610,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -93227,7 +96626,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -93237,7 +96636,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -93247,7 +96646,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -93283,7 +96682,7 @@ compliance activities that can be filtered by various criteria.
 
         - `user_agent: optional string or null`
 
-    - `updates: array of Name or Capabilities or RedactContent or 105 more`
+    - `updates: array of Name or Capabilities or RedactContent or 111 more`
 
       - `Name object`
 
@@ -95154,6 +98553,54 @@ compliance activities that can be filtered by various criteria.
 
           Setting value immediately before this change. Null means the setting had not been set for the organization, so the plan default applied.
 
+      - `ClaudeSecurityCreateProjectsEnabled object`
+
+        The Claude Security "Create projects" setting (whether members may create Claude Security projects) was changed for the organization.
+
+        - `type: optional "claude_security_create_projects_enabled"`
+
+          default: claude_security_create_projects_enabled
+
+        - `current_value: optional boolean or null`
+
+          Setting value immediately after this change. Null means the setting is not set, so its default applies.
+
+        - `previous_value: optional boolean or null`
+
+          Setting value immediately before this change. Null means the setting was not set, so its default applied.
+
+      - `ClaudeSecurityViewAllProjectsEnabled object`
+
+        The Claude Security "View all projects" setting (whether members may open every project in their workspace, including archived projects and projects not shared with them) was changed for the organization.
+
+        - `type: optional "claude_security_view_all_projects_enabled"`
+
+          default: claude_security_view_all_projects_enabled
+
+        - `current_value: optional boolean or null`
+
+          Setting value immediately after this change. Null means the setting is not set, so its default applies.
+
+        - `previous_value: optional boolean or null`
+
+          Setting value immediately before this change. Null means the setting was not set, so its default applied.
+
+      - `ClaudeSecurityTriageAllProjectsEnabled object`
+
+        The Claude Security "Triage all projects" setting (whether members who have "View all projects" may also triage findings in every project in their workspace, except archived projects) was changed for the organization.
+
+        - `type: optional "claude_security_triage_all_projects_enabled"`
+
+          default: claude_security_triage_all_projects_enabled
+
+        - `current_value: optional boolean or null`
+
+          Setting value immediately after this change. Null means the setting is not set, so its default applies.
+
+        - `previous_value: optional boolean or null`
+
+          Setting value immediately before this change. Null means the setting was not set, so its default applied.
+
       - `ArtifactTypeMotionEnabled object`
 
         The setting that lets members create Motion, one of Anthropic's built-in Artifact types, was changed for the organization.
@@ -95202,6 +98649,22 @@ compliance activities that can be filtered by various criteria.
 
           Setting value immediately before this change. Null means the setting was not set, so its default applied.
 
+      - `ClaudeScienceAutoModeEnabled object`
+
+        The Claude Science setting that lets members use auto mode, in which Claude approves its own actions instead of asking the member to approve each one, was changed for the organization.
+
+        - `type: optional "claude_science_auto_mode_enabled"`
+
+          default: claude_science_auto_mode_enabled
+
+        - `current_value: optional boolean or null`
+
+          Setting value immediately after this change
+
+        - `previous_value: optional boolean or null`
+
+          Setting value immediately before this change
+
       - `ConnectorRequestsOptedIn object`
 
         The organization's opt-in to connector requests, which lets members ask the organization's owners to add a connector, was changed. The "Let members request connectors" switch sets it the first time it is turned on; turning that switch off, or on again, is recorded as a `disabled_admin_request_types` change (`enable_connector` joins or leaves the list).
@@ -95217,6 +98680,38 @@ compliance activities that can be filtered by various criteria.
         - `previous_value: optional boolean or null`
 
           Setting value immediately before this change. Null means the organization had never opted in or out.
+
+      - `ArtifactOrganizationWideSharingEnabled object`
+
+        The artifact organization-wide sharing setting was changed for the organization.
+
+        - `type: optional "artifact_organization_wide_sharing_enabled"`
+
+          default: artifact_organization_wide_sharing_enabled
+
+        - `current_value: optional boolean or null`
+
+          Setting value immediately after this change
+
+        - `previous_value: optional boolean or null`
+
+          Setting value immediately before this change. Null means the setting had not been set for the organization, so the plan default applied.
+
+      - `ArtifactOutsideOrganizationInvitesEnabled object`
+
+        The setting that allows email invitations to an artifact for people outside the organization was changed for the organization.
+
+        - `type: optional "artifact_outside_organization_invites_enabled"`
+
+          default: artifact_outside_organization_invites_enabled
+
+        - `current_value: optional boolean or null`
+
+          Setting value immediately after this change
+
+        - `previous_value: optional boolean or null`
+
+          Setting value immediately before this change. Null means the setting had not been set for the organization, so the plan default applied.
 
     - `id: optional string`
 
@@ -95390,9 +98885,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -95406,7 +98901,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -95416,7 +98911,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -95426,7 +98921,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -95626,9 +99121,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -95642,7 +99137,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -95652,7 +99147,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -95662,7 +99157,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -95858,9 +99353,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -95874,7 +99369,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -95884,7 +99379,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -95894,7 +99389,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -96106,9 +99601,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -96122,7 +99617,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -96132,7 +99627,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -96142,7 +99637,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -96350,9 +99845,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -96366,7 +99861,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -96376,7 +99871,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -96386,7 +99881,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -96582,9 +100077,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -96598,7 +100093,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -96608,7 +100103,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -96618,7 +100113,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -96814,9 +100309,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -96830,7 +100325,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -96840,7 +100335,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -96850,7 +100345,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -97054,9 +100549,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -97070,7 +100565,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -97080,7 +100575,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -97090,7 +100585,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -97294,9 +100789,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -97310,7 +100805,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -97320,7 +100815,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -97330,7 +100825,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -97534,9 +101029,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -97550,7 +101045,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -97560,7 +101055,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -97570,7 +101065,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -97774,9 +101269,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -97790,7 +101285,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -97800,7 +101295,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -97810,7 +101305,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -98014,9 +101509,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -98030,7 +101525,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -98040,7 +101535,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -98050,7 +101545,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -98254,9 +101749,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -98270,7 +101765,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -98280,7 +101775,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -98290,7 +101785,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -98494,9 +101989,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -98510,7 +102005,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -98520,7 +102015,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -98530,7 +102025,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -98734,9 +102229,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -98750,7 +102245,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -98760,7 +102255,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -98770,7 +102265,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -98974,9 +102469,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -98990,7 +102485,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -99000,7 +102495,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -99010,7 +102505,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -99214,9 +102709,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -99230,7 +102725,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -99240,7 +102735,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -99250,7 +102745,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -99454,9 +102949,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -99470,7 +102965,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -99480,7 +102975,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -99490,7 +102985,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -99694,9 +103189,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -99710,7 +103205,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -99720,7 +103215,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -99730,7 +103225,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -99934,9 +103429,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -99950,7 +103445,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -99960,7 +103455,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -99970,7 +103465,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -100178,9 +103673,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -100194,7 +103689,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -100204,7 +103699,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -100214,7 +103709,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -100422,9 +103917,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -100438,7 +103933,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -100448,7 +103943,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -100458,7 +103953,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -100666,9 +104161,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -100682,7 +104177,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -100692,7 +104187,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -100702,7 +104197,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -100910,9 +104405,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -100926,7 +104421,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -100936,7 +104431,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -100946,7 +104441,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -101150,9 +104645,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -101166,7 +104661,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -101176,7 +104671,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -101186,7 +104681,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -101390,9 +104885,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -101406,7 +104901,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -101416,7 +104911,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -101426,7 +104921,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -101664,9 +105159,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -101680,7 +105175,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -101690,7 +105185,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -101700,7 +105195,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -101924,9 +105419,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -101940,7 +105435,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -101950,7 +105445,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -101960,7 +105455,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -102188,9 +105683,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -102204,7 +105699,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -102214,7 +105709,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -102224,7 +105719,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -102424,9 +105919,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -102440,7 +105935,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -102450,7 +105945,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -102460,7 +105955,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -102664,9 +106159,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -102680,7 +106175,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -102690,7 +106185,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -102700,7 +106195,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -102914,9 +106409,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -102930,7 +106425,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -102940,7 +106435,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -102950,7 +106445,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -103146,9 +106641,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -103162,7 +106657,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -103172,7 +106667,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -103182,7 +106677,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -103386,9 +106881,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -103402,7 +106897,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -103412,7 +106907,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -103422,7 +106917,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -103626,9 +107121,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -103642,7 +107137,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -103652,7 +107147,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -103662,7 +107157,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -103866,9 +107361,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -103882,7 +107377,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -103892,7 +107387,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -103902,7 +107397,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -104158,9 +107653,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -104174,7 +107669,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -104184,7 +107679,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -104194,7 +107689,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -104394,9 +107889,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -104410,7 +107905,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -104420,7 +107915,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -104430,7 +107925,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -104646,9 +108141,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -104662,7 +108157,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -104672,7 +108167,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -104682,7 +108177,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -104920,9 +108415,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -104936,7 +108431,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -104946,7 +108441,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -104956,7 +108451,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -105156,9 +108651,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -105172,7 +108667,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -105182,7 +108677,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -105192,7 +108687,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -105428,9 +108923,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -105444,7 +108939,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -105454,7 +108949,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -105464,7 +108959,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -105710,9 +109205,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -105726,7 +109221,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -105736,7 +109231,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -105746,7 +109241,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -105950,9 +109445,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -105966,7 +109461,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -105976,7 +109471,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -105986,7 +109481,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -106190,9 +109685,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -106206,7 +109701,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -106216,7 +109711,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -106226,7 +109721,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -106426,9 +109921,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -106442,7 +109937,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -106452,7 +109947,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -106462,7 +109957,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -106662,9 +110157,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -106678,7 +110173,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -106688,7 +110183,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -106698,7 +110193,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -106902,9 +110397,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -106918,7 +110413,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -106928,7 +110423,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -106938,7 +110433,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -107150,9 +110645,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -107166,7 +110661,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -107176,7 +110671,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -107186,7 +110681,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -107398,9 +110893,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -107414,7 +110909,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -107424,7 +110919,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -107434,7 +110929,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -107638,9 +111133,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -107654,7 +111149,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -107664,7 +111159,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -107674,7 +111169,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -107878,9 +111373,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -107894,7 +111389,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -107904,7 +111399,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -107914,7 +111409,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -108118,9 +111613,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -108134,7 +111629,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -108144,7 +111639,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -108154,7 +111649,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -108358,9 +111853,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -108374,7 +111869,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -108384,7 +111879,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -108394,7 +111889,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -108606,9 +112101,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -108622,7 +112117,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -108632,7 +112127,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -108642,7 +112137,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -108854,9 +112349,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -108870,7 +112365,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -108880,7 +112375,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -108890,7 +112385,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -109094,9 +112589,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -109110,7 +112605,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -109120,7 +112615,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -109130,7 +112625,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -109330,9 +112825,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -109346,7 +112841,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -109356,7 +112851,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -109366,7 +112861,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -109592,9 +113087,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -109608,7 +113103,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -109618,7 +113113,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -109628,7 +113123,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -109836,9 +113331,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -109852,7 +113347,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -109862,7 +113357,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -109872,7 +113367,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -110076,9 +113571,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -110092,7 +113587,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -110102,7 +113597,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -110112,7 +113607,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -110312,9 +113807,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -110328,7 +113823,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -110338,7 +113833,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -110348,7 +113843,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -110552,9 +114047,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -110568,7 +114063,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -110578,7 +114073,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -110588,7 +114083,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -110788,9 +114283,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -110804,7 +114299,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -110814,7 +114309,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -110824,7 +114319,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -111028,9 +114523,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -111044,7 +114539,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -111054,7 +114549,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -111064,7 +114559,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -111286,9 +114781,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -111302,7 +114797,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -111312,7 +114807,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -111322,7 +114817,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -111530,9 +115025,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -111546,7 +115041,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -111556,7 +115051,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -111566,7 +115061,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -111770,9 +115265,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -111786,7 +115281,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -111796,7 +115291,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -111806,7 +115301,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -112030,9 +115525,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -112046,7 +115541,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -112056,7 +115551,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -112066,7 +115561,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -112278,9 +115773,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -112294,7 +115789,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -112304,7 +115799,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -112314,7 +115809,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -112526,9 +116021,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -112542,7 +116037,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -112552,7 +116047,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -112562,7 +116057,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -112774,9 +116269,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -112790,7 +116285,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -112800,7 +116295,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -112810,7 +116305,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -113014,9 +116509,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -113030,7 +116525,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -113040,7 +116535,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -113050,7 +116545,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -113254,9 +116749,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -113270,7 +116765,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -113280,7 +116775,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -113290,7 +116785,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -113494,9 +116989,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -113510,7 +117005,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -113520,7 +117015,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -113530,7 +117025,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -113734,9 +117229,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -113750,7 +117245,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -113760,7 +117255,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -113770,7 +117265,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -113974,9 +117469,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -113990,7 +117485,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -114000,7 +117495,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -114010,7 +117505,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -114210,9 +117705,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -114226,7 +117721,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -114236,7 +117731,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -114246,7 +117741,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -114450,9 +117945,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -114466,7 +117961,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -114476,7 +117971,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -114486,7 +117981,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -114698,9 +118193,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -114714,7 +118209,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -114724,7 +118219,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -114734,7 +118229,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -114966,9 +118461,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -114982,7 +118477,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -114992,7 +118487,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -115002,7 +118497,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -115202,9 +118697,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -115218,7 +118713,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -115228,7 +118723,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -115238,7 +118733,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -115468,9 +118963,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -115484,7 +118979,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -115494,7 +118989,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -115504,7 +118999,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -115708,9 +119203,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -115724,7 +119219,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -115734,7 +119229,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -115744,7 +119239,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -115948,9 +119443,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -115964,7 +119459,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -115974,7 +119469,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -115984,7 +119479,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -116180,9 +119675,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -116196,7 +119691,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -116206,7 +119701,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -116216,7 +119711,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -116412,9 +119907,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -116428,7 +119923,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -116438,7 +119933,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -116448,7 +119943,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -116648,9 +120143,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -116664,7 +120159,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -116674,7 +120169,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -116684,7 +120179,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -116908,9 +120403,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -116924,7 +120419,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -116934,7 +120429,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -116944,7 +120439,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -117148,9 +120643,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -117164,7 +120659,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -117174,7 +120669,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -117184,7 +120679,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -117388,9 +120883,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -117404,7 +120899,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -117414,7 +120909,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -117424,7 +120919,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -117628,9 +121123,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -117644,7 +121139,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -117654,7 +121149,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -117664,7 +121159,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -117868,9 +121363,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -117884,7 +121379,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -117894,7 +121389,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -117904,7 +121399,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -118128,9 +121623,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -118144,7 +121639,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -118154,7 +121649,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -118164,7 +121659,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -118368,9 +121863,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -118384,7 +121879,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -118394,7 +121889,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -118404,7 +121899,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -118604,9 +122099,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -118620,7 +122115,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -118630,7 +122125,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -118640,7 +122135,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -118848,9 +122343,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -118864,7 +122359,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -118874,7 +122369,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -118884,7 +122379,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -119096,9 +122591,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -119112,7 +122607,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -119122,7 +122617,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -119132,7 +122627,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -119221,6 +122716,246 @@ compliance activities that can be filtered by various criteria.
       - `previous_value: string`
 
         Field value immediately before this change. For tag_count, the number of tags as a decimal string; tag keys and values are never recorded.
+
+  - `PlatformWorkspaceUserProfileAttached object`
+
+    A user profile was attached to a workspace, so that inference requests served by the workspace must name that profile.
+
+    - `type: optional "platform_workspace_user_profile_attached"`
+
+      default: platform_workspace_user_profile_attached
+
+    - `actor: APIActor or UserActor or UnauthenticatedUserActor or 8 more`
+
+      - `APIActor object`
+
+        - `type: optional "api_actor"`
+
+          default: api_actor
+
+        - `api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+      - `UserActor object`
+
+        - `type: optional "user_actor"`
+
+          default: user_actor
+
+        - `email_address: string`
+
+          format: email
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `user_id: string`
+
+      - `UnauthenticatedUserActor object`
+
+        - `type: optional "unauthenticated_user_actor"`
+
+          default: unauthenticated_user_actor
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+        - `unauthenticated_email_address: optional string or null`
+
+          format: email
+
+      - `AnthropicActor object`
+
+        - `type: optional "anthropic_actor"`
+
+          default: anthropic_actor
+
+        - `email_address: optional string or null`
+
+          format: email
+
+      - `SystemActor object`
+
+        Automated background processing performed by Anthropic systems, acting
+        without a user or customer credential.
+
+        - `type: optional "system_actor"`
+
+          default: system_actor
+
+        - `service: optional string or null`
+
+          Name of the automated process that performed the action, when known.
+
+      - `AdminAPIKeyActor object`
+
+        - `type: optional "admin_api_key_actor"`
+
+          default: admin_api_key_actor
+
+        - `admin_api_key_id: string`
+
+        - `ip_address: string`
+
+        - `user_agent: string`
+
+      - `ServiceAccountActor object`
+
+        - `type: optional "service_account_actor"`
+
+          default: service_account_actor
+
+        - `ip_address: string`
+
+        - `service_account_id: string`
+
+        - `user_agent: string`
+
+      - `ScimDirectorySyncActor object`
+
+        - `type: optional "scim_directory_sync_actor"`
+
+          default: scim_directory_sync_actor
+
+        - `directory_id: string`
+
+        - `workos_event_id: string`
+
+        - `idp_connection_type: optional string or null`
+
+      - `FederatedIdentityActor object`
+
+        A federated external workload authenticated via a verified OIDC token.
+
+        Carries the verified issuer, subject, and audience claims from the
+        presented JWT.
+
+        - `type: optional "federated_identity_actor"`
+
+          default: federated_identity_actor
+
+        - `issuer: string`
+
+        - `subject: string`
+
+        - `audience: optional array of string`
+
+        - `ip_address: optional string or null`
+
+        - `user_agent: optional string or null`
+
+      - `FederatedActor object`
+
+        An external identity asserted by a trusted provider — a cloud-provider
+        gateway or a customer-registered federation issuer — acting without an
+        Anthropic-provisioned account or service account.
+
+        - `type: optional "federated_actor"`
+
+          default: federated_actor
+
+        - `provider: Aws or Azure or Gcp or Oidc`
+
+          - `Aws object`
+
+            Asserting party: the AWS account the organization is bound to.
+
+            - `type: optional "aws"`
+
+              default: aws
+
+            - `account_id: string`
+
+            - `signed_principal: string`
+
+              The AWS-signed ARN of the IAM principal that requested the token.
+
+          - `Azure object`
+
+            Asserting party: the Azure subscription the organization is bound to.
+
+            - `type: optional "azure"`
+
+              default: azure
+
+            - `subscription_id: string`
+
+          - `Gcp object`
+
+            Asserting party: the GCP project the organization is bound to.
+
+            - `type: optional "gcp"`
+
+              default: gcp
+
+            - `project_number: string`
+
+          - `Oidc object`
+
+            Asserting party: a customer-registered OIDC federation issuer.
+
+            - `type: optional "oidc"`
+
+              default: oidc
+
+            - `issuer: optional string or null`
+
+              The federation issuer's URL. Null when the presented credential failed verification.
+
+        - `ip_address: optional string or null`
+
+        - `subject: optional string or null`
+
+          The provider's verified identifier for the caller; its form depends on the provider.
+
+        - `user_agent: optional string or null`
+
+      - `AttestedDeviceActor object`
+
+        An attested mobile device authenticated via Apple App Attest.
+
+        - `type: optional "attested_device_actor"`
+
+          default: attested_device_actor
+
+        - `external_client_id: string`
+
+        - `kid_hash: string`
+
+        - `ip_address: optional string or null`
+
+        - `user_agent: optional string or null`
+
+    - `user_profile_id: string`
+
+      Tagged ID of the attached user profile
+
+    - `workspace_id: string`
+
+      Tagged ID of the workspace
+
+    - `id: optional string`
+
+      Unique identifier for the activity e.g. 'activity_abcd1234'
+
+    - `created_at: optional string`
+
+      When this activity occurred.
+
+      format: date-time
+
+    - `organization_id: optional string or null`
+
+      Organization ID this activity is associated with
+
+    - `organization_uuid: optional string or null`
+
+      Organization UUID where the activity occurred. Null when the activity is not tied to an organization (for example, login and logout events or calls to the Compliance API).
 
   - `ClaudePluginCreated object`
 
@@ -119364,9 +123099,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -119380,7 +123115,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -119390,7 +123125,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -119400,7 +123135,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -119600,9 +123335,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -119616,7 +123351,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -119626,7 +123361,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -119636,7 +123371,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -119836,9 +123571,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -119852,7 +123587,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -119862,7 +123597,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -119872,7 +123607,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -120080,9 +123815,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -120096,7 +123831,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -120106,7 +123841,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -120116,7 +123851,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -120324,9 +124059,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -120340,7 +124075,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -120350,7 +124085,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -120360,7 +124095,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -120596,9 +124331,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -120612,7 +124347,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -120622,7 +124357,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -120632,7 +124367,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -120832,9 +124567,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -120848,7 +124583,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -120858,7 +124593,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -120868,7 +124603,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -121094,9 +124829,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -121110,7 +124845,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -121120,7 +124855,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -121130,7 +124865,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -121330,9 +125065,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -121346,7 +125081,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -121356,7 +125091,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -121366,7 +125101,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -121562,9 +125297,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -121578,7 +125313,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -121588,7 +125323,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -121598,7 +125333,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -121802,9 +125537,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -121818,7 +125553,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -121828,7 +125563,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -121838,7 +125573,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -122034,9 +125769,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -122050,7 +125785,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -122060,7 +125795,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -122070,7 +125805,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -122266,9 +126001,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -122282,7 +126017,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -122292,7 +126027,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -122302,7 +126037,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -122498,9 +126233,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -122514,7 +126249,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -122524,7 +126259,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -122534,7 +126269,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -122738,9 +126473,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -122754,7 +126489,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -122764,7 +126499,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -122774,7 +126509,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -122974,9 +126709,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -122990,7 +126725,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -123000,7 +126735,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -123010,7 +126745,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -123210,9 +126945,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -123226,7 +126961,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -123236,7 +126971,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -123246,7 +126981,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -123446,9 +127181,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -123462,7 +127197,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -123472,7 +127207,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -123482,7 +127217,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -123692,9 +127427,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -123708,7 +127443,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -123718,7 +127453,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -123728,7 +127463,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -123936,9 +127671,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -123952,7 +127687,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -123962,7 +127697,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -123972,7 +127707,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -124182,9 +127917,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -124198,7 +127933,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -124208,7 +127943,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -124218,7 +127953,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -124426,9 +128161,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -124442,7 +128177,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -124452,7 +128187,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -124462,7 +128197,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -124672,9 +128407,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -124688,7 +128423,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -124698,7 +128433,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -124708,7 +128443,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -124918,9 +128653,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -124934,7 +128669,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -124944,7 +128679,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -124954,7 +128689,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -125164,9 +128899,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -125180,7 +128915,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -125190,7 +128925,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -125200,7 +128935,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -125404,9 +129139,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -125420,7 +129155,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -125430,7 +129165,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -125440,7 +129175,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -125648,9 +129383,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -125664,7 +129399,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -125674,7 +129409,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -125684,7 +129419,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -125888,9 +129623,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -125904,7 +129639,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -125914,7 +129649,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -125924,7 +129659,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -126128,9 +129863,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -126144,7 +129879,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -126154,7 +129889,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -126164,7 +129899,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -126374,9 +130109,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -126390,7 +130125,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -126400,7 +130135,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -126410,7 +130145,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -126610,9 +130345,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -126626,7 +130361,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -126636,7 +130371,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -126646,7 +130381,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -126866,9 +130601,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -126882,7 +130617,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -126892,7 +130627,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -126902,7 +130637,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -127106,9 +130841,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -127122,7 +130857,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -127132,7 +130867,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -127142,7 +130877,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -127344,9 +131079,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -127360,7 +131095,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -127370,7 +131105,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -127380,7 +131115,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -127588,9 +131323,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -127604,7 +131339,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -127614,7 +131349,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -127624,7 +131359,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -127828,9 +131563,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -127844,7 +131579,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -127854,7 +131589,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -127864,7 +131599,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -128077,9 +131812,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -128093,7 +131828,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -128103,7 +131838,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -128113,7 +131848,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -128324,9 +132059,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -128340,7 +132075,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -128350,7 +132085,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -128360,7 +132095,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -128576,9 +132311,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -128592,7 +132327,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -128602,7 +132337,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -128612,7 +132347,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -128820,9 +132555,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -128836,7 +132571,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -128846,7 +132581,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -128856,7 +132591,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -129064,9 +132799,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -129080,7 +132815,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -129090,7 +132825,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -129100,7 +132835,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -129300,9 +133035,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -129316,7 +133051,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -129326,7 +133061,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -129336,7 +133071,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -129556,9 +133291,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -129572,7 +133307,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -129582,7 +133317,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -129592,7 +133327,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -129812,9 +133547,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -129828,7 +133563,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -129838,7 +133573,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -129848,7 +133583,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -130044,9 +133779,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -130060,7 +133795,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -130070,7 +133805,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -130080,7 +133815,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -130276,9 +134011,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -130292,7 +134027,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -130302,7 +134037,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -130312,7 +134047,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -130524,9 +134259,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -130540,7 +134275,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -130550,7 +134285,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -130560,7 +134295,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -130756,9 +134491,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -130772,7 +134507,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -130782,7 +134517,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -130792,7 +134527,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -130990,9 +134725,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -131006,7 +134741,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -131016,7 +134751,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -131026,7 +134761,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -131224,9 +134959,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -131240,7 +134975,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -131250,7 +134985,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -131260,7 +134995,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -131458,9 +135193,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -131474,7 +135209,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -131484,7 +135219,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -131494,7 +135229,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -131702,9 +135437,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -131718,7 +135453,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -131728,7 +135463,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -131738,7 +135473,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -131960,9 +135695,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -131976,7 +135711,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -131986,7 +135721,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -131996,7 +135731,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -132192,9 +135927,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -132208,7 +135943,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -132218,7 +135953,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -132228,7 +135963,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -132428,9 +136163,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -132444,7 +136179,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -132454,7 +136189,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -132464,7 +136199,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -132664,9 +136399,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -132680,7 +136415,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -132690,7 +136425,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -132700,7 +136435,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -132900,9 +136635,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -132916,7 +136651,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -132926,7 +136661,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -132936,7 +136671,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -133152,9 +136887,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -133168,7 +136903,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -133178,7 +136913,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -133188,7 +136923,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -133392,9 +137127,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -133408,7 +137143,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -133418,7 +137153,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -133428,7 +137163,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -133624,9 +137359,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -133640,7 +137375,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -133650,7 +137385,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -133660,7 +137395,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -133858,9 +137593,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -133874,7 +137609,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -133884,7 +137619,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -133894,7 +137629,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -134096,9 +137831,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -134112,7 +137847,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -134122,7 +137857,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -134132,7 +137867,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -134334,9 +138069,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -134350,7 +138085,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -134360,7 +138095,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -134370,7 +138105,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -134588,9 +138323,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -134604,7 +138339,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -134614,7 +138349,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -134624,7 +138359,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -134848,9 +138583,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -134864,7 +138599,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -134874,7 +138609,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -134884,7 +138619,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -135084,9 +138819,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -135100,7 +138835,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -135110,7 +138845,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -135120,7 +138855,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -135320,9 +139055,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -135336,7 +139071,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -135346,7 +139081,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -135356,7 +139091,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -135574,9 +139309,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -135590,7 +139325,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -135600,7 +139335,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -135610,7 +139345,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -135836,9 +139571,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -135852,7 +139587,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -135862,7 +139597,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -135872,7 +139607,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -136076,9 +139811,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -136092,7 +139827,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -136102,7 +139837,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -136112,7 +139847,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -136316,9 +140051,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -136332,7 +140067,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -136342,7 +140077,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -136352,7 +140087,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -136576,9 +140311,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -136592,7 +140327,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -136602,7 +140337,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -136612,7 +140347,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -136832,9 +140567,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -136848,7 +140583,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -136858,7 +140593,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -136868,7 +140603,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -137078,9 +140813,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -137094,7 +140829,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -137104,7 +140839,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -137114,7 +140849,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -137314,9 +141049,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -137330,7 +141065,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -137340,7 +141075,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -137350,7 +141085,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -137546,9 +141281,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -137562,7 +141297,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -137572,7 +141307,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -137582,7 +141317,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -137790,9 +141525,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -137806,7 +141541,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -137816,7 +141551,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -137826,7 +141561,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -138030,9 +141765,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -138046,7 +141781,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -138056,7 +141791,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -138066,7 +141801,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -138262,9 +141997,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -138278,7 +142013,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -138288,7 +142023,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -138298,7 +142033,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -138506,9 +142241,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -138522,7 +142257,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -138532,7 +142267,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -138542,7 +142277,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -138746,9 +142481,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -138762,7 +142497,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -138772,7 +142507,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -138782,7 +142517,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -138982,9 +142717,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -138998,7 +142733,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -139008,7 +142743,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -139018,7 +142753,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -139246,9 +142981,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -139262,7 +142997,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -139272,7 +143007,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -139282,7 +143017,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -139498,9 +143233,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -139514,7 +143249,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -139524,7 +143259,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -139534,7 +143269,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -139732,9 +143467,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -139748,7 +143483,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -139758,7 +143493,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -139768,7 +143503,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -139970,9 +143705,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -139986,7 +143721,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -139996,7 +143731,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -140006,7 +143741,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -140208,9 +143943,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -140224,7 +143959,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -140234,7 +143969,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -140244,7 +143979,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -140446,9 +144181,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -140462,7 +144197,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -140472,7 +144207,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -140482,7 +144217,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -140682,9 +144417,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -140698,7 +144433,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -140708,7 +144443,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -140718,7 +144453,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -140918,9 +144653,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -140934,7 +144669,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -140944,7 +144679,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -140954,7 +144689,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -141159,9 +144894,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -141175,7 +144910,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -141185,7 +144920,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -141195,7 +144930,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -141397,9 +145132,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -141413,7 +145148,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -141423,7 +145158,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -141433,7 +145168,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -141635,9 +145370,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -141651,7 +145386,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -141661,7 +145396,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -141671,7 +145406,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -141875,9 +145610,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -141891,7 +145626,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -141901,7 +145636,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -141911,7 +145646,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -141983,7 +145718,7 @@ compliance activities that can be filtered by various criteria.
 
   - `ClaudeUserSettingsUpdated object`
 
-    User updated their personal settings.
+    User updated their personal settings. Only changes to `analysis_tool_enabled`, `artifacts_enabled`, `cli_op_permissions_enabled`, `conversation_preferences`, `cowork_global_instructions`, `google_calendar_integration_enabled`, `mcp_tools_enabled` and `web_search_enabled` are recorded; older events may also list other settings.
 
     - `type: optional "claude_user_settings_updated"`
 
@@ -142123,9 +145858,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -142139,7 +145874,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -142149,7 +145884,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -142159,7 +145894,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -142709,9 +146444,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -142725,7 +146460,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -142735,7 +146470,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -142745,7 +146480,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -142949,9 +146684,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -142965,7 +146700,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -142975,7 +146710,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -142985,7 +146720,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -143185,9 +146920,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -143201,7 +146936,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -143211,7 +146946,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -143221,7 +146956,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -143433,9 +147168,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -143449,7 +147184,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -143459,7 +147194,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -143469,7 +147204,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -143677,9 +147412,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -143693,7 +147428,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -143703,7 +147438,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -143713,7 +147448,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -143925,9 +147660,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -143941,7 +147676,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -143951,7 +147686,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -143961,7 +147696,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -144165,9 +147900,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -144181,7 +147916,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -144191,7 +147926,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -144201,7 +147936,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -144409,9 +148144,9 @@ compliance activities that can be filtered by various criteria.
 
           default: federated_actor
 
-        - `provider: FederatedActorAwsProvider or FederatedActorAzureProvider or FederatedActorGcpProvider or FederatedActorOidcProvider`
+        - `provider: Aws or Azure or Gcp or Oidc`
 
-          - `FederatedActorAwsProvider object`
+          - `Aws object`
 
             Asserting party: the AWS account the organization is bound to.
 
@@ -144425,7 +148160,7 @@ compliance activities that can be filtered by various criteria.
 
               The AWS-signed ARN of the IAM principal that requested the token.
 
-          - `FederatedActorAzureProvider object`
+          - `Azure object`
 
             Asserting party: the Azure subscription the organization is bound to.
 
@@ -144435,7 +148170,7 @@ compliance activities that can be filtered by various criteria.
 
             - `subscription_id: string`
 
-          - `FederatedActorGcpProvider object`
+          - `Gcp object`
 
             Asserting party: the GCP project the organization is bound to.
 
@@ -144445,7 +148180,7 @@ compliance activities that can be filtered by various criteria.
 
             - `project_number: string`
 
-          - `FederatedActorOidcProvider object`
+          - `Oidc object`
 
             Asserting party: a customer-registered OIDC federation issuer.
 
@@ -144742,7 +148477,7 @@ curl https://api.anthropic.com/v1/compliance/organizations/$ORG_UUID/users \
 {
   "data": [
     {
-      "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+      "id": "user_01WxYzAbCdEfGhJkMnPqRsTu",
       "created_at": "2025-03-12T18:22:41.123456Z",
       "email": "jane.doe@example.com",
       "full_name": "Jane Doe",
@@ -144759,6 +148494,8 @@ curl https://api.anthropic.com/v1/compliance/organizations/$ORG_UUID/users \
 ### List organization members' personal preferences
 
 **GET** `/v1/compliance/organizations/{org_uuid}/user_preferences`
+
+This endpoint is in beta.
 
 List the personal preferences of an organization's current members.
 
@@ -144861,7 +148598,7 @@ curl https://api.anthropic.com/v1/compliance/organizations/$ORG_UUID/user_prefer
       "conversation_preferences": "Always answer in British English.",
       "cowork_global_instructions": "Prefer short status updates.",
       "user": {
-        "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+        "id": "user_01WxYzAbCdEfGhJkMnPqRsTu",
         "email_address": "jane.doe@example.com"
       }
     }
@@ -145251,6 +148988,8 @@ unknown organizations and organizations outside the hierarchy return 404.
 
       - `"claude_academy_inference_enabled"`
 
+      - `"claude_ai_ccr_support_sharing_enabled"`
+
       - `"claude_ai_chat_sharing_enabled"`
 
       - `"claude_ai_feedback_collection_enabled"`
@@ -145314,8 +149053,6 @@ unknown organizations and organizations outside the hierarchy return 404.
       - `"connector_tools_default_always_allow"`
 
       - `"content_redaction_enabled"`
-
-      - `"cowork_trusted_devices_required"`
 
       - `"desktop_extension_allowlist_enabled"`
 
@@ -145805,7 +149542,7 @@ curl https://api.anthropic.com/v1/compliance/groups/$GROUP_ID/members \
       "created_at": "2025-03-12T18:22:41.123456Z",
       "email": "jane.doe@example.com",
       "updated_at": "2025-03-14T09:05:17.456789Z",
-      "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+      "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
     }
   ],
   "has_more": true,
@@ -147036,6 +150773,10 @@ are sorted chronologically (time ascending) by created_at.
 
     format: date-time
 
+  - `href: string or null`
+
+    URL to view this project in claude.ai
+
   - `is_private: boolean`
 
     If false, the project is visible to all organization members; if true the project is accessible only to the creator and specified collaborators
@@ -147104,7 +150845,8 @@ curl https://api.anthropic.com/v1/compliance/apps/projects \
       "user": {
         "id": "user_xyz456",
         "email_address": "user@example.com"
-      }
+      },
+      "href": "https://claude.ai/project/abcdef01-2345-6789-abcd-ef0123456789"
     }
   ],
   "has_more": true,
@@ -147164,6 +150906,10 @@ Get detailed information for a specific project.
 
   Project description
 
+- `href: string or null`
+
+  URL to view this project in claude.ai
+
 - `instructions: string`
 
   Project's custom instructions / prompt
@@ -147222,6 +150968,7 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/$PROJECT_ID \
   "created_at": "2025-03-12T18:22:41.123456Z",
   "deleted_at": "2019-12-27T18:11:19.117Z",
   "description": "Planning and research for the Q3 launch",
+  "href": "https://claude.ai/project/3c9d2e1f-7a6b-4c58-9d3e-2f1a7b6c5d48",
   "instructions": "Focus on concise, actionable answers.",
   "is_private": true,
   "name": "Q3 Product Launch",
@@ -147229,7 +150976,7 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/$PROJECT_ID \
   "organization_uuid": "a1b2c3d4-e5f6-4789-a012-3456789abcde",
   "updated_at": "2025-03-14T09:05:17.456789Z",
   "user": {
-    "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+    "id": "user_01WxYzAbCdEfGhJkMnPqRsTu",
     "email_address": "jane.doe@example.com"
   }
 }
@@ -147343,11 +151090,11 @@ GET /v1/compliance/apps/projects/documents/{claude_proj_doc_id} endpoint.
 
 #### Returns
 
-- `data: array of ComplianceProjectFileReference or ComplianceProjectDocReference`
+- `data: array of ProjectFile or ProjectDoc`
 
   List of attachments sorted chronologically by created_at, tie break by id
 
-  - `ComplianceProjectFileReference object`
+  - `ProjectFile object`
 
     File attachment reference for compliance responses.
 
@@ -147383,7 +151130,7 @@ GET /v1/compliance/apps/projects/documents/{claude_proj_doc_id} endpoint.
 
       Size in bytes of the file's preferred downloadable variant, when recorded. Null otherwise. Use the per-file `/metadata` endpoint for the authoritative value.
 
-  - `ComplianceProjectDocReference object`
+  - `ProjectDoc object`
 
     Project document attachment reference for compliance responses.
 
@@ -147498,11 +151245,11 @@ role.
 
 #### Returns
 
-- `data: array of ComplianceProjectUserCollaborator or ComplianceProjectGroupCollaborator or ComplianceProjectOrganizationCollaborator or ComplianceProjectOrganizationRoleCollaborator`
+- `data: array of User or Group or Organization or OrganizationRole`
 
   List of collaborators sorted chronologically by granted_at, tie break by the underlying role-assignment UUID
 
-  - `ComplianceProjectUserCollaborator object`
+  - `User object`
 
     An individual user granted a role on a project.
 
@@ -147534,7 +151281,7 @@ role.
 
       Identifier of the user granted access (tagged ID), or null if their account has since been deleted
 
-  - `ComplianceProjectGroupCollaborator object`
+  - `Group object`
 
     An RBAC group granted a role on a project.
 
@@ -147566,7 +151313,7 @@ role.
 
       - `"viewer"`
 
-  - `ComplianceProjectOrganizationCollaborator object`
+  - `Organization object`
 
     An entire organization granted a role on a project.
 
@@ -147598,7 +151345,7 @@ role.
 
       - `"viewer"`
 
-  - `ComplianceProjectOrganizationRoleCollaborator object`
+  - `OrganizationRole object`
 
     All holders of an organization-level role granted a role on a project.
 
@@ -147736,7 +151483,7 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/documents/$DOCUMENT_I
   "created_at": "2025-03-12T18:22:41.123456Z",
   "filename": "design-notes.txt",
   "user": {
-    "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+    "id": "user_01WxYzAbCdEfGhJkMnPqRsTu",
     "email_address": "jane.doe@example.com"
   }
 }
@@ -147835,7 +151582,7 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/documents/$DOCUMENT_I
   "mime_type": "text/plain",
   "size_bytes": 0,
   "user": {
-    "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+    "id": "user_01WxYzAbCdEfGhJkMnPqRsTu",
     "email_address": "jane.doe@example.com"
   }
 }
@@ -148610,7 +152357,7 @@ curl https://api.anthropic.com/v1/compliance/apps/sessions/local/$LOCAL_SESSION_
     "type": "compliance_local_session",
     "updated_at": "2025-03-12T18:22:41.123456Z",
     "user": {
-      "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+      "id": "user_01WxYzAbCdEfGhJkMnPqRsTu",
       "email_address": "jane.doe@example.com"
     },
     "workspace_id": "wrkspc_01SvYKoWVRVHoEbwESNvzYdR"
@@ -148996,7 +152743,7 @@ malformed session identifier returns 400.
 
   - `sent_by_user_id: string or null`
 
-    Identifier of the human account that sent this turn on an agent-owned session. Null on user-owned sessions, where every user-role turn was sent by the session's `user`.
+    Identifier of the human account that sent this turn on an agent-owned session. Null on user-owned sessions, where every user-role turn was sent by the session's `user`. Can also be null on an agent-owned session, where several people may take part, when the turn cannot be attributed to one human account (for example, no sender was recorded).
 
 - `next_page: string or null`
 
@@ -149310,12 +153057,12 @@ curl https://api.anthropic.com/v1/compliance/apps/code/artifacts \
       "id": "cart_01Tu9VwXyZaBcDeFgHiJkLmN",
       "artifact_type": "code",
       "organization_uuid": "a1b2c3d4-e5f6-4789-a012-3456789abcde",
-      "owner_user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+      "owner_user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu",
       "published_version_id": "1741803761-9f3a",
       "read_mode": "org",
       "updated_at": "2025-03-14T09:05:17.456789Z",
       "user": {
-        "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+        "id": "user_01WxYzAbCdEfGhJkMnPqRsTu",
         "email_address": "jane.doe@example.com"
       },
       "versions": [

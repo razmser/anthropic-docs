@@ -58,20 +58,20 @@ Anthropic’s [client SDKs](../cli-sdks-libraries/overview.md) support Bedrock. 
   <Tab title="Java">
     <CodeGroup exclude="shell, python, typescript, csharp, go, php, ruby">
       ```groovy Gradle
-      implementation("com.anthropic:anthropic-java:3.3.0")
-      implementation("com.anthropic:anthropic-java-bedrock:3.3.0")
+      implementation("com.anthropic:anthropic-java:3.4.0")
+      implementation("com.anthropic:anthropic-java-bedrock:3.4.0")
       ```
 
       ```xml Maven
       <dependency>
           <groupId>com.anthropic</groupId>
           <artifactId>anthropic-java</artifactId>
-          <version>3.3.0</version>
+          <version>3.4.0</version>
       </dependency>
       <dependency>
           <groupId>com.anthropic</groupId>
           <artifactId>anthropic-java-bedrock</artifactId>
-          <version>3.3.0</version>
+          <version>3.4.0</version>
       </dependency>
       ```
 
@@ -745,17 +745,25 @@ For the full feature list with Amazon Bedrock availability, see [Features overvi
 * Claude Managed Agents
 * Server-side fallback (the [`fallbacks` parameter](refusals-and-fallback.md#server-side-fallback); use the [client-side fallback pattern](refusals-and-fallback.md#client-side-fallback) instead)
 * Automatic prompt caching (the [top-level `cache_control` field](prompt-caching.md#automatic-caching); use [explicit cache breakpoints](prompt-caching.md#explicit-cache-breakpoints) instead)
-* [Computer use](../agents-and-tools/tool-use/computer-use-tool.md) and [browser use](../agents-and-tools/tool-use/browser-use-tool.md) toolsets (`computer_toolset_20260801` and `browser_toolset_20260801` are not currently available on Amazon Bedrock; the beta computer use tool versions remain available)
+
+### Computer use and browser use toolsets on Bedrock
+
+The [computer use](../agents-and-tools/tool-use/computer-use-tool.md) and [browser use](../agents-and-tools/tool-use/browser-use-tool.md) toolsets are available through the InvokeModel API for these models:
+
+* Claude Fable 5.1
+* Claude Fable 5
+* Claude Opus 5.5
+* Claude Opus 5
+* Claude Opus 4.8
+* Claude Sonnet 5.5
+* Claude Sonnet 5
+* Claude Haiku 5.5
+
+To use one, add an entry of type `computer_toolset_20260801` or `browser_toolset_20260801` to the `tools` array. No beta header is required for either toolset.
 
 ### PDF support on Bedrock
 
-PDF support is available on Bedrock through both the Converse API and InvokeModel API. For detailed information about PDF processing capabilities and limitations, see [Amazon Bedrock PDF support](pdf-support.md#amazon-bedrock-pdf-support).
-
-**Important considerations for Converse API users:**
-
-* Visual PDF analysis (charts, images, layouts) requires citations to be enabled
-* Without citations, only basic text extraction is available
-* For full control without forced citations, use the InvokeModel API
+[PDF support](pdf-support.md) is available on Bedrock through both the Converse API and the InvokeModel API.
 
 ### Mid-conversation system messages on Bedrock
 

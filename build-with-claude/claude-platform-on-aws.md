@@ -308,20 +308,20 @@ Anthropic’s [client SDKs](../cli-sdks-libraries/overview.md) support Claude Pl
 
   <Tab title="Java">
     ```kotlin Gradle
-    implementation("com.anthropic:anthropic-java:3.3.0")
-    implementation("com.anthropic:anthropic-java-aws:3.3.0")
+    implementation("com.anthropic:anthropic-java:3.4.0")
+    implementation("com.anthropic:anthropic-java-aws:3.4.0")
     ```
 
     ```xml Maven
     <dependency>
       <groupId>com.anthropic</groupId>
       <artifactId>anthropic-java</artifactId>
-      <version>3.3.0</version>
+      <version>3.4.0</version>
     </dependency>
     <dependency>
       <groupId>com.anthropic</groupId>
       <artifactId>anthropic-java-aws</artifactId>
-      <version>3.3.0</version>
+      <version>3.4.0</version>
     </dependency>
     ```
   </Tab>
@@ -550,7 +550,7 @@ Claude Platform on AWS uses Claude API endpoints directly, which means you get f
 * **Beta features:** Pass the standard `anthropic-beta` header to access beta features, just as you would with the Claude API.
 * **Agent Skills:** Use pre-built and custom [Agent Skills](../agents-and-tools/agent-skills/overview.md) with the same `container.skills` parameter as the Claude API. All pre-built Skills (PowerPoint, Excel, Word, PDF) work out of the box.
 * **Code execution:** Run code in Anthropic’s managed sandbox using the [code execution tool](../agents-and-tools/tool-use/code-execution-tool.md).
-* **Tool use:** All [tool use capabilities](../agents-and-tools/tool-use/overview.md) are available except the computer use and browser use toolsets; see [Features not supported](claude-platform-on-aws.md#features-not-supported).
+* **Tool use:** All [tool use capabilities](../agents-and-tools/tool-use/overview.md) are available.
 * **Thinking:** [Adaptive thinking](thinking.md), the [effort parameter](effort.md), and, on the models that support it, [extended thinking](extended-thinking.md) work with the same parameters as the Claude API.
 * **Streaming:** Full SSE streaming support for real-time responses.
 * **Batch processing:** Submit batch requests for high-throughput workloads.
@@ -576,9 +576,8 @@ Sessions and self-hosted workers on Claude Platform on AWS differ from first-par
 The following capabilities are not currently available on Claude Platform on AWS:
 
 * **HIPAA readiness:** Anthropic’s HIPAA-ready program is not available. See [API and data retention](../manage-claude/api-and-data-retention.md).
-* **Computer use and browser use toolsets:** `computer_toolset_20260801` and `browser_toolset_20260801` are not currently available on Claude Platform on AWS. The beta computer use tool versions remain available for the models listed under [Earlier tool versions](../agents-and-tools/tool-use/computer-use-tool.md#earlier-tool-versions).
 
-- **Admin API:** Workspace endpoints (create, get, list, update, and archive on `/v1/organizations/workspaces`), external key endpoints (register, get, list, update, and delete on `/v1/organizations/external_keys`, for [CMEK](../manage-claude/cmek.md); keys are validated when attached to a workspace rather than through a validate endpoint), and the [telemetry destination endpoints](../api/claude-platform-on-aws-iam-actions.md#telemetry-destinations) are available. Other Admin API endpoints (organization members, workspace members, invites, API keys, usage reports, cost reports, and rate limit reports) are not currently available. View usage and cost data in the [Claude Console](claude-platform-on-aws.md#using-the-claude-console) instead. AWS IAM manages organization membership.
+- **Admin API:** Workspace endpoints (create, get, list, update, and archive on `/v1/organizations/workspaces`), external key endpoints (register, get, list, update, and delete on `/v1/organizations/external_keys`, for [CMEK](../manage-claude/cmek.md); keys are validated when attached to a workspace rather than through a validate endpoint), the [telemetry destination endpoints](../api/claude-platform-on-aws-iam-actions.md#telemetry-destinations), and the [Usage and Cost Analytics API](../manage-claude/usage-cost-analytics-api.md) endpoints are available. Other Admin API endpoints (organization members, workspace members, invites, API keys, the legacy [Usage and Cost API](../manage-claude/usage-cost-api.md), and rate limit reports) are not available. AWS IAM manages organization membership.
 - **Workspace member management:** Adding or removing users from individual workspaces is not available. AWS IAM policies on workspace ARNs control access.
 - **Claude Code workspace and Analytics API:** The Claude Code workspace with automatic rate limits is not available. Claude Code usage appears in the general usage view rather than a dedicated screen.
 - **OAuth authentication:** Not supported. Use SigV4 or API key authentication.
@@ -869,7 +868,7 @@ Spend is calculated at list prices and can take about 2 hours to reflect recent 
 
 ## Monitoring and logging
 
-AWS CloudTrail can capture all requests to Claude Platform on AWS. Workspace, external key, telemetry destination, compliance, vault, and webhook operations are logged as Management events by default. Inference, batch, file, skill, model, user profile, and Claude Managed Agents operations (other than vaults and webhooks) are classified as Data events and require explicit data event logging configuration, which incurs additional CloudTrail charges. See the [IAM actions reference](../api/claude-platform-on-aws-iam-actions.md#route-to-action-mapping) for the full event type classification and the [AWS CloudTrail documentation](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/) for configuration details.
+AWS CloudTrail can capture all requests to Claude Platform on AWS. Workspace, external key, telemetry destination, compliance, vault, and webhook operations are logged as Management events by default. Inference, batch, file, skill, model, user profile, usage and cost report, and Claude Managed Agents operations (other than vaults and webhooks) are classified as Data events and require explicit data event logging configuration, which incurs additional CloudTrail charges. See the [IAM actions reference](../api/claude-platform-on-aws-iam-actions.md#route-to-action-mapping) for the full event type classification and the [AWS CloudTrail documentation](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/) for configuration details.
 
 ### Request IDs
 

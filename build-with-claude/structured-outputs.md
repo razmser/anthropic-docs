@@ -3,7 +3,7 @@ title: Structured outputs
 url: https://platform.claude.com/docs/en/build-with-claude/structured-outputs
 description: Get validated JSON results from agent workflows
 featureMetadata:
-  status: ga
+  status: stable
   zdr:
     eligibility: qualified
     note: "Excludes [Covered Models](../manage-claude/api-and-data-retention.md#model-specific-data-retention-requirements). Your prompts and Claude's outputs are not stored. Only the JSON schema is cached, for up to 24 hours since last use. This also covers strict tool use (`strict: true` on tools), which uses the same grammar pipeline."
@@ -26,13 +26,13 @@ featureMetadata:
     - claude-opus-4-5-20251101
     - claude-sonnet-4-5-20250929
   supportedPlatforms:
-    Claude API: ga
-    Claude Platform on AWS: ga
-    Claude Models on Google Cloud (Anthropic managed): ga
-    Amazon Bedrock: ga
-    Amazon Bedrock (InvokeModel): ga
-    Claude Models on Google Cloud (Google managed): ga
-    Microsoft Foundry: ga
+    Claude API: stable
+    Claude Platform on AWS: stable
+    Claude Models on Google Cloud (Anthropic managed): stable
+    Amazon Bedrock: stable
+    Amazon Bedrock (InvokeModel): stable
+    Claude Models on Google Cloud (Google managed): stable
+    Microsoft Foundry: stable
 ---
 
 Structured outputs constrain Claude’s responses to follow a specific schema, ensuring valid, parseable output for downstream processing. Structured outputs provide two complementary features:
@@ -2623,7 +2623,7 @@ Structured outputs support standard JSON Schema with some limitations. Both JSON
 
 <Accordion title="Supported features">
   * All basic types: object, array, string, integer, number, boolean, null
-  * `enum` (strings, numbers, Booleans, or nulls only, no complex types). For a capitalization caveat, see [Invalid outputs](structured-outputs.md#invalid-outputs).
+  * `enum` (strings, numbers, booleans, or nulls only, no complex types). For a capitalization caveat, see [Invalid outputs](structured-outputs.md#invalid-outputs).
   * `const`
   * `anyOf` and `allOf` (with limitations: `allOf` with `$ref` not supported)
   * `$ref`, `$def`, and `definitions` (external `$ref` not supported)
@@ -2798,7 +2798,7 @@ The Python SDK (v1.0 and later) does not accept `output_format={...}` on `client
 
 **Incompatible with:**
 
-* **[Citations](citations.md):** Citations require interleaving citation blocks with text, which conflicts with strict JSON schema constraints. The API returns a 400 error if citations are enabled with `output_config.format`.
+* **[Citations](citations.md):** Citations require interleaving citation blocks with text, which conflicts with strict JSON schema constraints. The API returns a 400 error if citations are enabled with `output_config.format`. To extract structured data with a citation for each value, see [Get structured data with citations](citations.md#get-structured-data-with-citations).
 * **Message prefilling:** Prefilling is incompatible with JSON outputs.
 
 <Tip>

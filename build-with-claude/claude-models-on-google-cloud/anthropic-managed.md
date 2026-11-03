@@ -175,20 +175,20 @@ Install the package that provides the client:
 
   <Tab title="Java">
     ```kotlin Gradle
-    implementation("com.anthropic:anthropic-java:3.3.0")
-    implementation("com.anthropic:anthropic-java-google-cloud:3.3.0")
+    implementation("com.anthropic:anthropic-java:3.4.0")
+    implementation("com.anthropic:anthropic-java-google-cloud:3.4.0")
     ```
 
     ```xml Maven
     <dependency>
       <groupId>com.anthropic</groupId>
       <artifactId>anthropic-java</artifactId>
-      <version>3.3.0</version>
+      <version>3.4.0</version>
     </dependency>
     <dependency>
       <groupId>com.anthropic</groupId>
       <artifactId>anthropic-java-google-cloud</artifactId>
-      <version>3.3.0</version>
+      <version>3.4.0</version>
     </dependency>
     ```
   </Tab>
@@ -406,12 +406,12 @@ In Claude Models on Google Cloud (Anthropic managed), a request for a model that
 
 The client for Claude Models on Google Cloud (Anthropic managed) takes the settings in the following table. A value you pass when you create the client wins over the environment variable. To set the project and workspace ID explicitly, pass `project` (go: `Project`; java: `.project()`; csharp: `GoogleCloudClientOptions.Project`; cli: `--google-cloud-project`) and `workspace_id` (typescript, php: `workspaceId`; go: `WorkspaceID`; java: `.workspaceId()`; csharp: `GoogleCloudClientOptions.WorkspaceId`; cli: `--google-cloud-workspace-id`).
 
-| Setting      | Environment variable                                          | If unset                                                                                                                                                                                                                        |
-| ------------ | ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Project ID   | `ANTHROPIC_GOOGLE_CLOUD_PROJECT`, then `GOOGLE_CLOUD_PROJECT` | The project that Application Default Credentials reports, when the credential type carries one                                                                                                                                  |
-| Workspace ID | `ANTHROPIC_GOOGLE_CLOUD_WORKSPACE_ID`                         | The client raises an error unless you set the base URL. [Organization-level routes](anthropic-managed.md#iam-roles) don’t need a workspace ID. |
-| Location     | `ANTHROPIC_GOOGLE_CLOUD_LOCATION`                             | `global`                                                                                                                                                                                                                        |
-| Base URL     | `ANTHROPIC_GOOGLE_CLOUD_BASE_URL`                             | Derived from the project, location, and workspace ID                                                                                                                                                                            |
+| Setting      | Environment variable                                          | If unset                                                                                                                                                                                                                                                                                                                   |
+| ------------ | ------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Project ID   | `ANTHROPIC_GOOGLE_CLOUD_PROJECT`, then `GOOGLE_CLOUD_PROJECT` | The project that Application Default Credentials reports, when the credential type carries one                                                                                                                                                                                                                             |
+| Workspace ID | `ANTHROPIC_GOOGLE_CLOUD_WORKSPACE_ID`                         | The client raises an error unless you set the base URL. [Organization-level routes](anthropic-managed.md#iam-roles) and [user profile](../../manage-claude/user-profiles.md) routes don’t need a workspace ID. |
+| Location     | `ANTHROPIC_GOOGLE_CLOUD_LOCATION`                             | `global`                                                                                                                                                                                                                                                                                                                   |
+| Base URL     | `ANTHROPIC_GOOGLE_CLOUD_BASE_URL`                             | Derived from the project, location, and workspace ID                                                                                                                                                                                                                                                                       |
 
 Leave the location at `global`. The location is separate from where inference runs, so for US-only inference, set `inference_geo: "us"` on each request, as described in [Data residency](../../manage-claude/data-residency.md#inference-geo).
 
@@ -521,6 +521,8 @@ The following features work on Claude Models on Google Cloud (Anthropic managed)
 
   * [Prompt caching](../prompt-caching.md)
   * [Extended thinking](../thinking.md)
+  * [Adaptive thinking](../thinking.md#configuring-thinking)
+  * [Effort](../effort.md)
   * [Server-side fallback](../refusals-and-fallback.md#server-side-fallback)
   * [Streaming](../streaming.md)
   * [Structured outputs](../structured-outputs.md)
@@ -574,7 +576,7 @@ Anthropic manages rate limits for Claude Models on Google Cloud (Anthropic manag
 
 Claude Models on Google Cloud (Anthropic managed) bills through Google Cloud Marketplace. Anthropic meters your usage. It reports the usage to Google Cloud in Claude Consumption Units. One Claude Consumption Unit is $0.01 USD. The charges appear on your Google Cloud bill. Anthropic doesn’t send a separate invoice.
 
-View usage and cost data on the **Usage** and **Cost** pages in the [Claude Console](anthropic-managed.md#using-the-claude-console).
+View usage and cost data on the **Usage** and **Cost** pages in the [Claude Console](anthropic-managed.md#using-the-claude-console), or query it with the [Usage and Cost Analytics API](../../manage-claude/usage-cost-analytics-api.md).
 
 If you have a Google Cloud spend commitment, usage counts toward it the way other Marketplace purchases do.
 
@@ -825,6 +827,10 @@ To move to Claude Models on Google Cloud (Anthropic managed), complete the follo
     Run the request in [Making requests](anthropic-managed.md#making-requests) to check that your setup works. Then run your own code. If a call fails with a permission error, see [Troubleshooting account setup](anthropic-managed.md#troubleshooting-account-setup). Before you move production traffic, check the [rate limits for Claude Models on Google Cloud (Anthropic managed)](anthropic-managed.md#rate-limits).
   </Step>
 </Steps>
+
+## Support
+
+[Google Cloud Support](https://cloud.google.com/support) handles your Google Cloud account, access, and billing. [Anthropic Support](https://support.claude.com/en/articles/9015913-how-to-get-support) handles Claude itself, including models, API errors, and rate limits. To request higher rate limits, see [Rate limits](anthropic-managed.md#rate-limits).
 
 ## Next steps
 

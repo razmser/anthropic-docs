@@ -6,7 +6,7 @@ description: Explore Claude's advanced features and capabilities.
 
 For each feature’s eligibility under zero data retention (ZDR) and HIPAA readiness, see [API and data retention](../manage-claude/api-and-data-retention.md#feature-eligibility).
 
-For administration and governance, see the [Admin API](../manage-claude/admin-api.md), the [Usage and Cost API](../manage-claude/usage-cost-api.md), and the [Compliance API](../manage-claude/compliance-api.md).
+For administration and governance, see the [Admin API](../manage-claude/admin-api.md), the [Usage and Cost Analytics API](../manage-claude/usage-cost-analytics-api.md), and the [Compliance API](../manage-claude/compliance-api.md).
 
 ## Platform features
 
@@ -89,6 +89,7 @@ Features of the Claude Platform that work across its APIs. Each feature’s page
 | ↳ [Memory tool helpers](../agents-and-tools/tool-use/memory-tool.md#implement-the-memory-handler) | SDK helpers that handle the memory tool’s interface and tool-use loop, so your code supplies only the storage.                               |
 | [Message streaming](streaming.md)                                            | Receiving a Messages API response incrementally, as server-sent events, while it is generated.                                               |
 | ↳ [Fine-grained tool streaming](../agents-and-tools/tool-use/fine-grained-tool-streaming.md)      | Streams a tool’s input to your client as Claude writes it, without the server first buffering and checking the JSON.                         |
+| [Message threads](message-threads.md)                                        | Give long-running agents a faster time to first token, especially in long conversations, by sending only the new messages on each request.   |
 | [On-demand compaction](compaction-on-demand.md)                              | Replaces the earlier messages of a conversation with a summary that Claude writes when your application asks for it.                         |
 | ↳ [Background compaction](compaction-background.md)                          | Runs the on-demand compaction request while the conversation continues on its full history, then swaps in the summary when it arrives.       |
 | ↳ [Compaction and preserved thinking](compaction-thinking-blocks.md)         | Thinking blocks in the turns you keep after on-demand compaction can stay valid, under stated conditions, on models with preserved thinking. |

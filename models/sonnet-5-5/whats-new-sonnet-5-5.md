@@ -4,12 +4,12 @@ url: https://platform.claude.com/docs/en/models/sonnet-5-5/whats-new-sonnet-5-5
 description: "What changes when you move from Claude Sonnet 5 to Claude Sonnet 5.5: breaking changes, feature support, behavior differences, pricing, and availability."
 ---
 
-Claude Sonnet 5.5 offers the best combination of speed and intelligence. Five breaking changes affect code already running on Claude Sonnet 5:
+Claude Sonnet 5.5 offers the best combination of speed and intelligence. Five breaking changes can affect code already running on Claude Sonnet 5:
 
 * [Turn off up-front thinking with `between_tools`](whats-new-sonnet-5-5.md#turn-off-up-front-thinking).
 * [Forced tool use returns an error](whats-new-sonnet-5-5.md#forced-tool-use-is-not-supported).
 * [Thinking blocks are tied to the model and the conversation](whats-new-sonnet-5-5.md#thinking-blocks-are-tied-to-the-model-that-produced-them).
-* On the Claude API and Claude Models on Google Cloud (Google managed), [the earlier `computer_20251124` computer use tool is not accepted](whats-new-sonnet-5-5.md#computer-20251124-is-not-supported).
+* [Some computer use tool versions are not supported](whats-new-sonnet-5-5.md#computer-20251124-is-not-supported).
 * [The advisor tool rejects four models as advisors](whats-new-sonnet-5-5.md#advisor-tool-pairings): Claude Opus 4.8, Claude Opus 4.7, Claude Sonnet 5, and Claude Haiku 5.5.
 
 One more change alters the response shape without failing any request: [text between tool calls comes back in `thinking` blocks](whats-new-sonnet-5-5.md#text-between-tool-calls). An application that streams that text to its users goes quiet between tool calls until it sets a `display` value that returns the text, or turns off up-front thinking with `between_tools`.
@@ -52,21 +52,19 @@ Every thinking block records which model produced it. Each model reads its own b
 
 So a conversation that moves from Claude Sonnet 5 onto Claude Sonnet 5.5, or from Claude Sonnet 5.5 up to Claude Opus 5.5 on the Claude API and Claude Models on Google Cloud (Google managed), keeps its reasoning, and any other move away from Claude Sonnet 5.5 runs the turns after the switch without it. When a request carries a block the target model can’t read, the API drops it before the model sees it: the request succeeds, and dropped blocks aren’t billed. With the `thinking-binding-controls-2026-08-01` beta header, the drop is reported in a top-level `input_transformations` array. See [Switching models mid-conversation](../../build-with-claude/preserved-thinking.md#switching-models).
 
-The API also checks whether anything before a Claude Sonnet 5.5 thinking block has changed since the block was produced: the `system` prompt, the `tools`, or an earlier message. It enforces that check by default for accounts created on or after August 31, 2026, 00:00 UTC, on the Claude API, Amazon Bedrock, and Claude Models on Google Cloud (Google managed). On those accounts, a request that replays a block after such a change returns a 400 error. To drop the affected blocks instead, send the `thinking-binding-controls-2026-08-01` beta header and set `thinking.block_binding.prefix_mismatch_behavior` to `"drop_block"`. On older accounts, setting that field to either value opts the request in. `block_binding` works only with `thinking: {"type": "adaptive"}`. With `between_tools`, keep the history append-only, or strip the thinking blocks from the edited turn on.
+The API also checks whether anything before a Claude Sonnet 5.5 thinking block has changed since the block was produced: the `system` prompt, the `tools`, or an earlier message. Keep the conversation append-only: change instructions or tools with [mid-conversation system messages](../../build-with-claude/mid-conversation-system-messages.md) rather than edits. A request that replays a block after such a change and leaves `thinking.block_binding.prefix_mismatch_behavior` unset gets a 400 error on accounts created on or after August 31, 2026, 00:00 UTC. This applies on the Claude API, Amazon Bedrock, and Claude Models on Google Cloud (Google managed). On accounts created before that date, the request gets the error only when it sets the field to `"error"`. To drop the affected blocks instead, send the `thinking-binding-controls-2026-08-01` beta header and set the field to `"drop_block"`. `block_binding` works only with `thinking: {"type": "adaptive"}`. With any other thinking setting, you can’t send `block_binding`, so strip the block the error names and every later `thinking` and `redacted_thinking` block, then retry once.
 
-Keep the conversation append-only so the check never fails: change instructions or tools with [mid-conversation system messages](../../build-with-claude/mid-conversation-system-messages.md) rather than edits. See [Preserved thinking](../../build-with-claude/preserved-thinking.md) and the migration guide’s [note on thinking blocks](migration-guide.md#thinking-blocks).
+See [Preserved thinking](../../build-with-claude/preserved-thinking.md) and the migration guide’s [note on thinking blocks](migration-guide.md#thinking-blocks).
 
-### The `computer_20251124` computer use tool is not supported on the Claude API and Claude Models on Google Cloud (Google managed)
+### Some computer use tool versions are not supported
 
-On the Claude API and Claude Models on Google Cloud (Google managed), Claude Sonnet 5.5 supports [computer use](../../agents-and-tools/tool-use/computer-use-tool.md) only through the `computer_toolset_20260801` toolset. A request that declares the earlier `computer_20251124` tool returns a 400 `invalid_request_error`. On the Claude API, the message names the rejected type, then lists the tool types the model does accept. It begins:
+Claude Sonnet 5.5 supports [computer use](../../agents-and-tools/tool-use/computer-use-tool.md) through the `computer_toolset_20260801` toolset. On Amazon Bedrock, Claude Sonnet 5.5 also accepts the `computer_20251124` tool with the `computer-use-2025-11-24` beta header. Claude Sonnet 5.5 returns a 400 error for any computer use tool version it doesn’t accept, such as `computer_20251124` on the Claude API. The Claude API’s `invalid_request_error` message names the rejected type and, after `Did you mean one of`, lists the tool types the model accepts. The message begins:
 
 ```text wrap
 'claude-sonnet-5-5' does not support tool types: computer_20251124.
 ```
 
-On Amazon Bedrock, Claude Sonnet 5.5 accepts the earlier `computer_20251124` tool.
-
-To move an existing integration on the Claude API or Claude Models on Google Cloud (Google managed), follow [Migrate from `computer_20251124`](../../agents-and-tools/tool-use/computer-use-tool.md#migrate-from-computer-20251124), which shows the request before and after. Drop the beta header, replace the `tools` entry with `{"type": "computer_toolset_20260801"}`, and update your agent loop for member `tool_use` blocks, batch actions, and `toolset_name` on results. The toolset is available on both the Claude API and Claude Models on Google Cloud (Google managed). For other platforms, see the computer use tool’s [API support](../../agents-and-tools/tool-use/computer-use-tool.md#availability-feature-support) section. Integrations that already use the toolset, and the [browser use tool](../../agents-and-tools/tool-use/browser-use-tool.md), need no change.
+Integrations that use the toolset need no change. To move a `computer_20251124` integration to the toolset, follow [Migrate from `computer_20251124`](../../agents-and-tools/tool-use/computer-use-tool.md#migrate-from-computer-20251124), which shows the request before and after. Drop the beta header and replace the `tools` entry with `{"type": "computer_toolset_20260801"}`. Then update your agent loop for member `tool_use` blocks, batch actions, and `toolset_name` on results.
 
 ### Some advisor tool pairings are not supported
 
@@ -74,7 +72,7 @@ With the [advisor tool](../../agents-and-tools/tool-use/advisor-tool.md) (beta),
 
 ## Feature support
 
-Claude Sonnet 5.5 supports [per-message effort](../../build-with-claude/effort.md#change-effort-mid-conversation-beta) (beta), [mid-conversation system messages](../../build-with-claude/mid-conversation-system-messages.md), [mid-conversation tool changes](../../build-with-claude/mid-conversation-system-messages.md#mid-conversation-tool-changes) (beta), [prompt caching](../../build-with-claude/prompt-caching.md) with a 512-token minimum cacheable prompt, [batch processing](../../build-with-claude/batch-processing.md), the [Files API](../../build-with-claude/files.md), [PDF support](../../build-with-claude/pdf-support.md), [vision](../../build-with-claude/vision.md), and server-side and client-side [tools](../../agents-and-tools/tool-use/overview.md). Per-message effort, mid-conversation system messages, and mid-conversation tool changes aren’t available on Claude Sonnet 5, whose minimum cacheable prompt is 1,024 tokens. On the Claude API and Claude Models on Google Cloud (Google managed), computer use requires the `computer_toolset_20260801` toolset (see the [computer use breaking change](whats-new-sonnet-5-5.md#computer-20251124-is-not-supported)). See each feature’s page for model availability.
+Claude Sonnet 5.5 supports [per-message effort](../../build-with-claude/effort.md#change-effort-mid-conversation-beta) (beta), [mid-conversation system messages](../../build-with-claude/mid-conversation-system-messages.md), [mid-conversation tool changes](../../build-with-claude/mid-conversation-system-messages.md#mid-conversation-tool-changes) (beta), [prompt caching](../../build-with-claude/prompt-caching.md) with a 512-token minimum cacheable prompt, [batch processing](../../build-with-claude/batch-processing.md), the [Files API](../../build-with-claude/files.md), [PDF support](../../build-with-claude/pdf-support.md), [vision](../../build-with-claude/vision.md), and server-side and client-side [tools](../../agents-and-tools/tool-use/overview.md). Per-message effort, mid-conversation system messages, and mid-conversation tool changes aren’t available on Claude Sonnet 5, whose minimum cacheable prompt is 1,024 tokens. See each feature’s page for model availability.
 
 ### Compact on demand (beta)
 
@@ -159,7 +157,7 @@ Then check six things:
 1. If your code turns thinking off with `disabled`, send `between_tools` instead, at `high` effort or below.
 2. Replace `tool_choice` types `any` and `tool` with `auto` plus [strict tool use](../../agents-and-tools/tool-use/strict-tool-use.md).
 3. Keep conversations append-only. A request that replays a Claude Sonnet 5.5 thinking block after an edit to earlier history can return a 400 error. See [Thinking blocks are tied to the model and the conversation](whats-new-sonnet-5-5.md#thinking-blocks-are-tied-to-the-model-that-produced-them).
-4. If you use computer use through `computer_20251124` on the Claude API or Claude Models on Google Cloud (Google managed), [move to the toolset](../../agents-and-tools/tool-use/computer-use-tool.md#migrate-from-computer-20251124).
+4. If you use computer use through `computer_20251124`, [move to the toolset](../../agents-and-tools/tool-use/computer-use-tool.md#migrate-from-computer-20251124). On Amazon Bedrock, `computer_20251124` also works.
 5. If you use the advisor tool with a Claude Opus 4.8, Claude Opus 4.7, Claude Sonnet 5, or Claude Haiku 5.5 advisor, [switch to an advisor that Claude Sonnet 5.5 accepts](whats-new-sonnet-5-5.md#advisor-tool-pairings).
 6. If your interface shows the text between tool calls, set `thinking.display` when you use adaptive thinking. With `between_tools`, the text comes back without it. See [Text between tool calls is returned in thinking blocks](migration-guide.md#text-between-tool-calls).
 

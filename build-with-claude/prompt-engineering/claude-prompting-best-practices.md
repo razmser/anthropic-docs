@@ -1070,7 +1070,7 @@ You can also refer to the [full skill definition](https://github.com/anthropics/
 
 If people might ask your application about medicine doses, add the block below for the model your application calls to your system prompt, exactly as written. The block has Claude give a child’s dose of an over-the-counter medicine from the product’s label, not from memory. With web search, such as the [web search tool](../../agents-and-tools/tool-use/web-search-tool.md), Claude checks the label before answering, which adds latency and search costs. Without web search, Claude points the person to the label’s dosing chart, a pharmacist, or the child’s doctor instead of giving a dose.
 
-```text Medication dosing block for Claude Sonnet 5.5 wrap
+```text Medication dosing block for Claude Fable 5.1, Claude Fable 5, Claude Opus 5.5, Claude Opus 5, Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 5.5, and Claude Sonnet 5 wrap
 <medical_guidance>
 This applies only when the person explicitly says the medicine is for a child, and isn't a healthcare professional asking for work.
 Dosing for children's over-the-counter medicines depends on the child's weight and the specific product. For infants and toddlers, a small error can cause real harm. The product's label is the most reliable source, so Claude reports accurately what it says.
@@ -1127,7 +1127,7 @@ When migrating to current Claude models from earlier generations:
 
 6. **Tune anti-laziness prompting:** If your prompts previously encouraged the model to be more thorough or use tools more aggressively, reduce that guidance. Claude 4.6 models are more proactive and might overtrigger on instructions that were needed for previous models.
 
-7. **Pass thinking blocks back unchanged and keep history append-only:** Append each assistant turn exactly as the API returned it, thinking blocks included. On Claude Fable 5.1, Claude Opus 5.5, Claude Sonnet 5.5, and Claude Haiku 5.5, [modifying the conversation before a thinking block](../thinking.md#preserved-in-conversation) results in an error, or in the block being dropped if you opt into that: editing earlier messages, rebuilding `system` or `tools`, or summarizing older turns in place between requests invalidates every later thinking block, so move those changes to mid-conversation system messages and server-side context management. See [Keep the conversation history append-only](prompting-claude-fable-5-1.md#keep-the-conversation-history-append-only).
+7. **Pass thinking blocks back unchanged and keep history append-only:** Append each assistant turn exactly as the API returned it, thinking blocks included. On Claude 5.1 and later models, editing earlier messages, rebuilding `system` or `tools`, or summarizing older turns in place between requests [invalidates every later thinking block](../thinking.md#preserved-in-conversation). Move those changes to mid-conversation system messages and server-side context management. See [Keep the conversation history append-only](prompting-claude-fable-5-1.md#keep-the-conversation-history-append-only).
 
 For detailed migration steps, see the [Migration guide](../../about-claude/models/migration-guide.md).
 

@@ -51,8 +51,6 @@ ant models retrieve --model-id claude-opus-5-5 --format yaml
 ```yaml Output
 type: model
 id: claude-opus-5-5
-display_name: Claude Opus 5.5
-created_at: "2026-09-22T00:00:00Z"
 ...
 ```
 
@@ -150,15 +148,16 @@ Flags that take a file path, such as `--file` on the upload command, accept a ba
 ant files upload --file ./report.pdf
 ```
 
-To inline a file’s contents into a string-valued field, prefix the path with `@`:
+To inline a file’s contents into a string-valued field of a stdin document, prefix the path with `@` and wrap it in quotes:
 
 ```bash
 ant beta:agents create \
-  --name "Researcher" --model '{id: claude-opus-5-5}' \
-  --system @./prompts/researcher.txt
+  --name "Researcher" --model '{id: claude-opus-5-5}' <<'YAML'
+system: "@./prompts/researcher.txt"
+YAML
 ```
 
-Inside structured flag values, wrap the path in quotes. To send a PDF to the Messages API:
+Structured flag values work the same way. To send a PDF to the Messages API:
 
 ```bash
 ant messages create \

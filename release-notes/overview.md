@@ -12,6 +12,23 @@ The Claude Platform release notes list changes to the Claude API, the client SDK
   For updates to Claude Code, see the [complete CHANGELOG.md](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md) in the `claude-code` repository.
 </Tip>
 
+### November 2, 2026
+
+* Long conversations and agent loops on the Messages API can now send smaller requests and get a lower time to first token with [message threads](../build-with-claude/message-threads.md), in beta with the `message-threads-2026-08-12` beta header. The API keeps the conversation on the server, so each later request sends only the new messages. A thread expires 5 minutes after its last request and is deleted no more than 1 hour after its last use. Message threads are available on the Claude API, [Claude Platform on AWS](../build-with-claude/claude-platform-on-aws.md), Claude Models on Google Cloud (Anthropic managed), and [Claude in Microsoft Foundry](../build-with-claude/claude-in-microsoft-foundry.md).
+
+### October 30, 2026
+
+* We’ve deprecated [fast mode](../build-with-claude/fast-mode.md) for Claude Opus 4.8, with removal on November 30, 2026. After removal, requests to `claude-opus-4-8` with `speed: "fast"` will return an error. To continue using fast mode, migrate to [Claude Opus 5.5](../models/opus-5-5/migration-guide.md#migrating-from-claude-opus-4-8). Read more in [Fast mode](../build-with-claude/fast-mode.md#supported-models).
+
+### October 29, 2026
+
+* We’ve launched the [Usage and Cost Analytics API](../manage-claude/usage-cost-analytics-api.md) in beta with the `analytics-usage-cost-2026-08-24` beta header. Its `/v1/organizations/analytics/usage` and `/v1/organizations/analytics/cost` endpoints report token usage and cost for Claude Console and Claude Enterprise organizations. You can filter and group results by dimensions such as model, workspace, API key, and the user or service account behind each request.
+* The [Usage and Cost API](../manage-claude/usage-cost-api.md) is now a legacy API, and so are the `usage_report`, `cost_report`, `user_usage_report`, and `user_cost_report` endpoints of the [Claude Enterprise Analytics API](../manage-claude/analytics-api.md). All of them remain supported. To move an existing integration, see [Migrate from the Usage and Cost API](../manage-claude/usage-cost-analytics-api.md#migrate-from-usage-cost-api) or [Migrate from the Claude Enterprise usage and cost reports](../manage-claude/usage-cost-analytics-api.md#migrate-from-enterprise-analytics-reports).
+
+### October 28, 2026
+
+* We’ve raised the [maximum request size](../api/overview.md#request-size-limits) for the Messages API and the Token Counting API from 32 MB to 128 MB on the first-party Claude API.
+
 ### October 23, 2026
 
 * The [Claude Tag API](../manage-claude/claude-tag-api.md) is available in beta for Claude Enterprise organizations with the `experimental-claude-tag-2026-10-21` beta header. Its `/v1/organizations/claude_tag/` endpoints read and change [Claude Tag](https://claude.com/docs/claude-tag/overview) settings on Slack channels and Slack workspaces, show which settings apply in a channel and where each comes from, and attach Access bundles. Call it with an Admin API key that your primary owner creates in claude.ai with the `read:claude_tag` or `write:claude_tag` scope. It is not available to Claude Platform (Claude Console) organizations.
@@ -64,7 +81,7 @@ The Claude Platform release notes list changes to the Claude API, the client SDK
 * We’ve launched **Claude Haiku 5.5** (`claude-haiku-5-5`), our most capable model tuned for high-volume and latency-sensitive work. It has a [1M token context window](../build-with-claude/context-windows.md), 128k max output tokens, and [adaptive thinking](../build-with-claude/thinking.md) with the [effort parameter](../build-with-claude/effort.md). It’s available on the Claude API, [Claude in Amazon Bedrock](../build-with-claude/claude-in-amazon-bedrock.md), [Claude Platform on AWS](../build-with-claude/claude-platform-on-aws.md), [Claude on Google Cloud](../build-with-claude/claude-models-on-google-cloud/google-managed.md), and [Claude in Microsoft Foundry](../build-with-claude/claude-in-microsoft-foundry.md). See [What’s new in Claude Haiku 5.5](../models/haiku-5-5/whats-new-haiku-5-5.md).
 * Code written for Claude Haiku 4.5 can break on Claude Haiku 5.5. Manual extended thinking (`budget_tokens`), the sampling parameters `temperature`, `top_p`, and `top_k`, and assistant message prefill can each return a 400 error. `computer_20250124` also returns a 400 error: use the `computer_toolset_20260801` toolset on the Claude API and Google Cloud, or `computer_20251124` on Amazon Bedrock. A request that sends thinking blocks back after a change to `system`, `tools`, or earlier turns can also return a 400 error. Adaptive thinking is on by default, so a response can begin with `thinking` blocks, and their text is omitted unless you set `thinking.display` to `"summarized"`. The same text also counts as more tokens. See the [migration guide](../models/haiku-5-5/migration-guide.md) for each change. For model-specific prompting patterns, see [Prompting Claude Haiku 5.5](../build-with-claude/prompt-engineering/prompting-claude-haiku-5-5.md).
 * The Python and TypeScript SDKs now include classes, in beta, for the [browser use tool](../agents-and-tools/tool-use/browser-use-tool.md) and the [computer use tool](../agents-and-tools/tool-use/computer-use-tool.md). You subclass one and write one method per tool against your own browser or desktop automation. The SDK runs the tool loop, the URL and file policies you set for the browser, and your approval callback. See [Browser and computer use with the SDK toolsets](../agents-and-tools/tool-use/browser-use-sdk.md).
-* Claude Max and Team plans now include monthly API credits. To learn how to claim them, see [API credits for Max and Team plans](../about-claude/api-credits-for-subscribers.md).
+* Claude Max, Ultra, and Team plans now include monthly API credits. To learn how to claim them, see [API credits for Max, Ultra, and Team plans](../about-claude/api-credits-for-subscribers.md).
 * In Claude Managed Agents, a cloud environment with `limited` networking now also applies its `allowed_hosts` to the `web_search` and `web_fetch` tools. A `web_fetch` call for a URL on a host that `allowed_hosts` does not match returns a `url_not_allowed` error result to the agent. `web_search` omits results from such hosts. When `allowed_hosts` lists no hosts, neither tool returns a page or a search result. `allow_package_managers` and `allow_mcp_servers` add no hosts for these tools. To let the tools reach a host, add it to `allowed_hosts`, which also opens it to the sandbox. `unrestricted` networking and self-hosted environments do not limit these tools. See [Environment networking](../managed-agents/environments.md#networking).
 * With `limited` networking, creating a session fails with a 400 error when an enabled web tool’s `allowed_domains` has an entry not within `allowed_hosts`. So does a session update that adds such an entry. An `allowed_hosts` entry matches one exact host unless it starts with `*.`, so `docs.example.com` is not within `["example.com"]`. To fix the error, add the host to `allowed_hosts` or remove the entry from `allowed_domains`. See [Restrict web search and web fetch domains](../managed-agents/tools-web-restrictions.md).
 * In Claude Managed Agents, the [`web_fetch` tool](../managed-agents/tools.md#available-tools) now fetches only URLs that have already appeared in the session, for example in the text of a user message, in a `web_search` result, or in a page that `web_fetch` returned earlier. This reduces the risk of data exfiltration. A URL that appears only in Claude’s own output, the agent’s system prompt, an attached document, or the output of a tool such as `bash`, `read`, or an MCP tool does not count: a `web_fetch` call for it returns a `url_not_in_prior_context` error result to the agent. To let the agent fetch a URL, send it in the text of a `user.message` event.
@@ -80,7 +97,7 @@ The Claude Platform release notes list changes to the Claude API, the client SDK
 ### October 1, 2026
 
 * We’ve added a `line` field to the [Models API](../api/models/list.md). `GET /v1/models` and `GET /v1/models/{model_id}` now return the model line each model belongs to. Claude Opus 4.5 and Claude Opus 4.6 both report `opus`, for example. Use `line` to group models without parsing their IDs. `line` is `null` for a model that belongs to no line. See [Using the Models API](../models/overview.md#using-the-models-api).
-* [Dreams](../managed-agents/dreams.md) (research preview) now supports Claude Opus 5.5, Claude Fable 5.1, and Claude Sonnet 5.5. See [Supported models](../managed-agents/dreams.md#limits).
+* [Dreams](../managed-agents/dreams.md) (research preview) now supports Claude Opus 5.5, Claude Fable 5.1, and Claude Sonnet 5.5. See [Supported models](../managed-agents/dreams.md#feature-availability).
 
 ### September 30, 2026
 
@@ -150,8 +167,7 @@ The Claude Platform release notes list changes to the Claude API, the client SDK
 ### August 27, 2026
 
 * In Python SDK 1.2.0, TypeScript SDK 0.122.0, Go SDK 1.68.0, Java SDK 2.59.0, Ruby SDK 1.67.0, and C# SDK 12.44.0, `client.beta.files` and `client.beta.skills` no longer send the `files-api-2025-04-14` and `skills-2025-10-02` beta headers and return the same shapes as `client.files` and `client.skills`. With this change, `client.beta.skills.delete()` deletes a Skill together with all of its versions, and the beta Messages type `BetaSkill` (the container Skill reference) is renamed `BetaContainerSkill`. Requests that still send the beta headers keep receiving the beta shapes. See [Migrate from `files-api-2025-04-14`](../build-with-claude/files.md#migrate-from-files-api-2025-04-14) and [Migrate from `skills-2025-10-02`](../build-with-claude/skills-guide.md#migrate-from-skills-2025-10-02).
-
-- You can now create **personal keys** and **service account keys** in the Claude Console. They act as you or as a [service account](../manage-claude/workload-identity-federation.md#service-accounts), with the same permissions, and stop working when the linked account is removed from an organization. This lets organization admins more easily track usage for each account, and ensure key usage is legitimate. These API keys can be scoped to a specific workspace or [work on admin endpoints and across any workspace](../manage-claude/authentication.md#select-a-workspace) the account has access to. Workspace API keys remain supported as a legacy option. See [API keys in Authentication](../manage-claude/authentication.md#api-keys) for more information.
+* You can now create **personal keys** and **service account keys** in the Claude Console. They act as you or as a [service account](../manage-claude/workload-identity-federation.md#service-accounts), with the same permissions, and stop working when the linked account is removed from an organization. This lets organization admins more easily track usage for each account, and ensure key usage is legitimate. These API keys can be scoped to a specific workspace or [work on admin endpoints and across any workspace](../manage-claude/authentication.md#select-a-workspace) the account has access to. Workspace API keys remain supported as a legacy option. See [API keys in Authentication](../manage-claude/authentication.md#api-keys) for more information.
 
 ### August 26, 2026
 
@@ -207,7 +223,7 @@ The Claude Platform release notes list changes to the Claude API, the client SDK
 
 ### August 1, 2026
 
-* [Dreams](../managed-agents/dreams.md) (research preview) now supports Claude Opus 5. See [Supported models](../managed-agents/dreams.md#limits).
+* [Dreams](../managed-agents/dreams.md) (research preview) now supports Claude Opus 5. See [Supported models](../managed-agents/dreams.md#feature-availability).
 
 ### July 24, 2026
 
@@ -241,7 +257,7 @@ The Claude Platform release notes list changes to the Claude API, the client SDK
 
 ### July 10, 2026
 
-* [Dreams](../managed-agents/dreams.md) (research preview) now supports Claude Fable 5 and Claude Sonnet 5. See [Supported models](../managed-agents/dreams.md#limits).
+* [Dreams](../managed-agents/dreams.md) (research preview) now supports Claude Fable 5 and Claude Sonnet 5. See [Supported models](../managed-agents/dreams.md#feature-availability).
 * We’ve expanded the [Access Transparency](../manage-claude/access-transparency.md) documentation of `cmek_preserve` events with a filter example, an example event payload, and two preservation reason codes (`policy_violation_investigation`, `csae_report`). The documentation now also clarifies that a preservation event is written whether the preservation was initiated by a human reviewer or an automated safety pipeline. See [CMEK content preservation](../manage-claude/access-transparency.md#cmek-content-preservation).
 
 ### July 8, 2026
@@ -619,9 +635,9 @@ The Claude Platform release notes list changes to the Claude API, the client SDK
 
 ### August 5, 2025
 
-* We’ve launched [Claude Opus 4.1](https://www.anthropic.com/news/claude-opus-4-1), an incremental update to Claude Opus 4 with enhanced capabilities and performance improvements.\* Learn more in [Models overview](../models/overview.md).
+* We’ve launched [Claude Opus 4.1](https://www.anthropic.com/news/claude-opus-4-1), an incremental update to Claude Opus 4 with enhanced capabilities and performance improvements.<sup>\*</sup> Learn more in [Models overview](../models/overview.md).
 
-*\*Opus 4.1 does not allow both `temperature` and `top_p` parameters to be specified. Please use only one.*
+*<sup>\*Opus 4.1 does not allow both `temperature` and `top_p` parameters to be specified. Please use only one.</sup>*
 
 ### July 28, 2025
 

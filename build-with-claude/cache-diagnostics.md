@@ -3,7 +3,7 @@ title: Cache diagnostics
 url: https://platform.claude.com/docs/en/build-with-claude/cache-diagnostics
 description: Diagnose unexpected prompt cache misses by comparing consecutive requests and identifying exactly where the prompt prefix diverged.
 featureMetadata:
-  status: ga
+  status: stable
   zdr:
     eligibility: qualified
     note: Excludes [Covered Models](../manage-claude/api-and-data-retention.md#model-specific-data-retention-requirements). Your prompts and Claude's outputs are not stored. A fingerprint of cryptographic hashes and token-count estimates is retained briefly to allow comparison against the next request.
@@ -26,7 +26,7 @@ featureMetadata:
     - claude-opus-4-5-20251101
     - claude-sonnet-4-5-20250929
   supportedPlatforms:
-    Claude API: ga
+    Claude API: stable
 ---
 
 [Prompt caching](prompt-caching.md) cuts latency and cost significantly, but only when the beginning of your prompt is byte-for-byte identical to a recent request. A reordered tool, a timestamp interpolated into your system prompt, or an edit to an earlier message can silently invalidate the cache. Without cache diagnostics, the only signal is `usage.cache_read_input_tokens` dropping to zero, with no indication of what changed.
@@ -324,10 +324,7 @@ Include the `diagnostics` object on every turn. The object is the opt-in: the AP
       IO.println("Comparison still pending.");
   } else {
       var reason = r2.diagnostics().get().cacheMissReason().get();
-      // CacheMissReason doesn't expose a typed .type() accessor; read it from the raw JSON.
-      @SuppressWarnings("unchecked")
-      var json = (Map<String, JsonValue>) reason._json().orElseThrow().asObject().orElseThrow();
-      IO.println("cache_miss_reason: " + json.get("type").asStringOrThrow());
+      IO.println("cache_miss_reason: " + reason.type().asString());
   }
   ```
 
@@ -632,10 +629,7 @@ In streaming responses, `diagnostics` appears on the `message_start` event.
       IO.println("Comparison still pending.");
   } else {
       var reason = diagnostics.get().cacheMissReason().get();
-      // CacheMissReason doesn't expose a typed .type() accessor; read it from the raw JSON.
-      @SuppressWarnings("unchecked")
-      var json = (Map<String, JsonValue>) reason._json().orElseThrow().asObject().orElseThrow();
-      IO.println("cache_miss_reason: " + json.get("type").asStringOrThrow());
+      IO.println("cache_miss_reason: " + reason.type().asString());
   }
   ```
 
@@ -903,10 +897,7 @@ In a multi-turn conversation, carry the latest response `id` forward as `previou
 
         if (r.diagnostics().isPresent() && r.diagnostics().get().cacheMissReason().isPresent()) {
             var reason = r.diagnostics().get().cacheMissReason().get();
-            // CacheMissReason doesn't expose a typed .type() accessor; read it from the raw JSON.
-            @SuppressWarnings("unchecked")
-            var json = (Map<String, JsonValue>) reason._json().orElseThrow().asObject().orElseThrow();
-            IO.println("Turn " + (turn + 1) + " cache_miss_reason: " + json.get("type").asStringOrThrow());
+            IO.println("Turn " + (turn + 1) + " cache_miss_reason: " + reason.type().asString());
         }
 
         messages.add(r.toParam());
