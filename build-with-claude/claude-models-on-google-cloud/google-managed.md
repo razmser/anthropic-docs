@@ -100,7 +100,7 @@ The following examples use the global endpoint. For the other endpoint types, se
     -H "Authorization: Bearer $(gcloud auth print-access-token)" \
     -H "Content-Type: application/json" \
     -d '{
-      "anthropic_version": "vertex-2023-10-16",
+      "anthropic_version": "2026-10-21",
       "messages": [{"role": "user", "content": "Hey Claude!"}],
       "max_tokens": 100
     }'
@@ -353,7 +353,7 @@ The following examples use the `us` multi-region endpoint. The highlighted lines
     -H "Authorization: Bearer $(gcloud auth print-access-token)" \
     -H "Content-Type: application/json" \
     -d '{
-      "anthropic_version": "vertex-2023-10-16",
+      "anthropic_version": "2026-10-21",
       "messages": [{"role": "user", "content": "Hey Claude!"}],
       "max_tokens": 100
     }'
@@ -469,7 +469,7 @@ Features supported on Claude Models on Google Cloud (Google managed) include the
 
 * [Structured outputs](../structured-outputs.md)
 
-[Features overview](../overview.md) lists every feature and whether Claude Models on Google Cloud (Google managed) supports it.
+[Features overview](../overview.md) lists every feature. Each feature’s page shows whether Claude Models on Google Cloud (Google managed) supports it.
 
 ### Features not supported
 
@@ -549,7 +549,7 @@ For what changes when you move, see [How the two Google Cloud offerings differ](
       curl "https://claude.googleapis.com/v1/projects/$ANTHROPIC_GOOGLE_CLOUD_PROJECT/locations/global/workspaces/$ANTHROPIC_GOOGLE_CLOUD_WORKSPACE_ID/invoke/v1/messages" \
         -H "Authorization: Bearer $(gcloud auth application-default print-access-token)" \
         -H "content-type: application/json" \
-        -H "anthropic-version: 2023-06-01" \
+        -H "anthropic-version: 2026-10-21" \
         -d '{
           "model": "claude-opus-5-5",
           "max_tokens": 1024,
@@ -631,7 +631,7 @@ For what changes when you move, see [How the two Google Cloud offerings differ](
         -H "Authorization: Bearer $(gcloud auth print-access-token)" \
         -H "Content-Type: application/json" \
         -d '{
-          "anthropic_version": "vertex-2023-10-16",
+          "anthropic_version": "2026-10-21",
           "messages": [{"role": "user", "content": "Hey Claude!"}],
           "max_tokens": 100
         }'

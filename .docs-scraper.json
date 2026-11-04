@@ -659,6 +659,7 @@
     "build-with-claude/streaming.md": "https://platform.claude.com/docs/en/build-with-claude/streaming.md",
     "build-with-claude/structured-outputs.md": "https://platform.claude.com/docs/en/build-with-claude/structured-outputs.md",
     "build-with-claude/task-budgets.md": "https://platform.claude.com/docs/en/build-with-claude/task-budgets.md",
+    "build-with-claude/text-watermark.md": "https://platform.claude.com/docs/en/build-with-claude/text-watermark.md",
     "build-with-claude/thinking-steering-and-cost.md": "https://platform.claude.com/docs/en/build-with-claude/thinking-steering-and-cost.md",
     "build-with-claude/thinking-tool-workflows.md": "https://platform.claude.com/docs/en/build-with-claude/thinking-tool-workflows.md",
     "build-with-claude/thinking-troubleshooting.md": "https://platform.claude.com/docs/en/build-with-claude/thinking-troubleshooting.md",

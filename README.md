@@ -2,7 +2,7 @@
 
 Markdown mirror of [Anthropic's documentation](https://platform.claude.com/docs/en/home).
 
-Contains **846 pages**, discovered from the [page index](https://platform.claude.com/llms.txt) and [supplementary index](https://platform.claude.com/sitemap.xml).
+Contains **847 pages**, discovered from the [page index](https://platform.claude.com/llms.txt) and [supplementary index](https://platform.claude.com/sitemap.xml).
 
 Links to mirrored pages point to local files; external links and images remain online. Code examples and OpenAPI blocks are preserved.
 
@@ -669,6 +669,7 @@ Generated files are replaced by the next successful sync. Original content belon
 - [Streaming messages](build-with-claude/streaming.md)
 - [Structured outputs](build-with-claude/structured-outputs.md)
 - [Task budgets](build-with-claude/task-budgets.md)
+- [Text watermark](build-with-claude/text-watermark.md)
 - [Steering thinking](build-with-claude/thinking-steering-and-cost.md)
 - [Thinking in tool and multi-turn workflows](build-with-claude/thinking-tool-workflows.md)
 - [Troubleshooting thinking](build-with-claude/thinking-troubleshooting.md)
