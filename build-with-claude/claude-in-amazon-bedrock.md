@@ -100,8 +100,8 @@ Anthropic’s [client SDKs](../cli-sdks-libraries/overview.md) support Claude in
     <Tabs>
       <Tab title="Gradle">
         ```kotlin
-        implementation("com.anthropic:anthropic-java:3.4.0")
-        implementation("com.anthropic:anthropic-java-bedrock:3.4.0")
+        implementation("com.anthropic:anthropic-java:3.5.0")
+        implementation("com.anthropic:anthropic-java-bedrock:3.5.0")
         ```
       </Tab>
 
@@ -110,12 +110,12 @@ Anthropic’s [client SDKs](../cli-sdks-libraries/overview.md) support Claude in
         <dependency>
             <groupId>com.anthropic</groupId>
             <artifactId>anthropic-java</artifactId>
-            <version>3.4.0</version>
+            <version>3.5.0</version>
         </dependency>
         <dependency>
             <groupId>com.anthropic</groupId>
             <artifactId>anthropic-java-bedrock</artifactId>
-            <version>3.4.0</version>
+            <version>3.5.0</version>
         </dependency>
         ```
       </Tab>
