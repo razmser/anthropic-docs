@@ -2,7 +2,7 @@
 
 Markdown mirror of [Anthropic's documentation](https://platform.claude.com/docs/en/home).
 
-Contains **885 pages**, discovered from the [page index](https://platform.claude.com/llms.txt) and [supplementary index](https://platform.claude.com/sitemap.xml).
+Contains **886 pages**, discovered from the [page index](https://platform.claude.com/llms.txt) and [supplementary index](https://platform.claude.com/sitemap.xml).
 
 Links to mirrored pages point to local files; external links and images remain online. Code examples and OpenAPI blocks are preserved.
 
@@ -774,6 +774,7 @@ Generated files are replaced by the next successful sync. Original content belon
 - [Configure Inference hooks](manage-claude/inference-hooks-configuration.md)
 - [Develop an Inference hooks integration](manage-claude/inference-hooks-endpoint.md)
 - [Inference hooks](manage-claude/inference-hooks.md)
+- [IP allowlisting](manage-claude/ip-allowlist.md)
 - [OpenTelemetry tracing for the Claude API](manage-claude/opentelemetry.md)
 - [Set up OpenTelemetry with the Claude API](manage-claude/opentelemetry/api.md)
 - [Set up OpenTelemetry with the Claude SDK](manage-claude/opentelemetry/sdk.md)

@@ -764,6 +764,7 @@
     "manage-claude/inference-hooks-configuration.md": "https://platform.claude.com/docs/en/manage-claude/inference-hooks-configuration.md",
     "manage-claude/inference-hooks-endpoint.md": "https://platform.claude.com/docs/en/manage-claude/inference-hooks-endpoint.md",
     "manage-claude/inference-hooks.md": "https://platform.claude.com/docs/en/manage-claude/inference-hooks.md",
+    "manage-claude/ip-allowlist.md": "https://platform.claude.com/docs/en/manage-claude/ip-allowlist.md",
     "manage-claude/opentelemetry.md": "https://platform.claude.com/docs/en/manage-claude/opentelemetry.md",
     "manage-claude/opentelemetry/api.md": "https://platform.claude.com/docs/en/manage-claude/opentelemetry/api.md",
     "manage-claude/opentelemetry/sdk.md": "https://platform.claude.com/docs/en/manage-claude/opentelemetry/sdk.md",
