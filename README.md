@@ -2,7 +2,7 @@
 
 Markdown mirror of [Anthropic's documentation](https://platform.claude.com/docs/en/home).
 
-Contains **886 pages**, discovered from the [page index](https://platform.claude.com/llms.txt) and [supplementary index](https://platform.claude.com/sitemap.xml).
+Contains **895 pages**, discovered from the [page index](https://platform.claude.com/llms.txt) and [supplementary index](https://platform.claude.com/sitemap.xml).
 
 Links to mirrored pages point to local files; external links and images remain online. Code examples and OpenAPI blocks are preserved.
 
@@ -327,6 +327,7 @@ Generated files are replaced by the next successful sync. Original content belon
 - [List Users](api/beta/organization/users/list.md)
 - [Remove User](api/beta/organization/users/remove.md)
 - [Get User](api/beta/organization/users/retrieve.md)
+- [Sign Out User](api/beta/organization/users/sign_out.md)
 - [Update User](api/beta/organization/users/update.md)
 - [Webhooks](api/beta/organization/webhooks.md)
 - [Create Organization Webhook Endpoint](api/beta/organization/webhooks/create.md)
@@ -490,6 +491,8 @@ Generated files are replaced by the next successful sync. Original content belon
 - [Permissions](api/compliance/organizations/roles/permissions.md)
 - [List Compliance Role Permissions](api/compliance/organizations/roles/permissions/list.md)
 - [Get Compliance Role](api/compliance/organizations/roles/retrieve.md)
+- [Security Posture](api/compliance/organizations/security_posture.md)
+- [Get an organization's security posture](api/compliance/organizations/security_posture/retrieve.md)
 - [Settings](api/compliance/organizations/settings.md)
 - [Get effective organization settings](api/compliance/organizations/settings/retrieve.md)
 - [User Preferences](api/compliance/organizations/user_preferences.md)
@@ -694,6 +697,7 @@ Generated files are replaced by the next successful sync. Original content belon
 - [Prompting best practices](build-with-claude/prompt-engineering/claude-prompting-best-practices.md)
 - [Prompt engineering overview](build-with-claude/prompt-engineering/overview.md)
 - [Prompting Claude Fable 5.1](build-with-claude/prompt-engineering/prompting-claude-fable-5-1.md)
+- [Prompting Claude Fable 5.2](build-with-claude/prompt-engineering/prompting-claude-fable-5-2.md)
 - [Prompting Claude Fable 5](build-with-claude/prompt-engineering/prompting-claude-fable-5.md)
 - [Prompting Claude Haiku 5.5](build-with-claude/prompt-engineering/prompting-claude-haiku-5-5.md)
 - [Prompting Claude Opus 4.8](build-with-claude/prompt-engineering/prompting-claude-opus-4-8.md)
@@ -839,15 +843,19 @@ Generated files are replaced by the next successful sync. Original content belon
 - [Authenticate with vaults](managed-agents/vaults.md)
 - [Subscribe to webhooks](managed-agents/webhooks.md)
 - [Workflow runs](managed-agents/workflow-runs.md)
-- [Claude Fable 5.1 and Claude Mythos 5.1 migration guide](models/fable-5-1/migration-guide.md)
+- [Claude Fable 5.2 and Claude Mythos 5.2 migration guide](models/fable-5-1/migration-guide.md)
 - [Claude Fable 5.1](models/fable-5-1/overview.md)
-- [What's new in Claude Fable 5.1](models/fable-5-1/whats-new-fable-5-1.md)
+- [Claude Fable 5.1](models/fable-5-1/whats-new-fable-5-1.md)
+- [Claude Fable 5.2 and Claude Mythos 5.2 migration guide](models/fable-5-2/migration-guide.md)
+- [Claude Fable 5.2](models/fable-5-2/overview.md)
+- [What's new in Claude Fable 5.2](models/fable-5-2/whats-new-fable-5-2.md)
 - [Claude Fable 5](models/fable-5/overview.md)
 - [Claude Haiku 4.5](models/haiku-4-5/overview.md)
 - [Claude Haiku 5.5 migration guide](models/haiku-5-5/migration-guide.md)
 - [Claude Haiku 5.5](models/haiku-5-5/overview.md)
 - [What's new in Claude Haiku 5.5](models/haiku-5-5/whats-new-haiku-5-5.md)
 - [Claude Mythos 5.1](models/mythos-5-1/overview.md)
+- [Claude Mythos 5.2](models/mythos-5-2/overview.md)
 - [Claude Mythos 5](models/mythos-5/overview.md)
 - [Claude Opus 4.5](models/opus-4-5/overview.md)
 - [Claude Opus 4.6](models/opus-4-6/overview.md)
@@ -866,6 +874,7 @@ Generated files are replaced by the next successful sync. Original content belon
 - [Claude Sonnet 5](models/sonnet-5/overview.md)
 - [Claude Platform release notes](release-notes/overview.md)
 - [Claude Fable 5.1 system prompts](release-notes/system-prompts/claude-fable-5-1.md)
+- [Claude Fable 5.2 system prompts](release-notes/system-prompts/claude-fable-5-2.md)
 - [Claude Fable 5 system prompts](release-notes/system-prompts/claude-fable-5.md)
 - [Claude Haiku 3.5 system prompts](release-notes/system-prompts/claude-haiku-3-5.md)
 - [Claude Haiku 3 system prompts](release-notes/system-prompts/claude-haiku-3.md)
