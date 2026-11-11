@@ -49,8 +49,8 @@ The [client SDK](../../cli-sdks-libraries/overview.md) supports Claude Models on
     <Tabs>
       <Tab title="Gradle">
         ```kotlin
-        implementation("com.anthropic:anthropic-java:3.7.0")
-        implementation("com.anthropic:anthropic-java-vertex:3.7.0")
+        implementation("com.anthropic:anthropic-java:3.8.0")
+        implementation("com.anthropic:anthropic-java-vertex:3.8.0")
         ```
       </Tab>
 
@@ -59,12 +59,12 @@ The [client SDK](../../cli-sdks-libraries/overview.md) supports Claude Models on
         <dependency>
             <groupId>com.anthropic</groupId>
             <artifactId>anthropic-java</artifactId>
-            <version>3.7.0</version>
+            <version>3.8.0</version>
         </dependency>
         <dependency>
             <groupId>com.anthropic</groupId>
             <artifactId>anthropic-java-vertex</artifactId>
-            <version>3.7.0</version>
+            <version>3.8.0</version>
         </dependency>
         ```
       </Tab>

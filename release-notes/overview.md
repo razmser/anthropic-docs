@@ -25,6 +25,7 @@ The Claude Platform release notes list changes to the Claude API, the client SDK
 
 ### November 5, 2026
 
+* The [Compliance API](../manage-claude/compliance-api.md) now includes Security posture data, in beta for Claude Enterprise organizations. The [Activity Feed](../manage-claude/compliance-activity-feed.md) records changes to attestations on the **Security posture** page in claude.ai **Organization settings**. The `GET /v1/compliance/organizations/{organization_id}/security_posture` endpoint returns an organization’s current Security posture results. See [Security posture in the Compliance API](../manage-claude/compliance-security-posture/overview.md).
 * You can now set up an IP allowlist for your organization in the Claude Console, in beta. Requests to covered services from addresses not on your list are refused, which limits where a leaked API key can be used. Add IPv4 and IPv6 addresses or CIDR ranges, up to 1,000 per organization. See [IP allowlisting](../manage-claude/ip-allowlist.md) for what’s covered and how to set it up.
 * You can now sign a member of your Claude Enterprise (claude.ai) organization out of Claude everywhere with the Admin API. This capability is in beta. See the [Admin API reference](../api/beta/organization.md). The member stays in the organization and can sign in again. See [Sign a member out everywhere](../manage-claude/user-management.md#sign-a-member-out-everywhere) for the beta header and what the request doesn’t end.
 

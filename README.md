@@ -2,7 +2,7 @@
 
 Markdown mirror of [Anthropic's documentation](https://platform.claude.com/docs/en/home).
 
-Contains **895 pages**, discovered from the [page index](https://platform.claude.com/llms.txt) and [supplementary index](https://platform.claude.com/sitemap.xml).
+Contains **902 pages**, discovered from the [page index](https://platform.claude.com/llms.txt) and [supplementary index](https://platform.claude.com/sitemap.xml).
 
 Links to mirrored pages point to local files; external links and images remain online. Code examples and OpenAPI blocks are preserved.
 
@@ -773,6 +773,13 @@ Generated files are replaced by the next successful sync. Original content belon
 - [Compliance API FAQ](manage-claude/compliance-faq.md)
 - [Design your compliance integration](manage-claude/compliance-integration-patterns.md)
 - [List organizations, users, roles, groups, and settings](manage-claude/compliance-org-data.md)
+- [Check stored Security posture events against current results](manage-claude/compliance-security-posture/check-events-against-results.md)
+- [Detect changes in Security posture](manage-claude/compliance-security-posture/detect-changes.md)
+- [Security posture events reference](manage-claude/compliance-security-posture/events-reference.md)
+- [Map Security posture events to OCSF](manage-claude/compliance-security-posture/ocsf-mapping.md)
+- [Security posture in the Compliance API](manage-claude/compliance-security-posture/overview.md)
+- [Security posture results reference](manage-claude/compliance-security-posture/results-reference.md)
+- [Send Security posture events to your SIEM](manage-claude/compliance-security-posture/send-events.md)
 - [Retrieve session transcripts](manage-claude/compliance-sessions.md)
 - [Data residency](manage-claude/data-residency.md)
 - [Configure Inference hooks](manage-claude/inference-hooks-configuration.md)
