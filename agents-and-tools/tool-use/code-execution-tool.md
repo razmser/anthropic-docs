@@ -564,11 +564,11 @@ When Claude saves files to its output directory during code execution (see [How 
 
 <CodeGroup exclude="shell">
   <CodeGroupItem language="cURL">
-    Downloading every generated file takes a loop over the file IDs in the tool result, which needs more logic than a single shell command. Use the [Claude SDK](../../cli-sdks-libraries/overview.md) for this.
+    Downloading every generated file takes a loop over the file IDs in the tool result, which needs more logic than a single shell command. Use the [Anthropic SDK](../../cli-sdks-libraries/overview.md) for this.
   </CodeGroupItem>
 
   <CodeGroupItem language="CLI">
-    Downloading every generated file takes a loop over the file IDs in the tool result, which needs more logic than a single shell command. Use the [Claude SDK](../../cli-sdks-libraries/overview.md) for this.
+    Downloading every generated file takes a loop over the file IDs in the tool result, which needs more logic than a single shell command. Use the [Anthropic SDK](../../cli-sdks-libraries/overview.md) for this.
   </CodeGroupItem>
 
   ```python Python

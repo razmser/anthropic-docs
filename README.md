@@ -2,7 +2,7 @@
 
 Markdown mirror of [Anthropic's documentation](https://platform.claude.com/docs/en/home).
 
-Contains **902 pages**, discovered from the [page index](https://platform.claude.com/llms.txt) and [supplementary index](https://platform.claude.com/sitemap.xml).
+Contains **901 pages**, discovered from the [page index](https://platform.claude.com/llms.txt) and [supplementary index](https://platform.claude.com/sitemap.xml).
 
 Links to mirrored pages point to local files; external links and images remain online. Code examples and OpenAPI blocks are preserved.
 
@@ -660,16 +660,16 @@ Generated files are replaced by the next successful sync. Original content belon
 - [List User Profiles](api/user_profiles/list.md)
 - [Get User Profile](api/user_profiles/retrieve.md)
 - [Update User Profile](api/user_profiles/update.md)
-- [Versions](api/versioning.md)
+- [API versions](api/versioning.md)
 - [Batch processing](build-with-claude/batch-processing.md)
 - [Cache diagnostics](build-with-claude/cache-diagnostics.md)
 - [Citations](build-with-claude/citations.md)
-- [Claude in Amazon Bedrock (Opus 4.7 and later)](build-with-claude/claude-in-amazon-bedrock.md)
+- [Claude in Amazon Bedrock (bedrock-mantle)](build-with-claude/claude-in-amazon-bedrock.md)
 - [Claude in Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md)
 - [Claude Models on Google Cloud (Anthropic managed)](build-with-claude/claude-models-on-google-cloud/anthropic-managed.md)
 - [Claude Models on Google Cloud (Google managed)](build-with-claude/claude-models-on-google-cloud/google-managed.md)
 - [Claude Models on Google Cloud](build-with-claude/claude-models-on-google-cloud/overview.md)
-- [Claude on Amazon Bedrock (Opus 4.6 and earlier)](build-with-claude/claude-on-amazon-bedrock-legacy.md)
+- [Claude on Amazon Bedrock (bedrock-runtime)](build-with-claude/claude-on-amazon-bedrock-legacy.md)
 - [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md)
 - [Compaction in the background](build-with-claude/compaction-background.md)
 - [Compaction that keeps recent turns](build-with-claude/compaction-keep-recent-turns.md)
@@ -679,6 +679,7 @@ Generated files are replaced by the next successful sync. Original content belon
 - [Compaction overview](build-with-claude/compaction.md)
 - [Context editing](build-with-claude/context-editing.md)
 - [Context windows](build-with-claude/context-windows.md)
+- [Per-message effort](build-with-claude/effort-per-message.md)
 - [Effort](build-with-claude/effort.md)
 - [Embeddings](build-with-claude/embeddings.md)
 - [Extended thinking](build-with-claude/extended-thinking.md)
@@ -788,7 +789,7 @@ Generated files are replaced by the next successful sync. Original content belon
 - [IP allowlisting](manage-claude/ip-allowlist.md)
 - [OpenTelemetry tracing for the Claude API](manage-claude/opentelemetry.md)
 - [Set up OpenTelemetry with the Claude API](manage-claude/opentelemetry/api.md)
-- [Set up OpenTelemetry with the Claude SDK](manage-claude/opentelemetry/sdk.md)
+- [Set up OpenTelemetry with the Anthropic SDK](manage-claude/opentelemetry/sdk.md)
 - [Organization webhooks](manage-claude/organization-webhooks.md)
 - [Plugins API](manage-claude/plugins-api.md)
 - [Rate Limits API](manage-claude/rate-limits-api.md)
@@ -850,9 +851,7 @@ Generated files are replaced by the next successful sync. Original content belon
 - [Authenticate with vaults](managed-agents/vaults.md)
 - [Subscribe to webhooks](managed-agents/webhooks.md)
 - [Workflow runs](managed-agents/workflow-runs.md)
-- [Claude Fable 5.2 and Claude Mythos 5.2 migration guide](models/fable-5-1/migration-guide.md)
 - [Claude Fable 5.1](models/fable-5-1/overview.md)
-- [Claude Fable 5.1](models/fable-5-1/whats-new-fable-5-1.md)
 - [Claude Fable 5.2 and Claude Mythos 5.2 migration guide](models/fable-5-2/migration-guide.md)
 - [Claude Fable 5.2](models/fable-5-2/overview.md)
 - [What's new in Claude Fable 5.2](models/fable-5-2/whats-new-fable-5-2.md)
