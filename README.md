@@ -2,7 +2,7 @@
 
 Markdown mirror of [Anthropic's documentation](https://platform.claude.com/docs/en/home).
 
-Contains **901 pages**, discovered from the [page index](https://platform.claude.com/llms.txt) and [supplementary index](https://platform.claude.com/sitemap.xml).
+Contains **916 pages**, discovered from the [page index](https://platform.claude.com/llms.txt) and [supplementary index](https://platform.claude.com/sitemap.xml).
 
 Links to mirrored pages point to local files; external links and images remain online. Code examples and OpenAPI blocks are preserved.
 
@@ -694,6 +694,9 @@ Generated files are replaced by the next successful sync. Original content belon
 - [Features overview](build-with-claude/overview.md)
 - [PDF support](build-with-claude/pdf-support.md)
 - [Preserved thinking](build-with-claude/preserved-thinking.md)
+- [Change tools or instructions without failing the prefix check](build-with-claude/preserved-thinking/change-tools-or-instructions.md)
+- [Fix a thinking block bound to a different conversation](build-with-claude/preserved-thinking/fix-bound-to-a-different-conversation.md)
+- [Prefix checks on thinking blocks](build-with-claude/preserved-thinking/prefix-checks.md)
 - [Prompt caching](build-with-claude/prompt-caching.md)
 - [Prompting best practices](build-with-claude/prompt-engineering/claude-prompting-best-practices.md)
 - [Prompt engineering overview](build-with-claude/prompt-engineering/overview.md)
@@ -834,6 +837,7 @@ Generated files are replaced by the next successful sync. Original content belon
 - [Review and monitor agent sessions](managed-agents/secure-deployment-monitoring.md)
 - [Security risks and sandbox boundaries](managed-agents/secure-deployment-risks.md)
 - [Secure your Managed Agents deployment](managed-agents/secure-deployment.md)
+- [Data and access in self-hosted Claude Managed Agents](managed-agents/self-hosted-data-and-access.md)
 - [Custom tools in self-hosted sandboxes](managed-agents/self-hosted-sandboxes-custom-tools.md)
 - [Memory stores in self-hosted sandboxes](managed-agents/self-hosted-sandboxes-memory.md)
 - [Monitor and troubleshoot self-hosted workers](managed-agents/self-hosted-sandboxes-operations.md)
@@ -841,6 +845,17 @@ Generated files are replaced by the next successful sync. Original content belon
 - [Security model](managed-agents/self-hosted-sandboxes-security.md)
 - [Deploy self-hosted workers](managed-agents/self-hosted-sandboxes-workers.md)
 - [Self-hosted sandboxes](managed-agents/self-hosted-sandboxes.md)
+- [Self-hosted Claude Managed Agents](managed-agents/self-hosted.md)
+- [Agent identity and credentials](managed-agents/self-hosted/agent-identity.md)
+- [Call the API on a self-hosted server](managed-agents/self-hosted/call-the-api.md)
+- [Configuration reference](managed-agents/self-hosted/configuration-reference.md)
+- [Single sign-on](managed-agents/self-hosted/configure.md)
+- [Use the console on your server](managed-agents/self-hosted/console.md)
+- [Differences from the hosted service](managed-agents/self-hosted/differences.md)
+- [Inference provider](managed-agents/self-hosted/inference-provider.md)
+- [Deploy on Kubernetes](managed-agents/self-hosted/kubernetes.md)
+- [Get started with self-hosted Claude Managed Agents](managed-agents/self-hosted/quickstart.md)
+- [Upgrade self-hosted Claude Managed Agents](managed-agents/self-hosted/upgrade.md)
 - [Inspect sessions and track usage](managed-agents/session-observability.md)
 - [Session operations](managed-agents/session-operations.md)
 - [Session threads](managed-agents/session-threads.md)
