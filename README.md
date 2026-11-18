@@ -2,7 +2,7 @@
 
 Markdown mirror of [Anthropic's documentation](https://platform.claude.com/docs/en/home).
 
-Contains **916 pages**, discovered from the [page index](https://platform.claude.com/llms.txt) and [supplementary index](https://platform.claude.com/sitemap.xml).
+Contains **922 pages**, discovered from the [page index](https://platform.claude.com/llms.txt) and [supplementary index](https://platform.claude.com/sitemap.xml).
 
 Links to mirrored pages point to local files; external links and images remain online. Code examples and OpenAPI blocks are preserved.
 
@@ -191,6 +191,7 @@ Generated files are replaced by the next successful sync. Original content belon
 - [Detach Bundle](api/beta/organization/claude_tag/bundles/targets/delete.md)
 - [List Bundle Targets](api/beta/organization/claude_tag/bundles/targets/list.md)
 - [Get Bundle Target](api/beta/organization/claude_tag/bundles/targets/retrieve.md)
+- [Update Bundle](api/beta/organization/claude_tag/bundles/update.md)
 - [Slack Channels](api/beta/organization/claude_tag/slack_channels.md)
 - [Set Up Slack Channel](api/beta/organization/claude_tag/slack_channels/create.md)
 - [Remove Slack Channel](api/beta/organization/claude_tag/slack_channels/delete.md)
@@ -790,6 +791,11 @@ Generated files are replaced by the next successful sync. Original content belon
 - [Develop an Inference hooks integration](manage-claude/inference-hooks-endpoint.md)
 - [Inference hooks](manage-claude/inference-hooks.md)
 - [IP allowlisting](manage-claude/ip-allowlist.md)
+- [App testing and review](manage-claude/oauth-apps/app-review.md)
+- [Branding samples](manage-claude/oauth-apps/branding-samples.md)
+- [OAuth reference](manage-claude/oauth-apps/oauth-reference.md)
+- [Linked billing](manage-claude/oauth-apps/organization-billing-connections.md)
+- [Claude Platform OAuth](manage-claude/oauth-apps/overview.md)
 - [OpenTelemetry tracing for the Claude API](manage-claude/opentelemetry.md)
 - [Set up OpenTelemetry with the Claude API](manage-claude/opentelemetry/api.md)
 - [Set up OpenTelemetry with the Anthropic SDK](manage-claude/opentelemetry/sdk.md)

@@ -100,8 +100,8 @@ The [client SDK](../cli-sdks-libraries/overview.md) supports Claude in Amazon Be
     <Tabs>
       <Tab title="Gradle">
         ```kotlin
-        implementation("com.anthropic:anthropic-java:3.9.0")
-        implementation("com.anthropic:anthropic-java-bedrock:3.9.0")
+        implementation("com.anthropic:anthropic-java:3.10.0")
+        implementation("com.anthropic:anthropic-java-bedrock:3.10.0")
         ```
       </Tab>
 
@@ -110,12 +110,12 @@ The [client SDK](../cli-sdks-libraries/overview.md) supports Claude in Amazon Be
         <dependency>
             <groupId>com.anthropic</groupId>
             <artifactId>anthropic-java</artifactId>
-            <version>3.9.0</version>
+            <version>3.10.0</version>
         </dependency>
         <dependency>
             <groupId>com.anthropic</groupId>
             <artifactId>anthropic-java-bedrock</artifactId>
-            <version>3.9.0</version>
+            <version>3.10.0</version>
         </dependency>
         ```
       </Tab>

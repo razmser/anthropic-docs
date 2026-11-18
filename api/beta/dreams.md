@@ -121,6 +121,8 @@ See the [Dreams guide](../../managed-agents/dreams.md#create-a-dream) to learn m
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -734,6 +736,8 @@ See the [Dreams guide](../../managed-agents/dreams.md#list-dreams) for how to pa
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -1182,6 +1186,8 @@ See the [Dreams guide](../../managed-agents/dreams.md#track-progress) for how to
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -1624,6 +1630,8 @@ See the [Dreams guide](../../managed-agents/dreams.md#cancel-a-dream) to learn m
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -2068,6 +2076,8 @@ See the [Dreams guide](../../managed-agents/dreams.md#archive-a-dream) to learn 
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 

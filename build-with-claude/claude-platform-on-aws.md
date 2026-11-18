@@ -313,8 +313,8 @@ The [client SDK](../cli-sdks-libraries/overview.md) supports Claude Platform on 
     <Tabs>
       <Tab title="Gradle">
         ```kotlin
-        implementation("com.anthropic:anthropic-java:3.9.0")
-        implementation("com.anthropic:anthropic-java-aws:3.9.0")
+        implementation("com.anthropic:anthropic-java:3.10.0")
+        implementation("com.anthropic:anthropic-java-aws:3.10.0")
         ```
       </Tab>
 
@@ -323,12 +323,12 @@ The [client SDK](../cli-sdks-libraries/overview.md) supports Claude Platform on 
         <dependency>
             <groupId>com.anthropic</groupId>
             <artifactId>anthropic-java</artifactId>
-            <version>3.9.0</version>
+            <version>3.10.0</version>
         </dependency>
         <dependency>
             <groupId>com.anthropic</groupId>
             <artifactId>anthropic-java-aws</artifactId>
-            <version>3.9.0</version>
+            <version>3.10.0</version>
         </dependency>
         ```
       </Tab>
@@ -613,6 +613,7 @@ The following capabilities are not currently available on Claude Platform on AWS
 * **Fast mode:** Not available on Claude Platform on AWS.
 * **OpenAI-compatible API endpoints:** Not available on Claude Platform on AWS.
 * **MCP tunnels:** Only MCP servers exposed over the public internet are supported.
+* **Linked billing (beta):** [Linked billing](../manage-claude/oauth-apps/organization-billing-connections.md) is not available on Claude Platform on AWS.
 
 ## Data residency
 
