@@ -2,7 +2,7 @@
 
 Markdown mirror of [Anthropic's documentation](https://platform.claude.com/docs/en/home).
 
-Contains **922 pages**, discovered from the [page index](https://platform.claude.com/llms.txt) and [supplementary index](https://platform.claude.com/sitemap.xml).
+Contains **923 pages**, discovered from the [page index](https://platform.claude.com/llms.txt) and [supplementary index](https://platform.claude.com/sitemap.xml).
 
 Links to mirrored pages point to local files; external links and images remain online. Code examples and OpenAPI blocks are preserved.
 
@@ -847,6 +847,7 @@ Generated files are replaced by the next successful sync. Original content belon
 - [Custom tools in self-hosted sandboxes](managed-agents/self-hosted-sandboxes-custom-tools.md)
 - [Memory stores in self-hosted sandboxes](managed-agents/self-hosted-sandboxes-memory.md)
 - [Monitor and troubleshoot self-hosted workers](managed-agents/self-hosted-sandboxes-operations.md)
+- [Run one sandbox per session](managed-agents/self-hosted-sandboxes-per-session.md)
 - [Self-hosted worker reference](managed-agents/self-hosted-sandboxes-reference.md)
 - [Security model](managed-agents/self-hosted-sandboxes-security.md)
 - [Deploy self-hosted workers](managed-agents/self-hosted-sandboxes-workers.md)

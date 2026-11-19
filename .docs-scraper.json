@@ -837,6 +837,7 @@
     "managed-agents/self-hosted-sandboxes-custom-tools.md": "https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes-custom-tools.md",
     "managed-agents/self-hosted-sandboxes-memory.md": "https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes-memory.md",
     "managed-agents/self-hosted-sandboxes-operations.md": "https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes-operations.md",
+    "managed-agents/self-hosted-sandboxes-per-session.md": "https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes-per-session.md",
     "managed-agents/self-hosted-sandboxes-reference.md": "https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes-reference.md",
     "managed-agents/self-hosted-sandboxes-security.md": "https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes-security.md",
     "managed-agents/self-hosted-sandboxes-workers.md": "https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes-workers.md",
