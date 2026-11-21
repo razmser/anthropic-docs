@@ -2,7 +2,7 @@
 
 Markdown mirror of [Anthropic's documentation](https://platform.claude.com/docs/en/home).
 
-Contains **923 pages**, discovered from the [page index](https://platform.claude.com/llms.txt) and [supplementary index](https://platform.claude.com/sitemap.xml).
+Contains **936 pages**, discovered from the [page index](https://platform.claude.com/llms.txt) and [supplementary index](https://platform.claude.com/sitemap.xml).
 
 Links to mirrored pages point to local files; external links and images remain online. Code examples and OpenAPI blocks are preserved.
 
@@ -182,6 +182,19 @@ Generated files are replaced by the next successful sync. Original content belon
 - [List API Keys](api/beta/organization/api_keys/list.md)
 - [Retrieve API Key (Admin API)](api/beta/organization/api_keys/retrieve.md)
 - [Update API Key](api/beta/organization/api_keys/update.md)
+- [Claude Code](api/beta/organization/claude_code.md)
+- [Managed Settings](api/beta/organization/claude_code/managed_settings.md)
+- [Configuration](api/beta/organization/claude_code/managed_settings/configuration.md)
+- [Get Claude Code Managed Settings Configuration](api/beta/organization/claude_code/managed_settings/configuration/retrieve.md)
+- [Update Claude Code Managed Settings Configuration](api/beta/organization/claude_code/managed_settings/configuration/update.md)
+- [RBAC Group Default](api/beta/organization/claude_code/managed_settings/rbac_group_default.md)
+- [Get RBAC Group Default Claude Code Managed Settings](api/beta/organization/claude_code/managed_settings/rbac_group_default/retrieve.md)
+- [Update RBAC Group Default Claude Code Managed Settings](api/beta/organization/claude_code/managed_settings/rbac_group_default/update.md)
+- [RBAC Groups](api/beta/organization/claude_code/managed_settings/rbac_groups.md)
+- [Delete RBAC Group Claude Code Managed Settings](api/beta/organization/claude_code/managed_settings/rbac_groups/delete.md)
+- [List RBAC Group Claude Code Managed Settings](api/beta/organization/claude_code/managed_settings/rbac_groups/list.md)
+- [Get RBAC Group Claude Code Managed Settings](api/beta/organization/claude_code/managed_settings/rbac_groups/retrieve.md)
+- [Set RBAC Group Claude Code Managed Settings](api/beta/organization/claude_code/managed_settings/rbac_groups/set.md)
 - [Claude Tag](api/beta/organization/claude_tag.md)
 - [Bundles](api/beta/organization/claude_tag/bundles.md)
 - [List Bundles](api/beta/organization/claude_tag/bundles/list.md)
