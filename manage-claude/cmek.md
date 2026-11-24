@@ -64,7 +64,7 @@ Which product you use decides what your key encrypts, what stays under Anthropic
 * Your key protects only data written [after it takes effect](cmek-how-it-works.md#when-your-key-takes-effect).
 * If your key is deleted, Anthropic can’t recover the data it protects. Within about an hour of disabling your key, Anthropic can no longer decrypt that data. See [What each action does](cmek-key-lifecycle.md#what-each-action-does).
 * On Claude Platform, a workspace with a key [must retain data](cmek-data-retention.md#data-retention).
-* When Anthropic approves your whole organization for CMEK, it also enables [Access Transparency](access-transparency.md#access-transparency-with-customer-managed-keys) for that organization. Organizations with Access Transparency can’t call the Claude API directly from a browser.
+* When Anthropic approves your whole organization for CMEK, it also enables [Access Transparency](access-transparency.md#access-transparency-with-customer-managed-keys) for that organization. On Claude Platform, if you got access through [Enterprise Frontier Safeguards](enterprise-frontier-safeguards/overview.md) or Enterprise Data Controls, attaching your first key turns on Access Transparency instead, unless it’s already on. Organizations with Access Transparency can’t call the Claude API directly from a browser.
 
 ## Who can use CMEK
 

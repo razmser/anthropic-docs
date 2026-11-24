@@ -2,7 +2,7 @@
 
 Markdown mirror of [Anthropic's documentation](https://platform.claude.com/docs/en/home).
 
-Contains **936 pages**, discovered from the [page index](https://platform.claude.com/llms.txt) and [supplementary index](https://platform.claude.com/sitemap.xml).
+Contains **958 pages**, discovered from the [page index](https://platform.claude.com/llms.txt) and [supplementary index](https://platform.claude.com/sitemap.xml).
 
 Links to mirrored pages point to local files; external links and images remain online. Code examples and OpenAPI blocks are preserved.
 
@@ -227,6 +227,13 @@ Generated files are replaced by the next successful sync. Original content belon
 - [Get External Key](api/beta/organization/external_keys/retrieve.md)
 - [Update External Key](api/beta/organization/external_keys/update.md)
 - [Validate External Key](api/beta/organization/external_keys/validate.md)
+- [External Storage](api/beta/organization/external_storage.md)
+- [Activate External Storage](api/beta/organization/external_storage/activate.md)
+- [Create External Storage](api/beta/organization/external_storage/create.md)
+- [Delete External Storage](api/beta/organization/external_storage/delete.md)
+- [List External Storage](api/beta/organization/external_storage/list.md)
+- [Get External Storage](api/beta/organization/external_storage/retrieve.md)
+- [Update External Storage](api/beta/organization/external_storage/update.md)
 - [Federation](api/beta/organization/federation.md)
 - [Issuers](api/beta/organization/federation/issuers.md)
 - [Archive Federation Issuer](api/beta/organization/federation/issuers/archive.md)
@@ -800,6 +807,21 @@ Generated files are replaced by the next successful sync. Original content belon
 - [Send Security posture events to your SIEM](manage-claude/compliance-security-posture/send-events.md)
 - [Retrieve session transcripts](manage-claude/compliance-sessions.md)
 - [Data residency](manage-claude/data-residency.md)
+- [Use a customer-managed key](manage-claude/enterprise-frontier-safeguards/customer-managed-keys.md)
+- [Customer-owned storage](manage-claude/enterprise-frontier-safeguards/customer-owned-storage.md)
+- [Manage customer-owned storage](manage-claude/enterprise-frontier-safeguards/external-storage-manage.md)
+- [Set up customer-owned storage](manage-claude/enterprise-frontier-safeguards/external-storage.md)
+- [Enterprise Frontier Safeguards FAQ](manage-claude/enterprise-frontier-safeguards/faq.md)
+- [Review Safety Cases](manage-claude/enterprise-frontier-safeguards/flagged-cases.md)
+- [Human Review and Access Transparency](manage-claude/enterprise-frontier-safeguards/human-review-and-access-transparency.md)
+- [Enterprise Frontier Safeguards](manage-claude/enterprise-frontier-safeguards/overview.md)
+- [Safety Case files](manage-claude/enterprise-frontier-safeguards/safety-case-files.md)
+- [Safety Cases API](manage-claude/enterprise-frontier-safeguards/safety-cases-api.md)
+- [Enterprise Frontier Safeguards on Amazon Bedrock](manage-claude/enterprise-frontier-safeguards/setup-amazon-bedrock.md)
+- [Set up Enterprise Frontier Safeguards on Claude Models on Google Cloud (Anthropic managed)](manage-claude/enterprise-frontier-safeguards/setup-claude-models-on-google-cloud-anthropic-managed.md)
+- [Set up Enterprise Frontier Safeguards on Claude Platform on AWS](manage-claude/enterprise-frontier-safeguards/setup-claude-platform-on-aws.md)
+- [Set up Enterprise Frontier Safeguards on Claude Platform](manage-claude/enterprise-frontier-safeguards/setup-console.md)
+- [Enterprise Frontier Safeguards on Google Cloud's Agent Platform](manage-claude/enterprise-frontier-safeguards/setup-google-cloud-agent-platform.md)
 - [Configure Inference hooks](manage-claude/inference-hooks-configuration.md)
 - [Develop an Inference hooks integration](manage-claude/inference-hooks-endpoint.md)
 - [Inference hooks](manage-claude/inference-hooks.md)

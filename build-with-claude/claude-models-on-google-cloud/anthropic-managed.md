@@ -177,8 +177,8 @@ Install the package that provides the client:
     <Tabs>
       <Tab title="Gradle">
         ```kotlin
-        implementation("com.anthropic:anthropic-java:3.12.0")
-        implementation("com.anthropic:anthropic-java-google-cloud:3.12.0")
+        implementation("com.anthropic:anthropic-java:3.13.0")
+        implementation("com.anthropic:anthropic-java-google-cloud:3.13.0")
         ```
       </Tab>
 
@@ -187,12 +187,12 @@ Install the package that provides the client:
         <dependency>
             <groupId>com.anthropic</groupId>
             <artifactId>anthropic-java</artifactId>
-            <version>3.12.0</version>
+            <version>3.13.0</version>
         </dependency>
         <dependency>
             <groupId>com.anthropic</groupId>
             <artifactId>anthropic-java-google-cloud</artifactId>
-            <version>3.12.0</version>
+            <version>3.13.0</version>
         </dependency>
         ```
       </Tab>
@@ -421,7 +421,7 @@ Claude Models on Google Cloud (Anthropic managed) uses the same model IDs as the
 | Claude Opus 4.8 | `claude-opus-4-8` |
 | Claude Opus 4.7 | `claude-opus-4-7` |
 | Claude Opus 4.6 | `claude-opus-4-6` |
-| Claude Opus 4.5 | `claude-opus-4-5-20251101` |
+| Claude Opus 4.5 ([deprecated](../../about-claude/model-deprecations.md)) | `claude-opus-4-5-20251101` |
 | Claude Sonnet 5.5 | `claude-sonnet-5-5` |
 | Claude Sonnet 5 | `claude-sonnet-5` |
 | Claude Sonnet 4.6 | `claude-sonnet-4-6` |
@@ -563,6 +563,7 @@ The [Messages API](../../api/messages/create.md), the [Models API](../../api/mod
 * [Data residency](../../manage-claude/data-residency.md)
 * [Effort](../effort.md)
   * [Per-message effort](../effort-per-message.md) (Beta)
+* [Enterprise Frontier Safeguards](../../manage-claude/enterprise-frontier-safeguards/overview.md) (Beta)
 * [Fast mode](../fast-mode.md)
 * [Files API](../files.md)
 * [Forced tool use](../../agents-and-tools/tool-use/define-tools.md#forcing-tool-use)
