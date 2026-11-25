@@ -57,6 +57,8 @@ When creating a deployment, you pass the [session configurations](sessions.md) r
   * **Caller permissions:** The IAM principal that sets the role on the agent needs `iam:PassRole` on that role. The role must be in the same AWS account. No [managed policy](../api/claude-platform-on-aws-iam-actions.md#managed-policies) grants `iam:PassRole`.
 </Note>
 
+The following example creates a deployment:
+
 <CodeGroup defaultLanguage="CLI">
   ```bash cURL
   curl --fail-with-body -sS "https://api.anthropic.com/v1/deployments?beta=true" \
@@ -755,17 +757,23 @@ Each lifecycle change emits a [webhook event](webhooks.md#supported-event-types)
   ```
 </CodeGroup>
 
+On [Claude Models on Google Cloud (Anthropic managed)](../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md#claude-managed-agents), a deployment keeps running after you revoke its creator’s Google Cloud access. To stop it, pause or archive it.
+
 ### Failure behavior
 
 Session creation rate-limit responses are recorded immediately as a `session_rate_limited_error` run without retry; the schedule attempts again at the next scheduled occurrence. Rate limits on underlying API calls within a session are handled by the session itself.
 
 If a deployment’s agent is archived, the same operation archives the deployment. If the agent is deleted, the next scheduled trigger detects the missing agent and archives the deployment. Neither records a deployment run. If the agent references an archived subagent, the next trigger records a failed run with `error.type: "agent_archived_error"` and pauses the deployment. Other unrecoverable session-creation errors, such as an archived environment or vault, behave the same way: the trigger records a failed run and pauses the deployment. The deployment’s `paused_reason.error.type` mirrors the failed run’s `error.type`.
 
-If a deployment is paused because the agent has an archived subagent:
+If the deployment’s agent version, its advisor, or an agent that it lists uses a [retired model](../about-claude/model-deprecations.md), the next scheduled trigger fails. It records a run with `error.type: "unknown_error"` and pauses the deployment.
 
-1. Remove or replace the archived subagent when you [update the agent](../api/beta/agents/update.md).
+To move a deployment off an archived subagent or a retiring or retired model, follow these steps:
+
+1. For an archived subagent, [update the agent](../api/beta/agents/update.md) to remove or replace it. For a model, make the agent changes in [When a model is retired](migration.md#when-a-model-is-retired).
 2. Move the deployment to the agent’s latest version: [update the deployment](../api/beta/deployments/update.md) and pass the same agent ID again in `agent` (csharp, go: `Agent`). A deployment runs one version of its agent and keeps it even when the agent changes.
-3. Unpause the deployment, as [Managing deployment lifecycle](scheduled-deployments.md#managing-deployment-lifecycle) describes.
+3. If the deployment is paused, unpause it, as [Managing deployment lifecycle](scheduled-deployments.md#managing-deployment-lifecycle) describes.
+
+If you use Claude Platform on AWS and the model is retired, complete steps 1 and 2. Until you do, the deployment stays active and each scheduled trigger records a `session_creation_rejected_error` run.
 
 ## Trigger a manual run
 

@@ -32,7 +32,7 @@ Compared to `curl`, `ant` builds request bodies from typed flags or piped YAML i
     For Linux environments, download the release binary directly.
 
     ```bash
-    VERSION=2.13.0
+    VERSION=2.14.0
     OS=$(uname -s | tr '[:upper:]' '[:lower:]')
     case $(uname -m) in
       x86_64) ARCH=amd64 ;;
@@ -74,9 +74,7 @@ ant --version
 ant auth login
 ```
 
-<Note>
-  For other ways to authenticate (API key environment variable, headless hosts, multiple workspaces, named profiles, and Workload Identity Federation), see [CLI authentication options](authentication.md).
-</Note>
+To sign in on a host without a browser or to authenticate another way, see [CLI authentication options](authentication.md). The options include Workload Identity Federation, an API key, and Google Cloud credentials for [Claude Models on Google Cloud (Anthropic managed)](../../build-with-claude/claude-models-on-google-cloud/anthropic-managed.md).
 
 ## Send your first request
 

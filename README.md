@@ -2,7 +2,7 @@
 
 Markdown mirror of [Anthropic's documentation](https://platform.claude.com/docs/en/home).
 
-Contains **958 pages**, discovered from the [page index](https://platform.claude.com/llms.txt) and [supplementary index](https://platform.claude.com/sitemap.xml).
+Contains **965 pages**, discovered from the [page index](https://platform.claude.com/llms.txt) and [supplementary index](https://platform.claude.com/sitemap.xml).
 
 Links to mirrored pages point to local files; external links and images remain online. Code examples and OpenAPI blocks are preserved.
 
@@ -527,6 +527,7 @@ Generated files are replaced by the next successful sync. Original content belon
 - [List Files](api/files/list.md)
 - [Get File Metadata](api/files/retrieve_metadata.md)
 - [Upload File](api/files/upload.md)
+- [Handle errors](api/handle-errors.md)
 - [IP addresses](api/ip-addresses.md)
 - [Messages](api/messages.md)
 - [Batches](api/messages/batches.md)
@@ -826,10 +827,16 @@ Generated files are replaced by the next successful sync. Original content belon
 - [Develop an Inference hooks integration](manage-claude/inference-hooks-endpoint.md)
 - [Inference hooks](manage-claude/inference-hooks.md)
 - [IP allowlisting](manage-claude/ip-allowlist.md)
-- [App testing and review](manage-claude/oauth-apps/app-review.md)
-- [Branding samples](manage-claude/oauth-apps/branding-samples.md)
-- [OAuth reference](manage-claude/oauth-apps/oauth-reference.md)
-- [Linked billing](manage-claude/oauth-apps/organization-billing-connections.md)
+- [OAuth endpoints and parameters](manage-claude/oauth-apps/endpoints-and-parameters.md)
+- [Linked billing](manage-claude/oauth-apps/linked-billing.md)
+- [Use a separate credential for each customer](manage-claude/oauth-apps/linked-billing/credential-for-each-customer.md)
+- [Linked billing errors](manage-claude/oauth-apps/linked-billing/errors.md)
+- [Link and bill a customer](manage-claude/oauth-apps/linked-billing/link-and-bill-a-customer.md)
+- [Link your Claude organization button](manage-claude/oauth-apps/linked-billing/link-button.md)
+- [Manage linked customers](manage-claude/oauth-apps/linked-billing/manage-customers.md)
+- [Set up your app for Linked billing](manage-claude/oauth-apps/linked-billing/set-up-your-app.md)
+- [Test and publish your app](manage-claude/oauth-apps/linked-billing/test-and-publish.md)
+- [What your customers see](manage-claude/oauth-apps/linked-billing/what-your-customers-see.md)
 - [Claude Platform OAuth](manage-claude/oauth-apps/overview.md)
 - [OpenTelemetry tracing for the Claude API](manage-claude/opentelemetry.md)
 - [Set up OpenTelemetry with the Claude API](manage-claude/opentelemetry/api.md)

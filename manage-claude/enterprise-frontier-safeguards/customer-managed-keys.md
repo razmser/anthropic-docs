@@ -69,7 +69,7 @@ Don’t use the same key for both. Which keys encrypt what’s in your bucket de
 
     To set up a key on Claude Platform on AWS, follow the steps in [Set up CMEK on Claude Platform on AWS](../cmek-claude-platform-on-aws.md).
 
-    To set up a key on Claude Models on Google Cloud (Anthropic managed), follow the steps for your own key in [Add cloud resources](setup-claude-models-on-google-cloud-anthropic-managed.md#add-cloud-resources). You need `roles/claude.admin` instead of Organization Admin. You don’t need a bucket to use a key.
+    To set up a key on Claude Models on Google Cloud (Anthropic managed), [open the Claude Console](setup-claude-models-on-google-cloud-anthropic-managed.md#before-you-begin) from the Google Cloud console. Then, follow the steps for your own key in [Add cloud resources](setup-claude-models-on-google-cloud-anthropic-managed.md#add-cloud-resources). You need `roles/claude.admin` instead of Organization Admin. You don’t need a bucket to use a key.
   </Step>
 </Steps>
 
